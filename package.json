@@ -1,0 +1,25 @@
+{
+  "name": "orca-docs",
+  "version": "0.0.1",
+  "description": "User documentation for NCLS Development's Orca solution",
+  "author": {
+    "name": "ccjmne",
+    "email": "ccjmne@gmail.com",
+    "url": "https://github.com/ccjmne"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ccjmne/orca-docs.git"
+  },
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "del": "^2.2.1",
+    "gulp": "gulpjs/gulp#4.0",
+    "gulp-if": "^2.0.1",
+    "gulp-imagemin": "^3.0.1",
+    "merge-stream": "^1.0.0",
+    "plylog": "^0.4.0",
+    "polymer-build": "^0.4.0"
+  }
+}

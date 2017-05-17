@@ -1,0 +1,13 @@
+{
+  "name": "Orca &mdash; Documentation",
+  "short_name": "orca-docs",
+  "start_url": "/orca-home",
+  "display": "standalone",
+  "theme_color": "#337AB7",
+  "background_color": "#337AB7",
+  "icons": [{
+    "src": "assets/favicon-multisize.ico",
+    "sizes": "16x16 24x24 32x32 48x48 64x64 96x96 128x128 192x192 256x256",
+    "type": "image/x-icon"
+  }]
+}

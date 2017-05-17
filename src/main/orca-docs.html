@@ -1,0 +1,278 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+
+<link rel="import" href="../../bower_components/neon-animation/animations/slide-from-left-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/slide-right-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
+
+<link rel="import" href="../../bower_components/paper-drawer-panel/paper-drawer-panel.html">
+<link rel="import" href="../../bower_components/paper-header-panel/paper-header-panel.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
+
+
+<link rel="import" href="../utils/footnotes.html">
+<link rel="import" href="../utils/html-echo.html">
+
+<link rel="import" href="../shared-styles.html">
+
+<link rel="import" href="drawer-menu.html">
+<link rel="import" href="orca-footer.html">
+<link rel="import" href="orca-toolbar.html">
+
+<dom-module id="orca-docs">
+
+    <template>
+        <style is="custom-style" include="shared-styles iron-positioning iron-flex iron-flex-alignment">
+        :host {
+            font-weight: 300;
+            display: block;
+            --default-margin: 30px;
+            --primary-color: #337AB7;
+            --secondary-color: red;
+            --paper-video-ripple-color: var(--primary-color);
+        }
+        
+        paper-toolbar h1 {
+            font-weight: normal;
+        }
+        
+        paper-toolbar#drawer-toolbar {
+            --paper-toolbar-background: white;
+        }
+        
+        paper-toolbar#drawer-toolbar.medium-tall {
+            border-bottom: 1px solid lightgrey;
+        }
+        
+        paper-toolbar#drawer-toolbar .bottom {
+            transition: 0.2s opacity ease-in-out;
+            opacity: 1;
+        }
+        
+        paper-toolbar#drawer-toolbar:not(.medium-tall) .bottom {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        paper-toolbar#drawer-toolbar a {
+            text-decoration: none;
+        }
+        
+        paper-toolbar#drawer-toolbar a,
+        paper-toolbar#drawer-toolbar a:visited {
+            color: var(--primary-color);
+        }
+        
+        paper-toolbar#drawer-toolbar a:active {
+            color: black;
+        }
+        
+        paper-toolbar#drawer-toolbar img.logo {
+            max-height: 30px;
+        }
+        
+        paper-toolbar#drawer-toolbar h1.name {
+            margin-left: 12px;
+            color: black;
+        }
+        
+        paper-toolbar#drawer-toolbar a#get {
+            display: block;
+            padding: 16px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        
+        paper-icon-button#menu-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .search-box {
+            color: grey;
+            padding: 0 16px;
+        }
+        
+        .search-box:hover {
+            color: black;
+        }
+        
+        neon-animated-pages.main-view > * {
+            @apply(--layout-self-center);
+            @apply(--layout-horizontal);
+            @apply(--layout-center-justified);
+            padding: var(--default-margin) 0;
+        }
+        
+        neon-animated-pages.main-view > * >:first-child {
+            max-width: 780px;
+        }
+        
+        neon-animated-pages.main-view > *.large >:first-child {
+            width: 960px;
+            max-width: 960px;
+        }
+        
+        neon-animated-pages .iron-selected {
+            position: static;
+        }
+        </style>
+
+        <app-location route="{{route}}"></app-location>
+
+        <app-route route="{{route}}" pattern="/:view" data="{{routeData}}"></app-route>
+
+        <paper-drawer-panel id="drawer-panel" class="flex" drawer-focus-selector=".search-box paper-input">
+            <paper-header-panel drawer mode="waterfall-tall" tall-class="medium-tall">
+                <paper-toolbar id="drawer-toolbar">
+                    <div class="top fit">
+                        <a href="/orca-home" class="layout horizontal center">
+                            <paper-ripple></paper-ripple>
+                            <span class="flex"></span>
+                            <img class="logo" alt="Orca logo" src="../../assets/logo_bw.png" />
+                            <h1 class="name">Accueil</h1>
+                            <span class="flex"></span>
+                        </a>
+                    </div>
+                    <div class="bottom fit">
+                        <a href="/orca-get" id="get">
+                            <paper-ripple></paper-ripple>
+                            Acqu&eacute;rir la solution
+                        </a>
+                    </div>
+                </paper-toolbar>
+                <div class="search-box">
+                    <paper-input label="Documentation..." value="{{search}}">
+                        <iron-icon suffix icon="icons:search"></iron-icon>
+                    </paper-input>
+                </div>
+                <drawer-menu id="drawer-menu" page="{{pageName}}" search="[[search]]"></drawer-menu>
+            </paper-header-panel>
+
+            <paper-header-panel main mode="waterfall">
+                <template is="dom-if" if="[[_hasHeader(pageName)]]">
+                    <paper-toolbar>
+                        <paper-icon-button icon="icons:menu" paper-drawer-toggle></paper-icon-button>
+                        <h1><html-echo html="[[_getTitle(pageName)]]"></html-echo></h1>
+                    </paper-toolbar>
+                </template>
+                <template is="dom-if" if="[[!_hasHeader(pageName)]]">
+                    <paper-icon-button icon="icons:menu" paper-drawer-toggle></paper-icon-button>
+                </template>
+                <div id="main-container" class="layout vertical fit">
+                    <neon-animated-pages class="flex main-view" selected="[[pageName]]" attr-for-selected="name" fallback-selection="orca-404" role="main" entry-animation="slide-from-left-animation" exit-animation="slide-right-animation">
+                        <!-- main views -->
+                        <span name="orca-home"><orca-home></orca-home></span>
+                        <span name="orca-get" class="large"><orca-get></orca-get></span>
+
+                        <!-- routing error views -->
+                        <span name="orca-404"><orca-404></orca-404></span>
+                        <span name="orca-under-construction"><orca-under-construction></orca-under-construction></span>
+
+                        <!-- visualisation views -->
+                        <span name="orca-departments"><orca-departments></orca-departments></span>
+                        <span name="orca-sites"><orca-sites></orca-sites></span>
+                        <span name="orca-employees"><orca-employees></orca-employees></span>
+                        <span name="orca-trainings"><orca-trainings></orca-trainings></span>
+
+                        <!-- personalisation views -->
+                        <span name="orca-observed-certificates"><orca-observed-certificates></orca-observed-certificates></span>
+
+                        <!-- search views -->
+                        <span name="orca-advanced-search"><orca-advanced-search></orca-advanced-search></span>
+                        <span name="orca-filtering"><orca-filtering></orca-filtering></span>
+                        <span name="orca-quick-search"><orca-quick-search></orca-quick-search></span>
+                    </neon-animated-pages>
+                    <orca-footer></orca-footer>
+                </div>
+            </paper-header-panel>
+        </paper-drawer-panel>
+    </template>
+
+    <script>
+    Polymer({
+
+        is: 'orca-docs',
+
+        observers: [
+            '_routeChanged(routeData.view)'
+        ],
+
+        ready: function() {
+            this.__watchHash();
+        },
+
+        _hasHeader: function(pageName) {
+            return pageName !== 'orca-home' && pageName !== 'orca-get';
+        },
+
+        _getTitle: function(pageName) {
+            return this.$['drawer-menu'].getTitle(pageName);
+        },
+
+        _routeChanged: function(pageName) {
+            if (pageName === '') {
+                // Redirect '/' to '/home'
+                return this.set('routeData.view', 'orca-home');
+            }
+
+            if (this.$['drawer-menu'].exists(pageName)) {
+                this._importView(pageName);
+            } else {
+                this._importView(this.$['drawer-menu'].get404());
+            }
+        },
+
+        _importView: function(pageName) {
+            this.importHref(this.$['drawer-menu'].getUrl(pageName), this._showView(pageName), this._handleBrokenImport(pageName));
+            // Clear search input and close drawer (on narrow viewports)
+            this.search = '';
+            this.$['drawer-panel'].closeDrawer();
+        },
+
+        _showView: function(pageName) {
+            return function() {
+                this.set('pageName', pageName);
+                this.__scrollToSection();
+            }.bind(this);
+        },
+
+        _handleBrokenImport: function(pageName) {
+            return function() {
+                if (this.$['drawer-menu'].exists(pageName)) {
+                    this._routeChanged(this.$['drawer-menu'].getUnderConstruction());
+                } else {
+                    this._routeChanged(this.$['drawer-menu'].get404());
+                }
+            }.bind(this);
+        },
+
+        __scrollToSection: function() {
+            if (window.location.hash && document.querySelector(window.location.hash)) {
+                document.querySelector(window.location.hash).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        },
+
+        __watchHash: function(prev) {
+            if (window.location.hash !== prev) {
+                this.__scrollToSection();
+            }
+
+            this.async(arguments.callee.bind(this, window.location.hash), 100);
+        }
+
+    });
+    </script>
+</dom-module>

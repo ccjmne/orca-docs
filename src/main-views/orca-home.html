@@ -1,0 +1,452 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-ripple/paper-ripple.html">
+
+<link rel="import" href="../utils/title-toggle.html">
+<link rel="import" href="../utils/orca-animated-logo.html">
+
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="orca-home">
+    <template>
+        <style include="shared-styles iron-flex iron-flex-alignment">
+        :host {
+            display: block;
+        }
+        
+        #home-content {
+            padding-top: var(--default-margin);
+        }
+        
+        h1.toggle {
+            cursor: pointer;
+            position: relative;
+        }
+        
+        h1.toggle paper-ripple {
+            color: grey;
+        }
+        
+        img.label {
+            max-width: 150px;
+            object-fit: scale-down;
+        }
+        
+        #animated-logo + div.innovaction {
+            margin-left: 40px;
+        }
+        
+        .innovaction .details {
+            padding-top: 5px;
+            color: #239E66;
+            line-height: 1.1em;
+            text-align: center;
+        }
+        
+        paper-card.image-dark {
+            --paper-card-header-image-text: {
+                color: white;
+            }
+        }
+        </style>
+
+        <div class="layout vertical center" id="intro">
+            <div class="flex"></div>
+            <div class="layout horizontal center">
+                <div class="flex"></div>
+                <orca-animated-logo id="animated-logo"></orca-animated-logo>
+                <div class="layout vertical center innovaction">
+                    <img class="label" src="/assets/home/innovaction.png" />
+                    <div class="details">Labellis&eacute; par le comit&eacute;
+                        <br /><em>Innov'Action</em> IDF 2016
+                    </div>
+                </div>
+                <div class="flex"></div>
+            </div>
+            <span class="flex"></span>
+        </div>
+        <div id="home-content">
+            <paper-card id="first-card" class="image-dark" heading="Gestion des Formations S&eacute;curit&eacute;" elevation="1" image="/assets/home/risk-safety.png">
+                <div class="card-content">
+                    <p>
+                        Parfois, avoir les bons réflexes peut sauver une vie, ou &eacute;viter un d&eacute;sastre.
+                    </p>
+                </div>
+                <hr />
+                <div class="card-content">
+                    <p>
+                        Dans le cadre de la pr&eacute;vention des risques, les formations jouent un r&ocirc;le primordial&nbsp;: c'est de ce constat que la solution Orca est n&eacute;e. D&eacute;velopp&eacute;e afin de r&eacute;pondre &agrave; un besoin grandissant ainsi qu'aux obligations l&eacute;gales impos&eacute;es par le
+                        <a href="https://www.legifrance.gouv.fr/affichCode.do?cidTexte=LEGITEXT000006072050">Code du travail</a>, Orca offre une collection d'outils pour assurer le suivi des formations pertinentes au contexte de la s&eacute;curit&eacute; au travail.
+                    </p>
+                </div>
+                <div class="card-actions">
+                    <paper-button class="primary" on-tap="_demo">
+                        <iron-icon icon="icons:visibility"></iron-icon>D&eacute;monstration
+                    </paper-button>
+                </div>
+            </paper-card>
+            <paper-card heading="Derni&egrave;res nouveaut&eacute;s" elevation="1" image="/assets/home/news.png">
+                <div class="card-content">
+                    <p>
+                        Orca est en constant changement. Chaque version arrive avec son lot de nouveaut&eacute;s et bien souvent, d'infimes d&eacute;tails sont &eacute;galement ajust&eacute;s. Suivez l'&eacute;volution des bugs que vous nous soumettez&nbsp;!
+                    </p>
+                </div>
+                <hr />
+                <div class="card-content">
+                    <title-toggle class="underlined" state="{{version161}}">
+                        <div class="layout horizontal center">
+                            <span>Dans le dernier patch</span>
+                            <span class="pipe"></span>
+                            <code>version-1.6.1</code>
+                        </div>
+                    </title-toggle>
+                    <iron-collapse opened="[[version161]]">
+                        Publi&eacute; le 06 octobre 2016.
+                        <div>
+                            <h2>Am&eacute;liorations annexes</h2>
+                            <ol type="I">
+                                <li>Il est maintenant possible de n'avoir aucune <a href="/certificates">aptitude observ&eacute;e</a>.</li>
+                            </ol>
+                            <h2>Correction de bugs</h2>
+                            <ol type="I">
+                                <li>Corrig&eacute; bug faisant que la recherche avanc&eacute;e d'agents ayant &eacute;t&eacute; form&eacute;s entre deux dates sp&eacute;cifiques ne trouvait aucun r&eacute;sultat.
+                                </li>
+                            </ol>
+                        </div>
+                    </iron-collapse>
+                    <title-toggle class="underlined" state="{{version16x}}">
+                        <div class="layout horizontal center">
+                            <span>Dans la derni&egrave;re version</span>
+                            <span class="pipe"></span>
+                            <code>version-1.6.x</code>
+                        </div>
+                    </title-toggle>
+                    <iron-collapse opened="[[version16x]]">
+                        Publi&eacute;e le 16 septembre 2016.
+                        <div>
+                            <h2>Fonctionnalit&eacute;s majeures</h2>
+                            <h3 class="layout horizontal center">
+                                Visibilit&eacute; sur vos d&eacute;partements&nbsp;!<hr class="flex" />
+                            </h3>
+                            <p>
+                                Le bouton <span class="quote">Sites</span> du menu se d&eacute;roule maintenant pour offrir l'acc&egrave;s aux <a href="/departments">d&eacute;partments</a>. Ce module introduit &eacute;galement un nouvel indicateur&nbsp;: le score. Comme les autres modules de visualisation, il se d&eacute;cline en deux pages&nbsp;:
+                            </p>
+                            <ol type="I">
+                                <li>
+                                    La liste des d&eacute;partements, sur laquelle on retrouve, pour chaque d&eacute;partement&nbsp;:
+                                    <ul>
+                                        <li>son nom</li>
+                                        <li>son nombre de sites</li>
+                                        <li>son nombre d'agents</li>
+                                    </ul>
+                                    Puis, pour chaque <a href="/certificates">aptitude observ&eacute;e</a>, par d&eacute;faut, leur score. Davantage d'informations sont disponibles via la recherche avanc&eacute;e.
+                                </li>
+                                <li>Les fiches d&eacute;partement, listant leurs sites.</li>
+                            </ol>
+                            <p>
+                                Chacune de ces pages est livr&eacute;e avec les fonctionnalit&eacute;s de <a href="/advanced-search">recherche</a>, <a href="/links">partage</a> et
+                                <a href="/exports">export</a> habituelles.</p>
+                            <h3 class="layout horizontal center">
+                                Le score des d&eacute;partements<hr class="flex" />
+                            </h3>
+                            <p>
+                                Pour un d&eacute;partement, le score est un taux, en pourcents, qui concerne une aptitude.
+                                <br />Cachun de ses sites a le potentiel de combler une fraction de ce score, plus ou moins grande selon le nombre de ses sites. Ils contribuent &agrave; leur fraction selon leur indice de r&eacute;alisation de la cible assign&eacute;e &agrave; l'aptitude concern&eacute;e&nbsp;:
+                                <ol type="I">
+                                    <li>cible atteinte&nbsp;: fraction remplie &agrave; 100%</li>
+                                    <li>cible presque atteinte&nbsp;: fraction remplie aux deux tiers</li>
+                                    <li>moins de &frac23; de la cible&nbsp;: fraction enti&egrave;rement vide</li>
+                                </ol>
+                                &Agrave; noter&nbsp;: le nombre d'agents de chaque site n'intervient pas dans le calcul du score des d&eacute;partements.
+                            </p>
+                            <h2>Am&eacute;liorations annexes</h2>
+                            <ol type="I">
+                                <li>Les <a href="/sites">sites</a> ont maintenant une adresse e-mail.</li>
+                                <li>
+                                    Les champs <span class="quote">Notes</span> et <span class="quote">Sortie des dispositifs</span> dans les fiches <a href="/employees">agents</a> sont maintenant s&eacute;par&eacute;es.
+                                </li>
+                            </ol>
+                            <h2>Correction de bugs</h2>
+                            <p>
+                                Pas de bug&nbsp;!
+                            </p>
+                        </div>
+                    </iron-collapse>
+                </div>
+                <div class="card-actions">
+                    <a href="/versions-history" class="paper-button">
+                        <paper-button class="primary">
+                            <iron-icon icon="icons:history"></iron-icon>Versions pr&eacute;c&eacute;dentes
+                        </paper-button>
+                    </a>
+                </div>
+            </paper-card>
+            <paper-card class="image-dark" heading="&Eacute;volutions imminentes" elevation="1" image="/assets/home/upcoming.png">
+                <div class="card-content">
+                    <p>
+                        Le projet est encore jeune et notre &eacute;quipe travaille activement au d&eacute;veloppement de nouvelles fonctionnalit&eacute;s.
+                        <br />N'h&eacute;sitez-pas &agrave;
+                        <a href="mailto:nclsdevelopment@gmail.com">nous contacter</a> pour vous assurer que nous ne sommes pas &agrave; court d'id&eacute;es&nbsp;!
+                    </p>
+                </div>
+                <hr />
+                <div class="card-content">
+                    <title-toggle class="underlined" state="{{version162}}">
+                        <div class="layout horizontal center">
+                            <span>Pour le prochain patch</span>
+                            <span class="pipe"></span>
+                            <code>version-1.6.2</code>
+                        </div>
+                    </title-toggle>
+                    <iron-collapse opened="[[version162]]">
+                        Pr&eacute;vu pour d&eacute;cembre 2016.
+                        <div>
+                            <h2>Fonctionnalit&eacute;s majeures</h2>
+                            <h3 class="layout horizontal center">
+                                Support des accents pour les recherches et tris&nbsp;!<hr class="flex" />
+                            </h3>
+                            <p>
+                                Jusqu'&agrave; pr&eacute;sent, les lettres accentu&eacute;es n'&eacute;taient pas trait&eacute;es comme &eacute;quivalentes &agrave; leur version de base. Filtrer les agents dont le pr&eacute;nom contient <span class="quote">eric</span> ne trouvait que&nbsp;:
+                            </p>
+                            <ul>
+                                <li><span class="quote">Eric</span></li>
+                                <li><span class="quote">Aymeric</span></li>
+                                <li><span class="quote">Frederic</span></li>
+                            </ul>
+                            <p>
+                                Mais pas <span class="quote">&Eacute;ric</span>.
+                            </p>
+                            <hr />
+                            <p>
+                                De la m&ecirc;me mani&egrave;re, trier ces quatre pr&eacute;noms par ordre croissant rendait&nbsp;:
+                            </p>
+                            <ol type="I">
+                                <li><span class="quote">Aymeric</span></li>
+                                <li><span class="quote">Eric</span></li>
+                                <li><span class="quote">Frederic</span></li>
+                                <li><span class="quote">&Eacute;ric</span></li>
+                            </ol>
+                            <p>C'est r&eacute;gl&eacute; maintenant. Plus d'excuse pour oublier d'inscrire <span class="quote">Fr&iacute;&eth;a J&oslash;rgen</span> dans sa formation&nbsp;!</p>
+
+                            <h2>Am&eacute;liorations annexes</h2>
+                            <ol type="I">
+                                <li>Il est maintenant possible de d&eacute;sactiver une recherche avanc&eacute;e en fermant son bandeau. En cas de maladresse, une alerte temporaire vous proposera de r&eacute;tablir les crit&egrave;res disparus d'un simple clic.</li>
+                                <li>Les statistiques de formations sont exportables au format XLSX.</li>
+                                <li>Les badges des agents qui ont explicitement &eacute;t&eacute; sortis d'un dispositif appara&icirc;ssent maintenant en gris plut&ocirc;t qu'en rouge, pour les distinguer de ceux qui sont &agrave; renouveler.</li>
+                            </ol>
+                            <h2>Correction de bugs</h2>
+                            <p>Pas de bug&nbsp;!</p>
+                        </div>
+                    </iron-collapse>
+                    <title-toggle class="underlined" state="{{version17x}}">
+                        <div class="layout horizontal center">
+                            <span>Pour la prochaine version</span>
+                            <span class="pipe"></span>
+                            <code>version-1.7.x</code>
+                        </div>
+                    </title-toggle>
+                    <iron-collapse opened="[[version17x]]">
+                        Pr&eacute;vue pour mars 2017.
+                        <div>
+                            <h2>Fonctionnalit&eacute;s majeures</h2>
+                            <h3 class="layout horizontal center">
+                                Envoi d'e-mail group&eacute;s&nbsp;!<hr class="flex" />
+                            </h3>
+                            <p>
+                                Il est maintenant possible d'obtenir une liste d'e-mails correspondant &agrave; un groupe de <a href="/sites">sites</a> ou d'<a href="/agents">agents</a> selon n'importe quel crit&egrave;re de recherche existant. Cela inclut&nbsp;:
+                            </p>
+                            <ul>
+                                <li>tous les sites</li>
+                                <li>tous les sites d'un d&eacute;partement</li>
+                                <li>tous les agents d'un site</li>
+                                <li>tous les agents SST d'un site</li>
+                                <li>tous les agents qui devront &ecirc;tre renouvel&eacute;s SST dans les 6 prochains mois</li>
+                                <li>tous les agents dont le nom contient <span class="quote">Orca</span>, qui n'ont jamais &eacute;t&eacute; FSST mais qui sont SST depuis au moins 4 ans
+                                </li>
+                            </ul>
+                            <p>
+                                ... Et tout ce que la <a href="advanced-search">recherche avanc&eacute;e</a> permet&nbsp;!
+                            </p>
+                            <h3 class="layout horizontal center">
+                                Notifications&nbsp;!<hr class="flex" />
+                            </h3>
+                            <p>
+                                Il est possible de notifier les <a href="/sites">sites</a> lorsque leurs indicateurs tombent dans le rouge. Ou, mensuellement.
+                                <br /> Il est &eacute;galement possible d'envoyer un e-mail automatiquement aux formateurs&nbsp;:
+                            </p>
+                            <ol type="I">
+                                <li>avant leur formation</li>
+                                <li>le jour m&ecirc;me &mdash; avec un lien vers la fiche d'&eacute;margement correspondante</li>
+                                <li>le lendemain &mdash; avec un lien vers le proc&egrave;s verbal &agrave; compl&eacute;ter en ligne</li>
+                            </ol>
+                        </div>
+                    </iron-collapse>
+                </div>
+            </paper-card>
+        </div>
+    </template>
+
+    <script>
+    Polymer({
+        is: 'orca-home',
+
+        ready: function() {
+            if (navigator.isChrome()) {
+                this._initIntro();
+                this._animateIntro();
+            }
+        },
+
+        _initIntro: function() {
+            //document.querySelector('#mainContainer').style['overflow-y'] = 'hidden';
+            this.$.intro.style['height'] = window.innerHeight + 'px';
+            this.$.intro.style['position'] = 'relative';
+            this.$.intro.style['top'] = '-30px'; // account for .main-view { padding: 30px 0; }
+            this.$['animated-logo'].style['position'] = 'relative';
+            this.$['animated-logo'].style['left'] = '100px'; // half of .innovaction's width
+            this.$$('.innovaction').style['transform'] = 'scale(0)';
+        },
+
+        _animateIntro: function() {
+            this.$['animated-logo'].animateLogo(1500, 1000).onfinish = this._collapseIntro.bind(this, 600);
+            //this._animateBackground(document.querySelector('#main'));
+        },
+
+        _collapseIntro: function(duration) {
+            (function(options) {
+                this.$['animated-logo'].animateContent({
+                    width: ['650px', '350px']
+                }, options);
+
+                this.$['animated-logo'].animate({
+                    left: ['100px', 0]
+                }, options);
+
+                this.$$('.innovaction').animate({
+                    transform: ['translateX(200px)', 'translateX(0)'],
+                    transform: ['scale(0)', 'scale(1)'],
+                    opacity: [0, 1]
+                }, options);
+
+                this.$.intro.animate({
+                    height: [window.innerHeight + 'px', '200px'],
+                    top: ['-30px', 0]
+                }, options).onfinish = function() {
+                    //document.querySelector('#mainContainer').style['overflow-y'] = 'auto';
+                };
+            }.bind(this))({
+                duration: duration,
+                fill: 'forwards',
+                easing: 'ease-in-out'
+            });
+        },
+
+        _initAnimatedBackground: function(target) {
+            const svgNS = 'http://www.w3.org/2000/svg';
+            //const curated = ['GnBu', 'PRGn', 'BuGn', 'Spectral', 'PiYG', 'PuOr', 'BrBG'];
+            const pattern = Trianglify({
+                height: window.innerHeight,
+                width: target.getBoundingClientRect().width,
+                cell_size: 80,
+                x_colors: 'Blues' //curated[Math.floor(Math.random() * curated.length)]
+            });
+
+            console.log(typeof pattern.opts.x_colors === 'string' ? pattern.opts.x_colors : Object.keys(pattern.opts.palette).find(function(name) {
+                return pattern.opts.palette[name].every(function(value, idx) {
+                    return value === pattern.opts.x_colors[idx];
+                }, true);
+            }));
+
+            const svg = this.svg = pattern.svg();
+            svg.style['position'] = 'fixed';
+            target.insertBefore(svg, target.firstChild);
+
+            const circle = this.circle = document.createElementNS(svgNS, 'circle');
+            circle.setAttribute('cy', '50%');
+            circle.setAttribute('cx', '50%');
+            circle.setAttribute('r', '0%');
+            circle.setAttribute('fill', 'white');
+
+            const g = document.createElementNS(svgNS, 'g');
+            g.setAttribute('clip-path', 'url(#intro-clip)');
+            g.style['height'] = '100%';
+            while (svg.firstChild) {
+                g.appendChild(svg.firstChild);
+            }
+            g.appendChild(circle);
+            svg.appendChild(g);
+
+            const clipPath = svg.insertBefore(document.createElementNS(svgNS, 'defs'), svg.firstChild).appendChild(document.createElementNS(svgNS, 'clipPath'));
+            clipPath.setAttribute('id', 'intro-clip');
+            const clip = this.clip = document.createElementNS(svgNS, 'circle');
+            clip.setAttribute('cy', '50%');
+            clip.setAttribute('cx', '50%');
+            clip.setAttribute('r', '0%');
+            clipPath.appendChild(clip);
+        },
+
+        _animateBackground: function(target) {
+            this._initAnimatedBackground(target);
+            const that = this;
+
+            function heartbeat(delay, endDelay) {
+                that.circle.animate({
+                    r: ['0%', '50%'],
+                    opacity: [.4, 0]
+                }, {
+                    duration: 4 * 120,
+                    fill: 'forwards'
+                });
+
+                return that.clip.animate({
+                    r: ['30%', '29%']
+                }, {
+                    duration: 120,
+                    fill: 'forwards',
+                    iterations: 4,
+                    direction: 'alternate',
+                    endDelay: 500
+                });
+            }
+
+            this.clip.animate({
+                r: ['0%', '30%']
+            }, {
+                duration: 600,
+                fill: 'forwards',
+                easing: 'ease-in-out'
+            }).onfinish = function() {
+                heartbeat().onfinish = function() {
+                    heartbeat().onfinish = function() {
+                        that.clip.animate({
+                            r: ['30%', '150%']
+                        }, {
+                            duration: 1000,
+                            fill: 'forwards',
+                            ease: 'ease-in-out'
+                        });
+
+                        that.svg.animate({
+                            opacity: [1, 0]
+                        }, {
+                            duration: 1000,
+                            fill: 'forwards',
+                            ease: 'ease-in-out'
+                        });
+                    };
+                };
+            };
+        },
+
+        _demo: function() {
+            document.querySelector('#dialog--demo').open();
+        }
+    });
+    </script>
+</dom-module>

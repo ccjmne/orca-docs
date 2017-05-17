@@ -1,0 +1,126 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/paper-video/paper-video.html">
+
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="orca-quick-search">
+    <template>
+        <style is="custom-style" include="shared-styles iron-flex iron-flex-alignment">
+        :host {
+            display: block;
+            --paper-tabs-selection-bar-color: white;
+            --paper-tab-ink: white;
+            --paper-tabs: {
+                background-color: var(--primary-color);
+                color: white;
+            }
+        }
+        </style>
+
+        <div class="layout vertical">
+            <paper-card elevation="1" heading="Fonctionnement et d&eacute;monstration">
+                <paper-tabs id="tabs" selected="{{tab}}" attr-for-selected="name" fallback-selection="doc" align-bottom>
+                    <paper-tab name="doc">DOCUMENTATION</paper-tab>
+                    <paper-tab name="gif">D&Eacute;MONSTRATION</paper-tab>
+                </paper-tabs>
+
+                <iron-pages selected="[[tab]]" attr-for-selected="name">
+                    <div name="doc" class="card-content">
+                        <h1 class="underlined">Introduction</h1>
+                        <p>
+                            La <em>recherche globale</em> (ou <em>recherche rapide</em>) est un module d'acc&egrave;s rapide aux ressources.
+                            <br />Il s'agit simplement d'un champ de saisie int&eacute;gr&eacute; au bandeau-menu principal. Commencer &agrave; y saisir une recherche d&eacute;roule un menu pr&eacute;sentant les ressources correspondantes, mises en valeur selon leur pertinence.
+                        </p>
+                        <h2>D&eacute;tails d'impl&eacute;mentation</h2>
+                        <ol type="I">
+                            <li>Seuls les <em>modules de visualisation</em> sont interfac&eacute;s &agrave; travers cette fonctionnalit&eacute; d'acc&egrave;s rapide.</li>
+                            <li>Cliquer sur une entr&eacute;e de ce menu permet d'acc&eacute;der &agrave; la page de la ressource associ&eacute;e.</li>
+                            <li>
+                                Le menu est &eacute;galement navigable sans lever les mains du clavier, &agrave; l'aide des touches directionnelles. La touche
+                                <kbd>Entr&eacute;e &crarr;</kbd> s&eacute;lectionne l'item focalis&eacute; et ouvre la fiche correspondante.
+                            </li>
+                        </ol>
+                        <h1 class="underlined layout horizontal end">
+                            <span class="flex">S&eacute;lection des ressources</span>
+                            <paper-button class="primary" on-tap="_gif"><iron-icon icon="icons:visibility"></iron-icon>voir d&eacute;monstration</paper-button>
+                        </h1>
+                        <p>
+                            Les quatre types de ressources constituant l'ensemble des <em>modules de visualisation</em> sont accessibles via cette fonctionnalit&eacute;. Celles-ci sont identifi&eacute;es et s&eacute;lectionn&eacute;es selon leur type. Ainsi&nbsp;:
+                            <ol type="I">
+                                <li>la s&eacute;lection des <a href="/departments">d&eacute;partments</a> et <a href="/sites">sites</a> utilise leurs noms</li>
+                                <li>la s&eacute;lection des <a href="/employees">agents</a> peut se faire par leur identifiant, site, nom et pr&eacute;nom</li>
+                                <li>la s&eacute;lection des <a href="/trainings">formations</a> utilise leurs types et leurs dates</li>
+                            </ol>
+                        </p>
+                        <h1 class="underlined layout horizontal end">
+                            <span class="flex">Ordonnancement des r&eacute;sultats</span>
+                            <paper-button class="primary" on-tap="_gif"><iron-icon icon="icons:visibility"></iron-icon>voir d&eacute;monstration</paper-button>
+                        </h1>
+                        <p>
+                            Les r&eacute;sultats, potentiellement nombreux, sont soumis &agrave; un algorithme de prioritisation qui permet de sugg&eacute;rer &agrave; l'utilisateur les plus pertinents d'abord. Cet algorithme se d&eacute;compose en trois niveaux&nbsp;:
+                        </p>
+                        <ul>
+                            <li>
+                                Les ressources qui correspondent au crit&egrave;re de recherche sont pr&eacute;sent&eacute;es selon leur type&nbsp;:
+                                <ol type="I">
+                                    <li>les <a href="/departments">d&eacute;partements</a> puis les <a href="/sites">sites</a> en priorit&eacute;</li>
+                                    <li>les <a href="/employees">agents</a> dans un second temps</li>
+                                    <li>les <a href="/trainings">formations en dernier</a></li>
+                                </ol>
+                            </li>
+                            <li>
+                                Selon leur type, les ressources sont ensuite pr&eacute;sent&eacute;s dans un ordre sp&eacute;cifique&nbsp;:
+                                <ul>
+                                    <li>les <a href="/departments">d&eacute;partements</a> et <a href="/sites">sites</a> sont tri&eacute;s par ordre alphanum&eacute;rique</li>
+                                    <li>les <a href="/trainings">formations</a> sont tri&eacute;es par ordre chronologique d&eacute;croissant&nbsp;: les plus r&eacute;centes d'abord</li>
+                                    <li>les agents, ayant statistiquement nettement davantage de correspondances, sont sujets &agrave; un algorithme de prioritisation plus complexe d&eacute;crit ci-apr&egrave;s
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                Les agents sont prioritis&eacute;s si leur <em>nom de famille</em> correspond au premier mot entr&eacute; dans le champ de recherche. Puis, &agrave; un m&ecirc;me niveau de priorit&eacute;, les agents sont ensuite class&eacute;s par ordre alphab&eacute;tique du nom de famille, puis du pr&eacute;nom. Ainsi, chercher <span class="quote">NICOLAS</span> proposera, dans l'ordre suivant&nbsp;:
+                                <ol type="I">
+                                    <li>NICOLAS Eric</li>
+                                    <li>NICOLAS Fran&ccedil;ois</li>
+                                    <li>ALLARD Nicolas</li>
+                                    <li>BARON Nicolas</li>
+                                    <li>...</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </div>
+                    <div name="gif">
+                        <div class="img">
+                            <paper-video controls preload="auto" src="../../assets/videos/quick-search--quick-search.webm" autohide-controls="500" height="600"></paper-video>
+                        </div>
+                        <div class="card-actions">
+                            <paper-button class="primary" on-tap="_doc">
+                                <iron-icon icon="icons:arrow-back"></iron-icon>retour &agrave; la documentation
+                            </paper-button>
+                        </div>
+                    </div>
+                </iron-pages>
+            </paper-card>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'orca-quick-search',
+
+        _doc: function() {
+            this.tab = 'doc';
+        },
+
+        _gif: function() {
+            this.tab = 'gif';
+        }
+    });
+    </script>
+</dom-module>
