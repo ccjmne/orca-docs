@@ -1,0 +1,24 @@
+{
+  "name": "orca-docs",
+  "author": {
+    "name": "ccjmne",
+    "email": "ccjmne@gmail.com",
+    "url": "https://github.com/ccjmne"
+  },
+  "private": true,
+  "dependencies": {
+    "app-elements": "PolymerElements/app-elements#^1.0.0",
+    "diacritic": "^0.0.3",
+    "gold-elements": "PolymerElements/gold-elements#^1.0.1",
+    "iron-elements": "PolymerElements/iron-elements#^1.0.10",
+    "layout-elements": "PolymerElements/layout-elements",
+    "paper-elements": "PolymerElements/paper-elements#^1.0.7",
+    "polymer": "^1.9.1"
+  },
+  "devDependencies": {
+    "web-component-tester": "^4.0.0"
+  },
+  "resolutions": {
+    "app-route": "^1.0.0"
+  }
+}

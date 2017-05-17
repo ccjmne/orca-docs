@@ -1,0 +1,507 @@
+<html><head><link rel="import" href="../../bower_components/polymer/polymer-micro.html">
+<link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/paper-ripple/paper-ripple.html">
+
+<link rel="import" href="../utils/html-echo.html">
+
+</head><body><dom-module id="orca-get">
+    <template>
+        <style is="custom-style" include="shared-styles iron-flex iron-flex-alignment iron-flex-factors">
+        :host {
+            display: block;
+            white-space: nowrap;
+            --color-check: green;
+            --color-clear: #aaa;
+            --partner: #cdc;
+            --partner-lighter: #ded;
+            --micro: #ccc;
+            --micro-lighter: #ddd;
+            --business: #ddd;
+            --business-lighter: #eee;
+        }
+        
+        .checked {
+            color: var(--color-check);
+        }
+        
+        .unchecked {
+            color: var(--color-clear);
+        }
+        
+        td.subscribe {
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 16px;
+        }
+        
+        paper-material {
+            border-radius: 2px;
+        }
+        
+        #micro,
+        #business,
+        #partner {
+            cursor: pointer;
+        }
+        
+        h2 {
+            border: none;
+        }
+        
+        .lighter {
+            font-weight: lighter;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td,
+        th {
+            height: 25px;
+            padding: 5px 15px;
+        }
+        
+        table tbody tr:not(:first-of-type).separator {
+            border-top-width: 3px !important;
+        }
+        
+        paper-material.front {
+            padding: 6px 0;
+            z-index: 1;
+        }
+        
+        paper-material:not(.front) {
+            margin: 6px 0;
+        }
+        
+        #features {
+            margin: 6px 0;
+        }
+        
+        #features table tbody {
+            text-align: right;
+        }
+        
+        #features table tbody tr:not(:first-of-type) {
+            border-top: 1px solid lightgrey;
+        }
+        
+        #micro td.core,
+        #business td.core,
+        #partner td.core {
+            background-color: white;
+        }
+        
+        #micro table tbody,
+        #business table tbody,
+        #partner table tbody {
+            text-align: center;
+        }
+        
+        #micro {
+            background-color: var(--micro);
+        }
+        
+        #micro table tbody tr:not(:first-of-type) {
+            border-top: 1px solid var(--micro-lighter);
+        }
+        
+        #business {
+            background-color: var(--business);
+        }
+        
+        #business table tbody tr:not(:first-of-type) {
+            border-top: 1px solid var(--business-lighter);
+        }
+        
+        #partner {
+            background-color: var(--partner);
+        }
+        
+        #partner table tbody tr:not(:first-of-type) {
+            border-top: 1px solid var(--partner-lighter);
+        }
+        
+        #business {
+            overflow: hidden;
+        }
+        
+        #business .ribbon {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            transform: translateX(75px) rotateZ(45deg) translateX(-15px) translateY(30px);
+            border: 1px solid brown;
+            text-align: center;
+            font-size: .9em;
+            line-height: 1.2em;
+            background-color: crimson;
+            color: white;
+        }
+        </style>
+
+        <div class="layout horizontal stretch center-justified">
+            <div id="features" class="flex-2">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="height: 97px;">
+                                <h2>Choisissez votre modèle</h2>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template is="dom-repeat" items="[[_items]]">
+                            <tr class$="[[_separator(item.section)]]">
+                                <td>
+                                    <html-echo html="[[item.title]]"></html-echo>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+            <paper-material id="micro" class="flex" animated="" on-tap="_micro">
+                <paper-ripple></paper-ripple>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                <h2>
+                                    [[_plans.micro.display]]
+                                    <br><small class="lighter">[[_plans.micro.base]]€/mois</small>
+                                </h2>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template is="dom-repeat" items="[[_items]]">
+                            <tr class$="[[_separator(item.section)]]">
+                                <td class$="core [[item.micro._class]]">
+                                    <template is="dom-if" if="[[_iconCheck(item.micro.value)]]">
+                                        <iron-icon icon="icons:check" class="checked"></iron-icon>
+                                    </template>
+                                    <template is="dom-if" if="[[_iconClear(item.micro.value)]]">
+                                        <iron-icon icon="icons:clear" class="unchecked"></iron-icon>
+                                    </template>
+                                    <template is="dom-if" if="[[_text(item.micro.value)]]">
+                                        <html-echo html="[[item.micro.value]]"></html-echo>
+                                    </template>
+                                </td>
+                            </tr>
+                        </template>
+                        <tr>
+                            <td class="subscribe">
+                                Établir un devis
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </paper-material>
+            <paper-material id="business" class="front flex" elevation="2" animated="" on-tap="_business">
+                <paper-material elevation="1" class="ribbon">
+                    le plus
+                    <br>populaire
+                </paper-material>
+                <paper-ripple></paper-ripple>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                <h2>
+                                    [[_plans.business.display]]
+                                    <br><small class="lighter">dès [[_plans.business.base]]€/mois</small>
+                                </h2>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template is="dom-repeat" items="[[_items]]">
+                            <tr class$="[[_separator(item.section)]]">
+                                <td class$="core [[item.business._class]]">
+                                    <template is="dom-if" if="[[_iconCheck(item.business.value)]]">
+                                        <iron-icon icon="icons:check" class="checked"></iron-icon>
+                                    </template>
+                                    <template is="dom-if" if="[[_iconClear(item.business.value)]]">
+                                        <iron-icon icon="icons:clear" class="unchecked"></iron-icon>
+                                    </template>
+                                    <template is="dom-if" if="[[_text(item.business.value)]]">
+                                        <html-echo html="[[item.business.value]]"></html-echo>
+                                    </template>
+                                </td>
+                            </tr>
+                        </template>
+                        <tr>
+                            <td class="subscribe">
+                                Établir un devis
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </paper-material>
+            <paper-material id="partner" class="flex" animated="" on-tap="_partner">
+                <paper-ripple></paper-ripple>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                <h2>
+                                    [[_plans.partner.display]]
+                                    <br><small class="lighter">[[_plans.partner.base]]€/mois</small>
+                                </h2>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template is="dom-repeat" items="[[_items]]">
+                            <tr class$="[[_separator(item.section)]]">
+                                <td class$="core [[item.partner._class]]">
+                                    <template is="dom-if" if="[[_iconCheck(item.partner.value)]]">
+                                        <iron-icon icon="icons:check"></iron-icon>
+                                    </template>
+                                    <template is="dom-if" if="[[_iconClear(item.partner.value)]]">
+                                        <iron-icon icon="icons:clear" class="unchecked"></iron-icon>
+                                    </template>
+                                    <template is="dom-if" if="[[_text(item.partner.value)]]">
+                                        <html-echo html="[[item.partner.value]]"></html-echo>
+                                    </template>
+                                </td>
+                            </tr>
+                        </template>
+                        <tr>
+                            <td class="subscribe">
+                                Établir un devis
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </paper-material>
+        </div>
+        <small class="disclaimer">Prix exprimés hors taxes</small>
+    </template>
+    <script>
+    Polymer({
+        is: 'orca-get',
+
+        _micro: function() {
+            document.querySelector('#dialog--subscribe').open(this._plans.micro);
+        },
+
+        _business: function() {
+            document.querySelector('#dialog--subscribe').open(this._plans.business);
+        },
+
+        _partner: function() {
+            document.querySelector('#dialog--subscribe').open(this._plans.partner);
+        },
+
+        _separator: function(newSection) {
+            return newSection ? 'separator' : '';
+        },
+
+        _iconCheck: function(value) {
+            return value === true;
+        },
+
+        _iconClear: function(value) {
+            return value === false;
+        },
+
+        _text: function(value) {
+            return typeof value === 'string';
+        },
+
+        properties: {
+            _plans: {
+                type: Object,
+                value: {
+                    micro: {
+                        name: 'micro',
+                        display: 'Micro',
+                        base: 220
+                    },
+                    business: {
+                        name: 'business',
+                        display: 'Business',
+                        base: 760
+                    },
+                    partner: {
+                        name: 'partner',
+                        display: 'Partner',
+                        base: 1520
+                    }
+                }
+            },
+            _items: {
+                type: Array,
+                value: [{
+                    'title': 'Acc&egrave;s &agrave; la solution',
+                    'micro': {
+                        _class: 'checked',
+                        value: '24/7'
+                    },
+                    'business': {
+                        _class: 'checked',
+                        value: '24/7'
+                    },
+                    'partner': {
+                        _class: 'checked',
+                        value: '24/7'
+                    }
+                }, {
+                    'title': 'Comptes utilisateurs',
+                    'micro': {
+                        _class: 'checked',
+                        value: 'Illimit&eacute;s'
+                    },
+                    'business': {
+                        _class: 'checked',
+                        value: 'Illimit&eacute;s'
+                    },
+                    'partner': {
+                        _class: 'checked',
+                        value: 'Illimit&eacute;s'
+                    }
+                }, {
+                    'title': 'Performance r&eacute;seau',
+                    'micro': {
+                        value: 'Mod&eacute;r&eacute;e'
+                    },
+                    'business': {
+                        value: 'Mod&eacute;r&eacute;e'
+                    },
+                    'partner': {
+                        _class: 'checked',
+                        value: 'Haute'
+                    }
+                }, {
+                    'title': 'Base de donn&eacute;es',
+                    'micro': {
+                        value: 'Partag&eacute;e'
+                    },
+                    'business': {
+                        value: 'Partag&eacute;e'
+                    },
+                    'partner': {
+                        _class: 'checked',
+                        value: 'D&eacute;di&eacute;e'
+                    }
+                }, {
+                    section: true,
+                    'title': 'Chiffrement de bout en bout',
+                    'micro': {
+                        _class: 'checked',
+                        value: true
+                    },
+                    'business': {
+                        _class: 'checked',
+                        value: true
+                    },
+                    'partner': {
+                        _class: 'checked',
+                        value: true
+                    }
+                }, {
+                    'title': 'R&eacute;plication des donn&eacute;es',
+                    'micro': {
+                        _class: 'checked',
+                        value: true
+                    },
+                    'business': {
+                        _class: 'checked',
+                        value: true
+                    },
+                    'partner': {
+                        _class: 'checked',
+                        value: true
+                    }
+                }, {
+                    'title': 'Sauvegarde de s&eacute;curit&eacute; quoditienne',
+                    'micro': {
+                        value: false
+                    },
+                    'business': {
+                        _class: 'checked',
+                        value: true
+                    },
+                    'partner': {
+                        _class: 'checked',
+                        value: true
+                    }
+                }, {
+                    'title': 'Monitoring des tentatives d\'intrusion',
+                    'micro': {
+                        value: false
+                    },
+                    'business': {
+                        value: true
+                    },
+                    'partner': {
+                        _class: 'checked',
+                        value: true
+                    }
+                }, {
+                    'title': 'Monitoring de l\'activité des serveurs ',
+                    'micro': {
+                        value: false
+                    },
+                    'business': {
+                        value: false
+                    },
+                    'partner': {
+                        _class: 'checked',
+                        value: true
+                    }
+                }, {
+                    section: true,
+                    'title': 'Nombre d\'agents actifs',
+                    'micro': {
+                        value: '&le; 500'
+                    },
+                    'business': {
+                        value: '35&euro;/500 agents'
+                    },
+                    'partner': {
+                        _class: 'checked',
+                        value: 'Illimit&eacute;s'
+                    }
+                }, {
+                    'title': 'Acc&egrave;s aux mises &agrave; jour',
+                    'micro': {
+                        _class: 'checked',
+                        value: true
+                    },
+                    'business': {
+                        _class: 'checked',
+                        value: true
+                    },
+                    'partner': {
+                        _class: 'checked',
+                        value: true
+                    }
+                }, {
+                    'title': 'Ajustements en collaboration AGILE',
+                    'micro': {
+                        _class: 'checked',
+                        value: false
+                    },
+                    'business': {
+                        _class: 'checked',
+                        value: false
+                    },
+                    'partner': {
+                        _class: 'checked',
+                        value: true
+                    }
+                }]
+            }
+        }
+    });
+    </script>
+</dom-module>
+</body></html>

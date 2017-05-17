@@ -1,0 +1,192 @@
+<html><head><link rel="import" href="../../bower_components/polymer/polymer-micro.html">
+
+</head><body><dom-module id="footnotes-styles">
+    <template>
+        <style is="custom-style">
+        :host {
+            --footnote-indicator-default: crimson;
+            --footnote-background-default: #eee;
+            --footnote-alternate-background-default: white;
+            --footnote-alternate-border-default: #ccc;
+
+            --footnote-highlight: {
+                background-color: var(--footnote-background, --footnote-background-default);
+                padding: 2px 5px;
+                position: relative;
+                border-radius: 2px;
+            };
+            --footnote-highlight-before: {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                border: 1px solid var(--footnote-alternate-border, --footnote-alternate-border-default);
+                border-radius: 2px;
+                pointer-events: none;
+            };
+        }
+        </style>
+    </template>
+</dom-module>
+
+<dom-module id="footnote-indicator">
+    <template>
+        <style include="footnotes-styles">
+        :host {
+            font-weight: bold;
+            color: var(--footnote-indicator, --footnote-indicator-default);
+        }
+        
+        sup {
+            vertical-align: top;
+            font-size: 0.7em;
+            position: relative;
+            top: .1em;
+        }
+        </style>
+
+<!-- beautify preserve:start -->
+        <template is="dom-if" if="[[numeric]]"><sup>[[ref]]</sup></template><template is="dom-if" if="[[!numeric]]">[[_pattern]]</template></template>
+<!-- beautify preserve:end -->
+    <script>
+    Polymer({
+        is: 'footnote-indicator',
+
+        properties: {
+            numeric: {
+                type: Boolean,
+                value: false
+            },
+            ref: {
+                type: Number,
+                value: 1,
+                observer: '_refChanged'
+            }
+        },
+
+        _refChanged: function(ref) {
+            if (!ref || ref < 1) {
+                ref = 1;
+            }
+
+            this._pattern = '*'.repeat(ref);
+        }
+    });
+    </script>
+</dom-module>
+
+<dom-module id="footnote-needed">
+    <template>
+        <style include="footnotes-styles">
+        :host {
+            @apply --footnote-highlight;
+        }
+        :host[alternate] {
+            background-color: var(--footnote-alternate-background, --footnote-alternate-background-default);
+        };
+        :host[alternate]::before {
+            @apply --footnote-highlight-before;
+        }
+        </style>
+
+<!-- beautify preserve:start -->
+        <content></content>
+        <footnote-indicator numeric="[[numeric]]" ref="[[ref]]"></footnote-indicator></template>
+<!-- beautify preserve:end -->
+    <script>
+    Polymer({
+        is: 'footnote-needed',
+
+        properties: {
+            numeric: {
+                type: Boolean,
+                value: false
+            },
+            ref: {
+                type: Number,
+                value: 1
+            },
+            alternate: {
+                type: Boolean,
+                reflectToAttribute: true,
+                value: false
+            }
+        }
+    });
+    </script>
+</dom-module>
+
+<dom-module id="footnote-ref">
+    <template>
+        <footnote-indicator numeric="[[numeric]]" ref="[[ref]]"></footnote-indicator>&nbsp;:
+        <content></content>
+        <br>
+    </template>
+    <script>
+    Polymer({
+        is: 'footnote-ref',
+
+        properties: {
+            numeric: {
+                type: Boolean,
+                value: false
+            },
+            ref: {
+                type: Number,
+                value: 1
+            },
+            alternate: {
+                type: Boolean,
+                reflectToAttribute: true,
+                value: false
+            }
+        },
+
+        // Automatically wraps single <footnote-ref />'s in a <footnote-refs />
+        ready: function() {
+            if (!this.parentNode || this.parentNode.nodeName !== 'FOOTNOTE-REFS') {
+                const footnoteRefs = document.createElement('footnote-refs');
+                footnoteRefs.alternate = this.alternate;
+                this.parentNode.replaceChild(footnoteRefs, this);
+                footnoteRefs.appendChild(this);
+            }
+        }
+    });
+    </script>
+</dom-module>
+
+<dom-module id="footnote-refs">
+    <template>
+        <style include="footnotes-styles">
+        :host {
+            display: block;
+            margin: 2px 0;
+            @apply --footnote-highlight;
+        }
+        :host[alternate] {
+            background-color: var(--footnote-alternate-background, --footnote-alternate-background-default);
+        };
+        :host[alternate]::before {
+            @apply --footnote-highlight-before;
+        }
+        </style>
+
+        <content></content>
+    </template>
+    <script>
+    Polymer({
+        is: 'footnote-refs',
+
+        properties: {
+            alternate: {
+                type: Boolean,
+                reflectToAttribute: true,
+                value: false
+            }
+        }
+    });
+    </script>
+</dom-module>
+</body></html>

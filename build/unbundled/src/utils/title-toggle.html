@@ -1,0 +1,105 @@
+<html><head><link rel="import" href="../../bower_components/polymer/polymer-micro.html">
+
+<link rel="import" href="../../bower_components/paper-ripple/paper-ripple.html">
+
+<link rel="import" href="../shared-styles.html">
+
+</head><body><dom-module id="title-toggle">
+    <template>
+        <style include="iron-flex iron-positioning shared-styles">
+        :host {
+            cursor: pointer;
+        }
+        
+        [name=title] {
+            position: relative;
+        }
+        
+        placeholder-tooltip {
+            color: grey;
+            font-weight: 300;
+        }
+        
+        placeholder-tooltip::before {
+            content: 'cliquer pour';
+            color: lightgrey;
+        }
+        
+        paper-ripple {
+            color: grey;
+        }
+        
+        iron-icon {
+            color: var(--primary-color);
+        }
+        </style>
+        <template is="dom-if" if="[[h2]]">
+            <h2 name="title" class="layout horizontal center" on-tap="toggle">
+                <paper-ripple></paper-ripple>
+                <span class="flex"><content></content></span>
+                <placeholder-tooltip>
+                    <template is="dom-if" if="[[!state]]">
+                        dérouler
+                        <iron-icon icon="icons:expand-more"></iron-icon>
+                    </template>
+                    <template is="dom-if" if="[[state]]">
+                        réenrouler
+                        <iron-icon icon="icons:expand-less"></iron-icon>
+                    </template>
+                </placeholder-tooltip>
+            </h2>
+        </template>
+        <template is="dom-if" if="[[!h2]]">
+            <h1 name="title" class="layout horizontal center" on-tap="toggle">
+                <paper-ripple></paper-ripple>
+                <span class="flex"><content></content></span>
+                <placeholder-tooltip>
+                    <template is="dom-if" if="[[!state]]">
+                        dérouler
+                        <iron-icon icon="icons:expand-more"></iron-icon>
+                    </template>
+                    <template is="dom-if" if="[[state]]">
+                        réenrouler
+                        <iron-icon icon="icons:expand-less"></iron-icon>
+                    </template>
+                </placeholder-tooltip>
+            </h1>
+        </template>
+    </template>
+    <script>
+    Polymer({
+        is: 'title-toggle',
+
+        properties: {
+            state: {
+                type: Boolean,
+                notify: true,
+                value: false
+            },
+            h2: {
+                type: Boolean,
+                value: false
+            }
+        },
+
+        ready: function() {
+            this.async(function() {
+                this.classFollows('underlined', this.$$('[name=title]'), this);
+            });
+        },
+
+        on: function() {
+            this.state = true;
+        },
+
+        off: function() {
+            this.state = false;
+        },
+
+        toggle: function() {
+            this.state = !this.state;
+        }
+    });
+    </script>
+</dom-module>
+</body></html>
