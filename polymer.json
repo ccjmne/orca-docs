@@ -1,0 +1,19 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/main/orca-docs.html",
+  "fragments": [
+    "src/error-views/orca-404.html",
+    "src/error-views/orca-under-construction.html"
+  ],
+  "sourceGlobs": [
+    "src/**/*",
+    "assets/**/*",
+    "bower.json"
+  ],
+  "includeDependencies": [
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
+  ],
+  "lint": {
+    "rules": ["polymer-1"]
+  }
+}

@@ -1,0 +1,207 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/paper-video/paper-video.html">
+
+<link rel="import" href="../shared-styles.html">
+
+<link rel="import" href="../utils/scroll-to.html">
+
+<dom-module id="orca-advanced-search">
+    <template>
+        <style is="custom-style" include="shared-styles iron-flex iron-flex-alignment">
+        :host {
+            display: block;
+            --paper-tabs-selection-bar-color: white;
+            --paper-tab-ink: white;
+            --paper-tabs: {
+                background-color: var(--primary-color);
+                color: white;
+            }
+        }
+        </style>
+
+        <div class="layout vertical">
+            <paper-card elevation="1" heading="Fonctionnement et d&eacute;monstration">
+                <paper-tabs id="tabs" selected="{{tab}}" attr-for-selected="name" fallback-selection="doc" align-bottom>
+                    <paper-tab name="doc">DOCUMENTATION</paper-tab>
+                    <paper-tab name="gif-condition">CRIT&Egrave;RE DE RECHERCHE</paper-tab>
+                    <paper-tab name="gif-details">D&Eacute;TAILS AFFICHAGE</paper-tab>
+                </paper-tabs>
+
+                <iron-pages selected="[[tab]]" attr-for-selected="name">
+                    <div name="doc" class="card-content">
+                        <h1 class="underlined">Introduction</h1>
+                        <p>
+                            Accessible dans tous les <em>modules de visualisation</em>, la recherche avanc&eacute;e est un outil puissant qui permet une r&eacute;elle exploitation de vos donn&eacute;es. Elle se d&eacute;cline en deux fonctionnalit&eacute;s&nbsp;: la configuration des crit&egrave;res de recherche et l'affichage de d&eacute;tails suppl&eacute;mentaires.
+                        </p>
+                        <h2>R&eacute;utilisation</h2>
+                        <p>
+                            La <em>recherche avanc&eacute;e</em> fonctionne de pair avec le <a href="/links">module de partage</a>&nbsp;: chaque crit&egrave;re de recherche d&eacute;fini ainsi que chaque information suppl&eacute;mentaire s&eacute;lectionn&eacute;e sont synchronis&eacute;s avec l'URL du navigateur.
+                            <br />Partager ou sauvegarder le lien vers une recherche permet de r&eacute;-acc&eacute;der &agrave; tout moment &agrave; la m&ecirc;me configuration &mdash; avec des r&eacute;sultats toujours &agrave; jour.
+                        </p>
+                        <h1 class="underlined layout horizontal end">
+                            <span class="flex">Crit&egrave;res de recherche</span>
+                            <paper-button class="primary" on-tap="_criteria"><iron-icon icon="icons:visibility"></iron-icon>voir d&eacute;monstration</paper-button>
+                        </h1>
+                        <p>
+                            L'int&eacute;r&ecirc;t premier de la <em>recherche avanc&eacute;e</em> est le filtrage des r&eacute;sultats selon certain crit&egrave;res intelligents. Ceux-ci varient selon chaque module de visualisation&nbsp;: par exemple, dans le <a href="/employees">module agents</a>, les crit&egrave;res concernent l'&eacute;tat des aptitudes de chacun d'entre eux.
+                            <scroll-to target="#advanced-search--options">options de chaque module</scroll-to>
+                        </p>
+                        <h2>D&eacute;tails d'impl&eacute;mentation</h2>
+                        <ol type="I">
+                            <li>
+                                Chaque condition sp&eacute;cifi&eacute;e ajoute un nouveau crit&egrave;re de filtrage des r&eacute;sultats. Seules les ressources qui satisfont toutes ces conditions sont conserv&eacute;es.
+                            </li>
+                            <li>
+                                Tant qu'au moins une condition est d&eacute;finie, il n'est pas possible de fermer le bandeau de recherche avanc&eacute;e. Cela &eacute;vite de pr&eacute;senter &agrave; l'utilisateur des ressources filtr&eacute;es potentiellement &agrave; son insu.
+                            </li>
+                            <li>
+                                Le cas &eacute;ch&eacute;ant, les crit&egrave;res de recherche avanc&eacute;e viennent s'ajouter &agrave; ceux de <a href="/filtering">filtrage rapide</a> et seuls les r&eacute;sultats satisfaisant l'ensemble de ces conditions sont pr&eacute;serv&eacute;s.
+                            </li>
+                        </ol>
+                        <h1 class="underlined layout horizontal end">
+                            <span class="flex">Davantage d'information</span>
+                            <paper-button class="primary" on-tap="_details"><iron-icon icon="icons:visibility"></iron-icon>voir d&eacute;monstration</paper-button>
+                        </h1>
+                        <p>
+                            Le bandeau de recherche avanc&eacute;e propose &eacute;galement la visualisation d'informations additionnelles. Cocher/d&eacute;cocher la case li&eacute;e &agrave; une donn&eacute;e fait appara&icirc;tre/dispara&icirc;tre la colonne correspondante dans le tableau des ressources.
+                        </p>
+                        <h2>D&eacute;tails d'impl&eacute;mentation</h2>
+                        <ol type="I">
+                            <li>
+                                Les d&eacute;tails disponibles pour les modules de <a href="/sites">visualisation des sites</a> et <a href="/employees">celui des agents</a> se d&eacute;clinent en un bloc de configuration pour chaque <a href="/certificates">aptitude observ&eacute;e</a>.
+                            </li>
+                            <li>
+                                La visualisation de d&eacute;tails suppl&eacute;mentaires n'emp&ecirc;che en aucun cas la fermeture du bandeau de recherche avanc&eacute;e.
+                            </li>
+                        </ol>
+                    </div>
+                    <div name="gif-condition">
+                        <div class="img">
+                            <paper-video id="gif-condition" controls preload="auto" src="../../assets/videos/advanced-search--criteria.webm" autohide-controls="500" height="600"></paper-video>
+                        </div>
+                        <div class="card-actions">
+                            <paper-button class="primary" on-tap="_doc">
+                                <iron-icon icon="icons:arrow-back"></iron-icon>retour &agrave; la documentation
+                            </paper-button>
+                        </div>
+                    </div>
+                    <div name="gif-details">
+                        <div class="img">
+                            <paper-video id="gif-condition" controls preload="auto" src="../../assets/videos/advanced-search--details.webm" autohide-controls="500" height="600"></paper-video>
+                        </div>
+                        <div class="card-actions">
+                            <paper-button class="primary" on-tap="_doc">
+                                <iron-icon icon="icons:arrow-back"></iron-icon>retour &agrave; la documentation
+                            </paper-button>
+                        </div>
+                    </div>
+                </iron-pages>
+            </paper-card>
+
+            <paper-card id="advanced-search--options" heading="Options de chaque module" elevation="1">
+                <div class="card-content">
+                    <p>
+                        Chaque <em>module de visualisation</em> propose ses propres crit&egrave;res de recherche avanc&eacute;e, &eacute;tudi&eacute;s pour assister l'utilisateur dans l'exploitation de ses donn&eacute;es.
+                    </p>
+                    <h1 class="underlined">Visualisation des d&eacute;partements</h1>
+                    <p>
+                        La <em>recherche avanc&eacute;e</em> ne propose pas de crit&egrave;re de s&eacute;lection particuliers pour le module de <a href="/departments">visualisation des d&eacute;partements</a>. On estime que les conditions de <a href="/filtering">filtrage rapide</a> sont suffisantes dans ce cas.
+                    </p>
+                    <h1 class="underlined">Visualisation des sites</h1>
+                    <p>
+                        Les sites peuvent &ecirc;tre filtr&eacute;s selon l'&eacute;tat des aptitudes de ses agents. Une condition de s&eacute;lection concerne une aptitude particuli&egrave;re et peut &ecirc;tre d&eacute;finie&nbsp;:
+                    </p>
+                    <ul>
+                        <li>Selon le niveau d'atteignement de sa cible pour le site
+                            <ol type="I">
+                                <li>atteinte</li>
+                                <li>presque atteinte (aux deux tiers)</li>
+                                <li>non atteinte</li>
+                            </ol>
+                        </li>
+                        <li>Selon la quantit&eacute; d'agents form&eacute;s dans le site
+                            <ol type="I">
+                                <li>par rapport &agrave; un taux</li>
+                                <li>par rapport &agrave; un nombre pr&eacute;cis</li>
+                            </ol>
+                        </li>
+                    </ul>
+                    <h1 class="underlined">Visualisation des agents</h1>
+                    <p>
+                        Comme leurs sites, les agents peuvent &ecirc;tre filtr&eacute;s selon l'&eacute;tat de leurs aptitudes. Une condition de s&eacute;lection concerne une aptitude particuli&egrave;re et peut &ecirc;tre d&eacute;finie&nbsp;:
+                    </p>
+                    <ol type="I">
+                        <li>Selon son statut actuel pour l'agent
+                            <ul>
+                                <li>valide</li>
+                                <li>expir&eacute;</li>
+                            </ul>
+                        </li>
+                        <li>Selon que l'agent a ou n'a pas int&eacute;gr&eacute; son dispositif
+                            <ul>
+                                <li>int&eacute;gr&eacute; (comprendre&nbsp;: form&eacute;(e) au moins une fois, ind&eacute;pendamment de son statut actuel)</li>
+                                <li>jamais int&eacute;gr&eacute; (comprendre&nbsp;: jamais form&eacute;(e))</li>
+                            </ul>
+                        </li>
+                        <li>Selon son obtention/renouvellement par l'agent
+                            <ul>
+                                <li>r&eacute;cent(e)</li>
+                                <li>prochain(e)</li>
+                            </ul>
+                        </li>
+                        <li>Selon son expiration pour l'agent
+                            <ul>
+                                <li>r&eacute;cente</li>
+                                <li>prochaine</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <h1 class="underlined">Visualisation des formations</h1>
+                    <p>
+                        Les formations peuvent &ecirc;tre filtr&eacute;es selon leur dates et/ou selon leur type&nbsp;:
+                    </p>
+                    <ul>
+                        <li>Selon leur date
+                            <ol type="I">
+                                <li>pr&eacute;vue prochainement</li>
+                                <li>pr&eacute;vue/r&eacute;alis&eacute; r&eacute;cemment</li>
+                                <li>pr&eacute;vue/r&eacute;alis&eacute; sur une certaine plage de dates</li>
+                            </ol>
+                        </li>
+                        <li>Selon leur type
+                            <ol type="I">
+                                <li>type de formation particulier</li>
+                                <li>types de formation octroyant une aptitude particuli&egrave;re</li>
+                            </ol>
+                        </li>
+                    </ul>
+                    <p>
+                        La recheche avanc&eacute;e de formations selon leurs types est sp&eacute;ciale en le fait qu'il y est possible d'en s&eacute;lectionner plusieurs&nbsp;; celles-ci &eacute;tant conserv&eacute;es d&egrave;s qu'elles sont de l'un de ces types.
+                    </p>
+                </div>
+            </paper-card>
+        </div>
+    </template>
+
+    <script>
+    Polymer({
+        is: 'orca-advanced-search',
+        _doc: function() {
+            this.$.tabs.select('doc');
+        },
+        _criteria: function() {
+            this.$.tabs.select('gif-condition');
+        },
+        _details: function() {
+            this.$.tabs.select('gif-details');
+        }
+    });
+    </script>
+</dom-module>

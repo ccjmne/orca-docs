@@ -1,0 +1,46 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="scroll-to">
+    <style>
+    a {
+        margin: 8px 0;
+        display: block;
+        cursor: pointer;
+        background-color: #eee;
+        padding-left: 30px;
+        border-left: 2px solid var(--primary-color);
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    :host:hover em {
+        color: var(--primary-color);
+    }
+    </style>
+    <template>
+        <a href="[[target]]" on-tap="_scrollToSection">
+            <span>Voir&nbsp;:</span>
+            <em><content></content></em>
+        </a>
+    </template>
+    <script>
+    Polymer({
+        is: 'scroll-to',
+
+        properties: {
+            target: {
+                type: String
+            }
+        },
+
+        // In case the target is the current url -- hash included
+        _scrollToSection: function() {
+            if (window.location.hash && document.querySelector(window.location.hash)) {
+                document.querySelector(window.location.hash).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        }
+    });
+    </script>
+</dom-module>
