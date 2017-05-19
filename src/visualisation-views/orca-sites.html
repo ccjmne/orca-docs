@@ -1,0 +1,151 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-video/paper-video.html">
+
+<link rel="import" href="../utils/title-toggle.html">
+<link rel="import" href="../utils/scroll-to.html">
+
+<dom-module id="orca-sites">
+    <template>
+        <style is="custom-style" include="shared-styles iron-flex iron-flex-alignment">
+        :host {
+            display: block;
+            --paper-tabs-selection-bar-color: white;
+            --paper-tab-ink: white;
+            --paper-tabs: {
+                background-color: var(--primary-color);
+                color: white;
+            }
+        }
+        
+        .collapse-content {
+            padding-top: 1px;
+            padding-bottom: 1px;
+        }
+        </style>
+
+        <div class="layout vertical">
+            <paper-card elevation="1" heading="Documentation">
+                <div name="doc" class="card-content">
+                    <h1 class="underlined">Introduction</h1>
+                    <p>
+                        Les <em>sites</em> sont l'une des ressources principales de la solution Orca. Ils correspondent &agrave; des sites physiques, organis&eacute;s en <a href="/departments">d&eacute;partement</a>, auxquels des <a href="/employees">agents</a> sont affect&eacute;s.
+                        <br />Un compte <a href="/admin-users">utilisateur</a> peut &ecirc;tre li&eacute; et attribu&eacute; &agrave; un <em>site</em>.
+                    </p>
+                    <h1 class="underlined">Pr&eacute;sentation</h1>
+                    <p>
+                        Comme chaque <em>module de visualisation</em>, la pr&eacute;sentation des sites se compose de deux pages&nbsp;: celle de <em>listage</em>, et la
+                        <em>fiche site</em>.
+                    </p>
+                    <title-toggle h2 state="{{sites--listing-page}}">Page de listage</title-toggle>
+                    <iron-collapse opened="[[sites--listing-page]]">
+                        <div class="collapse-content">
+                            <p>
+                                Cette page se compose principalement d'un tableau de l'ensemble des sites <a href="/access">accessibles</a> &agrave; l'utilisateur. Elle int&egrave;gre les fonctionnalit&eacute;s de <a href="/advanced-search">recherche avanc&eacute;e</a>, de <a href="/links">partage</a> et d'<a href="/exports">export</a>. On y retrouve, pour chaque site, ses&nbsp;:
+                            </p>
+                            <ol type="I">
+                                <li>nom</li>
+                                <li>d&eacute;partement</li>
+                                <li>nombre d'agents</li>
+                            </ol>
+                            <p>
+                                Ansi que, pour chaque <a href="/certificates">aptitude observ&eacute;e</a>, selon la configuration de <a href="/advanced-search">recherche avanc&eacute;e</a>, le&nbsp;:
+                            </p>
+                            <ol type="I">
+                                <li>
+                                    <footnote-needed>taux d'agents form&eacute;s</footnote-needed>
+                                </li>
+                                <li>
+                                    <footnote-needed>nombre d'agents form&eacute;s</footnote-needed>
+                                </li>
+                                <li>cible &agrave; atteindre</li>
+                                <li>
+                                    <footnote-needed>nombre d'agents manquants pour atteindre cette cible</footnote-needed>
+                                </li>
+                            </ol>
+                            <footnote-refs>
+                                <footnote-ref>
+                                    Ces informations utilisent un <em>code couleur</em> permettant &agrave; l'utilisateur de reconna&icirc;tre instantan&eacute;ment les aptitudes pour lesquelles la cible&nbsp;:
+                                </footnote-ref>
+                                <ol type="I">
+                                    <li><span class="label label-success">vert</span>&nbsp;: est atteinte</li>
+                                    <li><span class="label label-warning">orange</span>&nbsp;: est <em>presque</em> atteinte (au moins aux deux tiers)</li>
+                                    <li><span class="label label-danger">rouge</span>&nbsp;: n'est pas atteinte (&agrave; moins de deux tiers)</li>
+                                </ol>
+                            </footnote-refs>
+                        </div>
+                    </iron-collapse>
+                    <title-toggle h2 state="{{sites--single-page}}">Fiche site</title-toggle>
+                    <iron-collapse opened="[[sites--single-page]]">
+                        <div class="collapse-content">
+                            <p>
+                                La fiche d'un site se compose des deux &eacute;l&eacute;ments que sont son <em>tableau de bord</em> et la liste de ses <a href="/employees">agents</a>. Elle int&egrave;gre &eacute;galement la fonctionnalit&eacute; d'<a href="/exports">export</a>.
+                            </p>
+                            <h3 class="layout horizontal center">
+                                Tableau de bord<hr class="flex" />
+                            </h3>
+                            <p>Le tableau de bord concentre l'int&eacute;gralit&eacute; des informations du site&nbsp;:</p>
+                            <ol type="I">
+                                <li>son <a href="/departments">d&eacute;partement</a></li>
+                                <li>son nombre d'agents &mdash; et sa d&eacute;composition en agents permanents et temporaires</li>
+                                <li>une adresse courriel de contact avec son &eacute;quipe responsable</li>
+                                <li>les &eacute;ventuelles notes prises le concernant</li>
+                                <li>la derni&egrave;re date de mise &agrave; jour des affectations de ses agents</li>
+                            </ol>
+                            <p>Puis, pour chaque <a href="/certificates">aptitude observ&eacute;e</a>&nbsp;:</p>
+                            <ol type="I">
+                                <li>le d&eacute;tail de sa cible</li>
+                                <li>son nombre (et taux) d'agents form&eacute;s</li>
+                                <li>le nombre d'agents restant &agrave; former ou renouveler pour atteindre la cible</li>
+                            </ol>
+                            <p>
+                                Enfin, le tableau de bord peut s'&eacute;tendre pour proposer un historique suivant l'&eacute;volution de la satisfaction des cibles du site.
+                            </p>
+                            <scroll-to target="#sites--history">Historique d'un site</scroll-to>
+                            <h3 class="layout horizontal center">
+                                Liste des agents<hr class="flex" />
+                            </h3>
+                            <p>
+                                La liste des agents d'un site contient certaines informations pour chacun d'entre eux&nbsp;:
+                            </p>
+                            <ol type="I">
+                                <li>leur matricule</li>
+                                <li>leurs genre, nom et pr&eacute;nom</li>
+                                <li>leur statut (permanent ou temporaire)</li>
+                                <li>leur date d'expiration de chaque <a href="/certificates">aptitude observ&eacute;e</a></li>
+                            </ol>
+                            <p>La <a href="/advanced-search">recherche avanc&eacute;e</a> n'est pas disponible pour cette liste. Cliquer sur l'un de ces agents ouvre la fiche de celui-ci.</p>
+                        </div>
+                    </iron-collapse>
+                </div>
+            </paper-card>
+
+            <paper-card id="sites--history" heading="Historique d'un site" elevation="1">
+                <div class="card-content">
+                    <p>
+                        L'historique est un outil permettant de visualiser, &agrave; l'aide d'un graphique simple, l'&eacute;volution de la satisfaction de la cible d'une aptitude au cours du temps.
+                    </p>
+                    <h1 class="underlined">Utilisation</h1>
+                    <p>
+                        Deux donn&eacute;es configurent la vue de l'historique&nbsp;: la date de d&eacute;but et l'aptitude concern&eacute;e. L'historique pr&eacute;sentera les donn&eacute;es pour l'aptitude s&eacute;lectionn&eacute;e sur toute la p&eacute;riode depuis la date choisie jusqu'aujourd'hui &mdash; avec un relev&eacute; chaque mois.
+                        <br />Le graphique utilis&eacute; est interactif et passer la souris au-dessus de celui-ci permet de focaliser la vue sur un relev&eacute; particulier et de mettre en valeur la cible de ce site ainsi que son nombre effectif d'agents valides &agrave; la date correspondante.
+                    </p>
+                </div>
+                <div class="img border-top">
+                    <paper-video id="gif-condition" controls preload="auto" src="../../assets/videos/sites--history.webm" autohide-controls="500" height="600"></paper-video>
+                </div>
+            </paper-card>
+        </div>
+    </template>
+
+    <script>
+    Polymer({
+        is: 'orca-sites'
+    });
+    </script>
+</dom-module>

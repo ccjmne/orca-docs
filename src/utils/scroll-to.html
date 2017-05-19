@@ -18,7 +18,7 @@
     }
     </style>
     <template>
-        <a href="[[target]]" on-tap="_scrollToSection">
+        <a href="[[target]]" on-tap="_trigger">
             <span>Voir&nbsp;:</span>
             <em><content></content></em>
         </a>
@@ -33,12 +33,10 @@
             }
         },
 
-        // In case the target is the current url -- hash included
-        _scrollToSection: function() {
-            if (window.location.hash && document.querySelector(window.location.hash)) {
-                document.querySelector(window.location.hash).scrollIntoView({
-                    behavior: 'smooth'
-                });
+        _trigger: function() {
+            // In case the target is the current url (hash included), force trigger
+            if (window.location.hash === this.target || window.location.pathname + window.location.hash === this.target) {
+                this.fire('scroll-to')
             }
         }
     });

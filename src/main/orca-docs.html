@@ -26,7 +26,6 @@
 
 <link rel="import" href="drawer-menu.html">
 <link rel="import" href="orca-footer.html">
-<link rel="import" href="orca-toolbar.html">
 
 <dom-module id="orca-docs">
 
@@ -107,18 +106,18 @@
             color: black;
         }
         
-        neon-animated-pages.main-view > * {
+        neon-animated-pages#main-view > * {
             @apply(--layout-self-center);
             @apply(--layout-horizontal);
             @apply(--layout-center-justified);
             padding: var(--default-margin) 0;
         }
         
-        neon-animated-pages.main-view > * >:first-child {
+        neon-animated-pages#main-view > * >:first-child {
             max-width: 780px;
         }
         
-        neon-animated-pages.main-view > *.large >:first-child {
+        neon-animated-pages#main-view > *.large >:first-child {
             width: 960px;
             max-width: 960px;
         }
@@ -170,7 +169,7 @@
                     <paper-icon-button icon="icons:menu" paper-drawer-toggle></paper-icon-button>
                 </template>
                 <div id="main-container" class="layout vertical fit">
-                    <neon-animated-pages class="flex main-view" selected="[[pageName]]" attr-for-selected="name" fallback-selection="orca-404" role="main" entry-animation="slide-from-left-animation" exit-animation="slide-right-animation">
+                    <neon-animated-pages id="main-view" class="flex" selected="[[pageName]]" attr-for-selected="name" fallback-selection="orca-404" entry-animation="slide-from-left-animation" exit-animation="slide-right-animation">
                         <!-- main views -->
                         <span name="orca-home"><orca-home></orca-home></span>
                         <span name="orca-get" class="large"><orca-get></orca-get></span>
@@ -209,7 +208,11 @@
         ],
 
         ready: function() {
+            this.addEventListener('scroll-to', this.__scrollToSection);
             this.__watchHash();
+            window.Intercom('boot', {
+                app_id: 'f8wixr1i'
+            });
         },
 
         _hasHeader: function(pageName) {
@@ -258,16 +261,28 @@
         },
 
         __scrollToSection: function() {
-            if (window.location.hash && document.querySelector(window.location.hash)) {
-                document.querySelector(window.location.hash).scrollIntoView({
-                    behavior: 'smooth'
-                });
+            const view = this.$['main-view'].querySelector('.iron-selected');
+            const target = view && window.location.hash && view.firstChild.$$(window.location.hash);
+            if (!target) {
+                return;
             }
+
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+
+            const ripple = document.createElement('paper-ripple');
+            ripple.setAttribute('noink', true);
+            target.append(ripple);
+            ripple.simulatedRipple();
+            ripple.addEventListener('transitionend', function() {
+                target.removeChild(ripple);
+            });
         },
 
         __watchHash: function(prev) {
             if (window.location.hash !== prev) {
-                this.__scrollToSection();
+                this.fire('scroll-to');
             }
 
             this.async(arguments.callee.bind(this, window.location.hash), 100);

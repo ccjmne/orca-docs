@@ -1,0 +1,158 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-video/paper-video.html">
+
+<link rel="import" href="../utils/title-toggle.html">
+<link rel="import" href="../utils/scroll-to.html">
+
+<dom-module id="orca-departments">
+    <template>
+        <style is="custom-style" include="shared-styles iron-flex iron-flex-alignment">
+        :host {
+            display: block;
+            --paper-tabs-selection-bar-color: white;
+            --paper-tab-ink: white;
+            --paper-tabs: {
+                background-color: var(--primary-color);
+                color: white;
+            }
+        }
+        
+        .collapse-content {
+            padding-top: 1px;
+            padding-bottom: 1px;
+        }
+        </style>
+
+        <div class="layout vertical">
+            <paper-card elevation="1" heading="Documentation">
+                <div name="doc" class="card-content">
+                    <h1 class="underlined">Introduction</h1>
+                    <p>
+                        Les <em>d&eacute;partements</em> sont l'une des ressources principales de la solution Orca. Ils permettent d'organiser les <a href="/sites">sites</a> en groupes logiques.
+                        <br />Bien que correspondant souvent &agrave; un groupement par proximit&eacute; g&eacute;ographique, les d&eacute;partements peuvent &eacute;galement &ecirc;tre utilis&eacute;s afin de distinguer leurs sites selon tout autre crit&egrave;re. On peut par exemple envisager de grouper ensemble tous les &eacute;tablissements recevant du public.
+                        <br />Un compte <a href="/admin-users">utilisateur</a> peut &ecirc;tre li&eacute; et attribu&eacute; &agrave; un <em>d&eacute;partement</em>.
+                    </p>
+                    <h1 class="underlined">Pr&eacute;sentation</h1>
+                    <p>
+                        Comme chaque <em>module de visualisation</em>, la pr&eacute;sentation des d&eacute;partements se compose de deux pages&nbsp;: celle de <em>listage</em>, et la
+                        <em>fiche d&eacute;partement</em>.
+                    </p>
+                    <title-toggle h2 state="{{departments--listing-page}}">Page de listage</title-toggle>
+                    <iron-collapse opened="[[departments--listing-page]]">
+                        <div class="collapse-content">
+                            <p>
+                                Cette page se compose principalement d'un tableau de l'ensemble des d&eacute;partements <a href="/access">accessibles</a> &agrave; l'utilisateur. Elle int&egrave;gre les fonctionnalit&eacute;s de <a href="/advanced-search">recherche avanc&eacute;e</a>, de <a href="/links">partage</a> et d'<a href="/exports">export</a>. On y retrouve, pour chaque d&eacute;partement, ses&nbsp;:
+                            </p>
+                            <ol type="I">
+                                <li>nom</li>
+                                <li>nombre de sites</li>
+                                <li>nombre d'agents</li>
+                            </ol>
+                            <p>
+                                Ansi que, pour chaque <a href="/certificates">aptitude observ&eacute;e</a>, selon la configuration de <a href="/advanced-search">recherche avanc&eacute;e</a>&nbsp;:
+                            </p>
+                            <ol type="I">
+                                <li>le score</li>
+                                <li>le d&eacute;tail de sa cible pour chacun des sites</li>
+                                <li>le taux d'agents form&eacute;s</li>
+                                <li>le nombre d'agents form&eacute;s</li>
+                            </ol>
+                            <scroll-to target="#departments--score">Score aptitude d'un d&eacute;partement</scroll-to>
+                        </div>
+                    </iron-collapse>
+                    <title-toggle h2 state="{{departments--single-page}}">Fiche d&eacute;partement</title-toggle>
+                    <iron-collapse opened="[[departments--single-page]]">
+                        <div class="collapse-content">
+                            <p>
+                                La fiche d'un d&eacute;partement se compose des deux &eacute;l&eacute;ments que sont son <em>tableau de bord</em> et la liste de ses sites. Elle int&egrave;gre &eacute;galement la fonctionnalit&eacute; d'<a href="/exports">export</a>.
+                            </p>
+                            <h3 class="layout horizontal center">
+                                Tableau de bord<hr class="flex" />
+                            </h3>
+                            <p>Le tableau de bord concentre l'int&eacute;gralit&eacute; des informations du d&eacute;partement&nbsp;:</p>
+                            <ol type="I">
+                                <li>son nombre de sites</li>
+                                <li>son nombre d'agents &mdash; et sa d&eacute;composition en agents permanents et temporaires</li>
+                                <li>les &eacute;ventuelles notes prises le concernant</li>
+                                <li>la derni&egrave;re date de mise &agrave; jour des affectations de ses agents</li>
+                            </ol>
+                            <p>Puis, pour chaque <a href="/certificates">aptitude observ&eacute;e</a>&nbsp;:</p>
+                            <ol type="I">
+                                <li>son score</li>
+                                <li>le d&eacute;tail de ses cibles</li>
+                                <li>son nombre (et taux) d'agents form&eacute;s</li>
+                            </ol>
+                            <p>
+                                Enfin, le tableau de bord peut s'&eacute;tendre pour proposer un historique suivant l'&eacute;volution des scores du d&eacute;partement.
+                            </p>
+                            <scroll-to target="#departments--score">Score aptitude d'un d&eacute;partement</scroll-to>
+                            <scroll-to target="#departments--history">Historique d'un d&eacute;partement</scroll-to>
+                            <h3 class="layout horizontal center">
+                                Liste des sites<hr class="flex" />
+                            </h3>
+                            <p>
+                                La liste des sites d'un d&eacute;partement contient certaines informations pour chacun d'entre eux&nbsp;:
+                            </p>
+                            <ol type="I">
+                                <li>le nom</li>
+                                <li>le nombre d'agents</li>
+                                <li>le taux d'agent form&eacute;s &agrave; chaque <a href="/certificates">aptitude observ&eacute;e</a></li>
+                            </ol>
+                            <p>La <a href="/advanced-search">recherche avanc&eacute;e</a> n'est pas disponible pour cette liste. Cliquer sur l'un de ces sites ouvre la fiche de celui-ci.</p>
+                        </div>
+                    </iron-collapse>
+                </div>
+            </paper-card>
+
+            <paper-card id="departments--history" heading="Historique d'un d&eacute;partement" elevation="1">
+                <div class="card-content">
+                    <p>
+                        L'historique est un outil permettant de visualiser, &agrave; l'aide d'un graphique simple, l'&eacute;volution de la satisfaction de la cible d'une aptitude au cours du temps.
+                    </p>
+                    <h1 class="underlined">Utilisation</h1>
+                    <p>
+                        Deux donn&eacute;es configurent la vue de l'historique&nbsp;: la date de d&eacute;but et l'aptitude concern&eacute;e. L'historique pr&eacute;sentera les donn&eacute;es pour l'aptitude s&eacute;lectionn&eacute;e sur toute la p&eacute;riode depuis la date choisie jusqu'aujourd'hui &mdash; avec un relev&eacute; chaque mois.
+                        <br />Le graphique utilis&eacute; est interactif et passer la souris au-dessus de celui-ci permet de focaliser la vue sur un relev&eacute; particulier et de visualiser le d&eacute;tail des cibles &agrave; la date correspondante.</p>
+                    <hr />
+                    <p>Chaque relev&eacute; pr&eacute;sente le <em>d&eacute;tail</em> de la cible d'une aptitude &agrave; une certaine date, lequel se d&eacute;compose en trois &eacute;l&eacute;ments&nbsp;:
+                    </p>
+                    <ol type="I">
+                        <li>le nombre de sites pour lesquels la cible est atteinte</li>
+                        <li>le nombre de sites pour lesquels la cible est <span class="quote">presque atteinte</span> (aux deux tiers)</li>
+                        <li>le nombre de sites pour lesquels la cible n'est pas atteinte &mdash; &agrave; moins de deux tiers</li>
+                    </ol>
+                </div>
+                <div class="img border-top">
+                    <paper-video id="gif-condition" controls preload="auto" src="../../assets/videos/departments--history.webm" autohide-controls="500" height="600"></paper-video>
+                </div>
+            </paper-card>
+
+            <paper-card id="departments--score" heading="Score aptitude d'un d&eacute;partement" elevation="1">
+                <div class="card-content">
+                    <p>
+                        Pour un d&eacute;partement, son <em>score</em> est un taux, en pourcents, qui concerne une aptitude.
+                        <br />Cachun de ses sites a le potentiel de combler une fraction de ce score, plus ou moins grande selon le nombre de ses sites. Ils contribuent &agrave; leur fraction selon leur indice de r&eacute;alisation de la cible assign&eacute;e &agrave; l'aptitude concern&eacute;e&nbsp;:
+                    </p>
+                    <ol type="I">
+                        <li>cible atteinte&nbsp;: fraction remplie &agrave; 100%</li>
+                        <li>cible presque atteinte&nbsp;: fraction remplie aux deux tiers</li>
+                        <li>moins de &frac23; de la cible&nbsp;: fraction enti&egrave;rement vide</li>
+                    </ol>
+                    <p>&Agrave; noter&nbsp;: le nombre d'agents de chaque site n'intervient pas dans le calcul du score des d&eacute;partements.</p>
+                </div>
+            </paper-card>
+        </div>
+    </template>
+
+    <script>
+    Polymer({
+        is: 'orca-departments'
+    });
+    </script>
+</dom-module>
