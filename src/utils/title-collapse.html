@@ -1,0 +1,96 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
+
+<link rel="import" href="title-toggle.html">
+
+<dom-module id="title-collapse">
+    <template>
+        <style is="custom-style" include="shared-styles iron-flex iron-flex-alignment">
+        :host {
+            display: block;
+        }
+        
+        .collapse-content {
+            /* So the element covers its entire content, including eventual margins that would otherwise make the collapsing animation jumpy */
+            padding: 1px 0;
+        }
+        
+        .suffix {
+            color: grey;
+            font-weight: 300;
+        }
+        
+        .suffix::before {
+            content: 'cliquer pour';
+            color: lightgrey;
+        }
+        
+        .suffix iron-icon {
+            color: var(--primary-color);
+        }
+        
+        .vr {
+            margin: 24px 0 8px 0;
+            padding: 8px;
+            border-radius: 10px;
+        }
+        
+        .vr:not(.right) {
+            border-left: 1px solid var(--primary-color);
+        }
+        
+        .vr.right {
+            border-right: 1px solid var(--primary-color);
+        }
+        </style>
+
+        <title-toggle state="{{state}}" h2="[[h2]]">
+            <content select=".title"></content>
+
+            <div class="suffix">
+                <template is="dom-if" if="[[!state]]">
+                    d&eacute;rouler
+                    <iron-icon icon="icons:expand-more"></iron-icon>
+                </template>
+                <template is="dom-if" if="[[state]]">
+                    r&eacute;enrouler
+                    <iron-icon icon="icons:expand-less"></iron-icon>
+                </template>
+            </div>
+        </title-toggle>
+        <iron-collapse opened="[[state]]" class="layout horizontal">
+            <div class="vr"></div>
+            <div class="collapse-content flex">
+                <content select=":not(.title)"></content>
+            </div>
+            <div class="vr right"></div>
+        </iron-collapse>
+    </template>
+    <script>
+    Polymer({
+        is: 'title-collapse',
+
+        properties: {
+            h2: {
+                type: Boolean,
+                value: false
+            },
+
+            state: {
+                type: Boolean,
+                value: false,
+                notify: true
+            }
+        },
+
+        ready: function() {
+            this.async(function() {
+                this.classFollows('underlined', this.$.title, this);
+            });
+        }
+    });
+    </script>
+</dom-module>

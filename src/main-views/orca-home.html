@@ -1,6 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
@@ -8,7 +7,7 @@
 
 <link rel="import" href="../utils/orca-animated-logo.html">
 <link rel="import" href="../utils/paper-card-ripple.html">
-<link rel="import" href="../utils/title-toggle.html">
+<link rel="import" href="../utils/title-collapse.html">
 
 <link rel="import" href="../shared-styles.html">
 
@@ -89,85 +88,69 @@
                 </div>
                 <hr />
                 <div class="card-content">
-                    <title-toggle class="underlined" state="{{version161}}">
-                        <div class="layout horizontal center">
-                            <span>Dans le dernier patch</span>
-                            <span class="pipe"></span>
-                            <code>version-1.6.1</code>
-                        </div>
-                    </title-toggle>
-                    <iron-collapse opened="[[version161]]">
-                        Publi&eacute; le 06 octobre 2016.
-                        <div>
-                            <h2>Am&eacute;liorations annexes</h2>
+                    <title-collapse>
+                        <span class="title">Dans le dernier patch<span class="pipe"></span><code>version-1.6.1</code></span>
+                        <p>
+                            Publi&eacute; le 06 octobre 2016.
+                        </p>
+                        <h2>Am&eacute;liorations annexes</h2>
+                        <ol type="I">
+                            <li>Il est maintenant possible de n'avoir aucune <a href="/certificates">aptitude observ&eacute;e</a>.</li>
+                        </ol>
+                        <h2>Correction de bugs</h2>
+                        <ol type="I">
+                            <li>Corrig&eacute; bug faisant que la recherche avanc&eacute;e d'agents ayant &eacute;t&eacute; form&eacute;s entre deux dates sp&eacute;cifiques ne trouvait aucun r&eacute;sultat.</li>
+                        </ol>
+                    </title-collapse>
+                    <title-collapse>
+                        <span class="title">Dans la derni&egrave;re version<span class="pipe"></span><code>version-1.6.x</code></span>
+                        <p>
+                            Publi&eacute;e le 16 septembre 2016.
+                        </p>
+                        <h2>Fonctionnalit&eacute;s majeures</h2>
+                        <h3 class="layout horizontal center">Visibilit&eacute; sur vos d&eacute;partements&nbsp;!<hr class="flex" /></h3>
+                        <p>
+                            Le bouton <span class="quote">Sites</span> du menu se d&eacute;roule maintenant pour offrir l'acc&egrave;s aux <a href="/departments">d&eacute;partments</a>. Ce module introduit &eacute;galement un nouvel indicateur&nbsp;: le score. Comme les autres modules de visualisation, il se d&eacute;cline en deux pages&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li>
+                                La liste des d&eacute;partements, sur laquelle on retrouve, pour chaque d&eacute;partement&nbsp;:
+                                <ul>
+                                    <li>son nom</li>
+                                    <li>son nombre de sites</li>
+                                    <li>son nombre d'agents</li>
+                                </ul>
+                                Puis, pour chaque <a href="/certificates">aptitude observ&eacute;e</a>, par d&eacute;faut, leur score. Davantage d'informations sont disponibles via la recherche avanc&eacute;e.
+                            </li>
+                            <li>Les fiches d&eacute;partement, listant leurs sites.</li>
+                        </ol>
+                        <p>
+                            Chacune de ces pages est livr&eacute;e avec les fonctionnalit&eacute;s de <a href="/advanced-search">recherche</a>, <a href="/links">partage</a> et
+                            <a href="/exports">export</a> habituelles.
+                        </p>
+                        <h3 class="layout horizontal center">Le score des d&eacute;partements<hr class="flex" /></h3>
+                        <p>
+                            Pour un d&eacute;partement, le score est un taux, en pourcents, qui concerne une aptitude.
+                            <br />Cachun de ses sites a le potentiel de combler une fraction de ce score, plus ou moins grande selon le nombre de ses sites. Ils contribuent &agrave; leur fraction selon leur indice de r&eacute;alisation de la cible assign&eacute;e &agrave; l'aptitude concern&eacute;e&nbsp;:
                             <ol type="I">
-                                <li>Il est maintenant possible de n'avoir aucune <a href="/certificates">aptitude observ&eacute;e</a>.</li>
+                                <li>cible atteinte&nbsp;: fraction remplie &agrave; 100%</li>
+                                <li>cible presque atteinte&nbsp;: fraction remplie aux deux tiers</li>
+                                <li>moins de &frac23; de la cible&nbsp;: fraction enti&egrave;rement vide</li>
                             </ol>
-                            <h2>Correction de bugs</h2>
-                            <ol type="I">
-                                <li>Corrig&eacute; bug faisant que la recherche avanc&eacute;e d'agents ayant &eacute;t&eacute; form&eacute;s entre deux dates sp&eacute;cifiques ne trouvait aucun r&eacute;sultat.
-                                </li>
-                            </ol>
-                        </div>
-                    </iron-collapse>
-                    <title-toggle class="underlined" state="{{version16x}}">
-                        <div class="layout horizontal center">
-                            <span>Dans la derni&egrave;re version</span>
-                            <span class="pipe"></span>
-                            <code>version-1.6.x</code>
-                        </div>
-                    </title-toggle>
-                    <iron-collapse opened="[[version16x]]">
-                        Publi&eacute;e le 16 septembre 2016.
-                        <div>
-                            <h2>Fonctionnalit&eacute;s majeures</h2>
-                            <h3 class="layout horizontal center">
-                                Visibilit&eacute; sur vos d&eacute;partements&nbsp;!<hr class="flex" />
-                            </h3>
-                            <p>
-                                Le bouton <span class="quote">Sites</span> du menu se d&eacute;roule maintenant pour offrir l'acc&egrave;s aux <a href="/departments">d&eacute;partments</a>. Ce module introduit &eacute;galement un nouvel indicateur&nbsp;: le score. Comme les autres modules de visualisation, il se d&eacute;cline en deux pages&nbsp;:
-                            </p>
-                            <ol type="I">
-                                <li>
-                                    La liste des d&eacute;partements, sur laquelle on retrouve, pour chaque d&eacute;partement&nbsp;:
-                                    <ul>
-                                        <li>son nom</li>
-                                        <li>son nombre de sites</li>
-                                        <li>son nombre d'agents</li>
-                                    </ul>
-                                    Puis, pour chaque <a href="/certificates">aptitude observ&eacute;e</a>, par d&eacute;faut, leur score. Davantage d'informations sont disponibles via la recherche avanc&eacute;e.
-                                </li>
-                                <li>Les fiches d&eacute;partement, listant leurs sites.</li>
-                            </ol>
-                            <p>
-                                Chacune de ces pages est livr&eacute;e avec les fonctionnalit&eacute;s de <a href="/advanced-search">recherche</a>, <a href="/links">partage</a> et
-                                <a href="/exports">export</a> habituelles.</p>
-                            <h3 class="layout horizontal center">
-                                Le score des d&eacute;partements<hr class="flex" />
-                            </h3>
-                            <p>
-                                Pour un d&eacute;partement, le score est un taux, en pourcents, qui concerne une aptitude.
-                                <br />Cachun de ses sites a le potentiel de combler une fraction de ce score, plus ou moins grande selon le nombre de ses sites. Ils contribuent &agrave; leur fraction selon leur indice de r&eacute;alisation de la cible assign&eacute;e &agrave; l'aptitude concern&eacute;e&nbsp;:
-                                <ol type="I">
-                                    <li>cible atteinte&nbsp;: fraction remplie &agrave; 100%</li>
-                                    <li>cible presque atteinte&nbsp;: fraction remplie aux deux tiers</li>
-                                    <li>moins de &frac23; de la cible&nbsp;: fraction enti&egrave;rement vide</li>
-                                </ol>
-                                &Agrave; noter&nbsp;: le nombre d'agents de chaque site n'intervient pas dans le calcul du score des d&eacute;partements.
-                            </p>
-                            <h2>Am&eacute;liorations annexes</h2>
-                            <ol type="I">
-                                <li>Les <a href="/sites">sites</a> ont maintenant une adresse e-mail.</li>
-                                <li>
-                                    Les champs <span class="quote">Notes</span> et <span class="quote">Sortie des dispositifs</span> dans les fiches <a href="/employees">agents</a> sont maintenant s&eacute;par&eacute;es.
-                                </li>
-                            </ol>
-                            <h2>Correction de bugs</h2>
-                            <p>
-                                Pas de bug&nbsp;!
-                            </p>
-                        </div>
-                    </iron-collapse>
+                            &Agrave; noter&nbsp;: le nombre d'agents de chaque site n'intervient pas dans le calcul du score des d&eacute;partements.
+                        </p>
+                        <h2>Am&eacute;liorations annexes</h2>
+                        <ol type="I">
+                            <li>Les <a href="/sites">sites</a> ont maintenant une adresse e-mail.</li>
+                            <li>
+                                Les champs <span class="quote">Notes</span> et <span class="quote">Sortie des dispositifs</span> dans les fiches <a href="/employees">agents</a> sont maintenant s&eacute;par&eacute;es.
+                            </li>
+                        </ol>
+                        <h2>Correction de bugs</h2>
+                        <p>
+                            Pas de bug&nbsp;!
+                        </p>
+                    </title-collapse>
                 </div>
                 <div class="card-actions">
                     <a href="/versions-history" class="paper-button">
@@ -187,96 +170,79 @@
                 </div>
                 <hr />
                 <div class="card-content">
-                    <title-toggle class="underlined" state="{{version162}}">
-                        <div class="layout horizontal center">
-                            <span>Pour le prochain patch</span>
-                            <span class="pipe"></span>
-                            <code>version-1.6.2</code>
-                        </div>
-                    </title-toggle>
-                    <iron-collapse opened="[[version162]]">
-                        Pr&eacute;vu pour d&eacute;cembre 2016.
-                        <div>
-                            <h2>Fonctionnalit&eacute;s majeures</h2>
-                            <h3 class="layout horizontal center">
-                                Support des accents pour les recherches et tris&nbsp;!<hr class="flex" />
-                            </h3>
-                            <p>
-                                Jusqu'&agrave; pr&eacute;sent, les lettres accentu&eacute;es n'&eacute;taient pas trait&eacute;es comme &eacute;quivalentes &agrave; leur version de base. Filtrer les agents dont le pr&eacute;nom contient <span class="quote">eric</span> ne trouvait que&nbsp;:
-                            </p>
-                            <ul>
-                                <li><span class="quote">Eric</span></li>
-                                <li><span class="quote">Aymeric</span></li>
-                                <li><span class="quote">Frederic</span></li>
-                            </ul>
-                            <p>
-                                Mais pas <span class="quote">&Eacute;ric</span>.
-                            </p>
-                            <hr />
-                            <p>
-                                De la m&ecirc;me mani&egrave;re, trier ces quatre pr&eacute;noms par ordre croissant rendait&nbsp;:
-                            </p>
-                            <ol type="I">
-                                <li><span class="quote">Aymeric</span></li>
-                                <li><span class="quote">Eric</span></li>
-                                <li><span class="quote">Frederic</span></li>
-                                <li><span class="quote">&Eacute;ric</span></li>
-                            </ol>
-                            <p>C'est r&eacute;gl&eacute; maintenant. Plus d'excuse pour oublier d'inscrire <span class="quote">Fr&iacute;&eth;a J&oslash;rgen</span> dans sa formation&nbsp;!</p>
-
-                            <h2>Am&eacute;liorations annexes</h2>
-                            <ol type="I">
-                                <li>Il est maintenant possible de d&eacute;sactiver une recherche avanc&eacute;e en fermant son bandeau. En cas de maladresse, une alerte temporaire vous proposera de r&eacute;tablir les crit&egrave;res disparus d'un simple clic.</li>
-                                <li>Les statistiques de formations sont exportables au format XLSX.</li>
-                                <li>Les badges des agents qui ont explicitement &eacute;t&eacute; sortis d'un dispositif appara&icirc;ssent maintenant en gris plut&ocirc;t qu'en rouge, pour les distinguer de ceux qui sont &agrave; renouveler.</li>
-                            </ol>
-                            <h2>Correction de bugs</h2>
-                            <p>Pas de bug&nbsp;!</p>
-                        </div>
-                    </iron-collapse>
-                    <title-toggle class="underlined" state="{{version17x}}">
-                        <div class="layout horizontal center">
-                            <span>Pour la prochaine version</span>
-                            <span class="pipe"></span>
-                            <code>version-1.7.x</code>
-                        </div>
-                    </title-toggle>
-                    <iron-collapse opened="[[version17x]]">
-                        Pr&eacute;vue pour mars 2017.
-                        <div>
-                            <h2>Fonctionnalit&eacute;s majeures</h2>
-                            <h3 class="layout horizontal center">
-                                Envoi d'e-mail group&eacute;s&nbsp;!<hr class="flex" />
-                            </h3>
-                            <p>
-                                Il est maintenant possible d'obtenir une liste d'e-mails correspondant &agrave; un groupe de <a href="/sites">sites</a> ou d'<a href="/agents">agents</a> selon n'importe quel crit&egrave;re de recherche existant. Cela inclut&nbsp;:
-                            </p>
-                            <ul>
-                                <li>tous les sites</li>
-                                <li>tous les sites d'un d&eacute;partement</li>
-                                <li>tous les agents d'un site</li>
-                                <li>tous les agents SST d'un site</li>
-                                <li>tous les agents qui devront &ecirc;tre renouvel&eacute;s SST dans les 6 prochains mois</li>
-                                <li>tous les agents dont le nom contient <span class="quote">Orca</span>, qui n'ont jamais &eacute;t&eacute; FSST mais qui sont SST depuis au moins 4 ans
-                                </li>
-                            </ul>
-                            <p>
-                                ... Et tout ce que la <a href="advanced-search">recherche avanc&eacute;e</a> permet&nbsp;!
-                            </p>
-                            <h3 class="layout horizontal center">
-                                Notifications&nbsp;!<hr class="flex" />
-                            </h3>
-                            <p>
-                                Il est possible de notifier les <a href="/sites">sites</a> lorsque leurs indicateurs tombent dans le rouge. Ou, mensuellement.
-                                <br /> Il est &eacute;galement possible d'envoyer un e-mail automatiquement aux formateurs&nbsp;:
-                            </p>
-                            <ol type="I">
-                                <li>avant leur formation</li>
-                                <li>le jour m&ecirc;me &mdash; avec un lien vers la fiche d'&eacute;margement correspondante</li>
-                                <li>le lendemain &mdash; avec un lien vers le proc&egrave;s verbal &agrave; compl&eacute;ter en ligne</li>
-                            </ol>
-                        </div>
-                    </iron-collapse>
+                    <title-collapse>
+                        <span class="title">Pour le prochain patch<span class="pipe"></span><code>version-1.6.2</code></span>
+                        <p>
+                            Pr&eacute;vu pour d&eacute;cembre 2016.
+                        </p>
+                        <h2>Fonctionnalit&eacute;s majeures</h2>
+                        <h3 class="layout horizontal center">Support des accents pour les recherches et tris&nbsp;!<hr class="flex" /></h3>
+                        <p>
+                            Jusqu'&agrave; pr&eacute;sent, les lettres accentu&eacute;es n'&eacute;taient pas trait&eacute;es comme &eacute;quivalentes &agrave; leur version de base. Filtrer les agents dont le pr&eacute;nom contient <span class="quote">eric</span> ne trouvait que&nbsp;:
+                        </p>
+                        <ul>
+                            <li><span class="quote">Eric</span></li>
+                            <li><span class="quote">Aymeric</span></li>
+                            <li><span class="quote">Frederic</span></li>
+                        </ul>
+                        <p>
+                            Mais pas <span class="quote">&Eacute;ric</span>.
+                        </p>
+                        <hr />
+                        <p>
+                            De la m&ecirc;me mani&egrave;re, trier ces quatre pr&eacute;noms par ordre croissant rendait&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li><span class="quote">Aymeric</span></li>
+                            <li><span class="quote">Eric</span></li>
+                            <li><span class="quote">Frederic</span></li>
+                            <li><span class="quote">&Eacute;ric</span></li>
+                        </ol>
+                        <p>
+                            C'est r&eacute;gl&eacute; maintenant. Plus d'excuse pour oublier d'inscrire <span class="quote">Fr&iacute;&eth;a J&oslash;rgen</span> dans sa formation&nbsp;!
+                        </p>
+                        <h2>Am&eacute;liorations annexes</h2>
+                        <ol type="I">
+                            <li>Il est maintenant possible de d&eacute;sactiver une recherche avanc&eacute;e en fermant son bandeau. En cas de maladresse, une alerte temporaire vous proposera de r&eacute;tablir les crit&egrave;res disparus d'un simple clic.</li>
+                            <li>Les statistiques de formations sont exportables au format XLSX.</li>
+                            <li>Les badges des agents qui ont explicitement &eacute;t&eacute; sortis d'un dispositif appara&icirc;ssent maintenant en gris plut&ocirc;t qu'en rouge, pour les distinguer de ceux qui sont &agrave; renouveler.</li>
+                        </ol>
+                        <h2>Correction de bugs</h2>
+                        <p>Pas de bug&nbsp;!</p>
+                    </title-collapse>
+                    <title-collapse>
+                        <span class="title">Pour la prochaine version<span class="pipe"></span><code>version-1.7.x</code></span>
+                        <p>
+                            Pr&eacute;vue pour mars 2017.
+                        </p>
+                        <h2>Fonctionnalit&eacute;s majeures</h2>
+                        <h3 class="layout horizontal center">Envoi d'e-mail group&eacute;s&nbsp;!<hr class="flex" /></h3>
+                        <p>
+                            Il est maintenant possible d'obtenir une liste d'e-mails correspondant &agrave; un groupe de <a href="/sites">sites</a> ou d'<a href="/agents">agents</a> selon n'importe quel crit&egrave;re de recherche existant. Cela inclut&nbsp;:
+                        </p>
+                        <ul>
+                            <li>tous les sites</li>
+                            <li>tous les sites d'un d&eacute;partement</li>
+                            <li>tous les agents d'un site</li>
+                            <li>tous les agents SST d'un site</li>
+                            <li>tous les agents qui devront &ecirc;tre renouvel&eacute;s SST dans les 6 prochains mois</li>
+                            <li>tous les agents dont le nom contient <span class="quote">Orca</span>, qui n'ont jamais &eacute;t&eacute; FSST mais qui sont SST depuis au moins 4 ans
+                            </li>
+                        </ul>
+                        <p>
+                            ... Et tout ce que la <a href="advanced-search">recherche avanc&eacute;e</a> permet&nbsp;!
+                        </p>
+                        <h3 class="layout horizontal center">Notifications&nbsp;!<hr class="flex" /></h3>
+                        <p>
+                            Il est possible de notifier les <a href="/sites">sites</a> lorsque leurs indicateurs tombent dans le rouge. Ou, mensuellement.
+                            <br /> Il est &eacute;galement possible d'envoyer un e-mail automatiquement aux formateurs&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li>avant leur formation</li>
+                            <li>le jour m&ecirc;me &mdash; avec un lien vers la fiche d'&eacute;margement correspondante</li>
+                            <li>le lendemain &mdash; avec un lien vers le proc&egrave;s verbal &agrave; compl&eacute;ter en ligne</li>
+                        </ol>
+                    </title-collapse>
                 </div>
             </paper-card-ripple>
         </div>

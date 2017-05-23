@@ -1,13 +1,13 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
 <link rel="import" href="../../bower_components/paper-video/paper-video.html">
 
 <link rel="import" href="../utils/footnotes.html">
 <link rel="import" href="../utils/paper-card-ripple.html">
 <link rel="import" href="../utils/scroll-to.html">
-<link rel="import" href="../utils/title-toggle.html">
+<link rel="import" href="../utils/title-collapse.html">
 
 <link rel="import" href="../shared-styles.html">
 
@@ -23,15 +23,10 @@
                 color: white;
             }
         }
-        
-        .collapse-content {
-            padding-top: 1px;
-            padding-bottom: 1px;
-        }
         </style>
 
         <div class="layout vertical">
-            <paper-card-ripple elevation="1" heading="Documentation">
+            <paper-card-ripple elevation="1" heading="Vue d'ensemble">
                 <div name="doc" class="card-content">
                     <h1 class="underlined">Introduction</h1>
                     <p>
@@ -48,302 +43,317 @@
                         <em>fiche formation</em> et enfin, une variation de cette derni&egrave;re, pour leur cr&eacute;ation et modification.
                         <br />D'autre part, ces ressources particuli&egrave;res font &eacute;galement l'objet d'un module de statistiques.
                     </p>
-                    <title-toggle h2 state="{{trainings--listing-page}}">Page de listage</title-toggle>
-                    <iron-collapse opened="[[trainings--listing-page]]">
-                        <div class="collapse-content">
-                            <p>
-                                Cette page se compose principalement d'un tableau de l'ensemble des formations. Elle int&egrave;gre les fonctionnalit&eacute;s de <a href="/orca-advanced-search">recherche avanc&eacute;e</a>, de <a href="/orca-links">partage</a> et d'<a href="/orca-exports">export</a>. La barre d'action propose &eacute;galement (aux utilisateurs autoris&eacute;s) la cr&eacute;ation de nouvelles formations.
-                                <br />Cliquer sur l'une des formations permet d'acc&eacute;der &agrave; sa fiche compl&egrave;te.</p>
-                            <scroll-to target="/orca-admin-users#roles">Gestion des utilisateurs &mdash; R&ocirc;les utilisateurs</scroll-to>
-                            <p>Cette liste pr&eacute;sente, pour chacune des formations, ses&nbsp;:</p>
-                            <ol type="I">
-                                <li>type de formation &mdash; avec les
-                                    <footnote-needed>badges des <a href="/orca-admin-certificates">aptitudes correspondantes</a></footnote-needed>
-                                </li>
-                                <li>date(s)</li>
-                                <li>date de fin &mdash; &agrave; partir de laquelle les aptitudes sont octroy&eacute;es</li>
-                                <li>
-                                    <footnote-needed>&eacute;tat d'avancement</footnote-needed>
-                                </li>
-                            </ol>
-                            <footnote-ref>
-                                Ces informations sont color&eacute;es en <span class="label label-blank">gris</span> ou <span class="label label-success">vert</span> selon que la formation est <span class="label label-blank">pr&eacute;vue</span> ou <span class="label label-success">r&eacute;alis&eacute;e</span>.
+
+                    <title-collapse h2>
+                        <span class="title">Page de listage</span>
+                        <p>
+                            Cette page se compose principalement d'un tableau de l'ensemble des formations. Elle int&egrave;gre les fonctionnalit&eacute;s de <a href="/orca-advanced-search">recherche avanc&eacute;e</a>, de <a href="/orca-links">partage</a> et d'<a href="/orca-exports">export</a>. La barre d'action propose &eacute;galement (aux utilisateurs autoris&eacute;s) la cr&eacute;ation de nouvelles formations.
+                            <br />Cliquer sur l'une des formations permet d'acc&eacute;der &agrave; sa fiche compl&egrave;te.</p>
+                        <scroll-to target="/orca-admin-users#roles">Gestion des utilisateurs &mdash; R&ocirc;les utilisateurs</scroll-to>
+                        <p>
+                            Cette liste pr&eacute;sente, pour chacune des formations, ses&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li>type de formation &mdash; avec les
+                                <footnote-needed>badges des <a href="/orca-admin-certificates">aptitudes correspondantes</a></footnote-needed>
+                            </li>
+                            <li>date(s)</li>
+                            <li>date de fin &mdash; &agrave; partir de laquelle les aptitudes sont octroy&eacute;es</li>
+                            <li>
+                                <footnote-needed>&eacute;tat d'avancement</footnote-needed>
+                            </li>
+                        </ol>
+                        <footnote-ref>
+                            Ces informations sont color&eacute;es en <span class="label label-blank">gris</span> ou <span class="label label-success">vert</span> selon que la formation est <span class="label label-blank">pr&eacute;vue</span> ou <span class="label label-success">r&eacute;alis&eacute;e</span>.
+                        </footnote-ref>
+                        <p>
+                            Ansi que, selon la configuration de <a href="/orca-advanced-search">recherche avanc&eacute;e</a>&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li>
+                                <footnote-needed ref="1" numeric>date de d&eacute;but</footnote-needed>
+                            </li>
+                            <li>nombre d'agents inscrits</li>
+                            <li>
+                                <footnote-needed ref="2" numeric>nombre d'agents valid&eacute;s</footnote-needed>, en <span class="label label-success">vert</span>
+                            </li>
+                            <li>
+                                <footnote-needed ref="2" numeric>nombre d'agents non valid&eacute;s</footnote-needed>, en <span class="label label-danger">rouge</span>
+                            </li>
+                        </ol>
+                        <footnote-refs>
+                            <footnote-ref ref="1" numeric>La date de d&eacute;but est laiss&eacute;e <em>vide</em> pour les formations sur une seule journ&eacute;e.</footnote-ref>
+                            <footnote-ref ref="2" numeric>
+                                Pour les formations qui sont seulement <em>pr&eacute;vues</em>, le nombre d'agents valid&eacute;s et recal&eacute;s est toujours nul.
                             </footnote-ref>
-                            <p>
-                                Ansi que, selon la configuration de <a href="/orca-advanced-search">recherche avanc&eacute;e</a>&nbsp;:
-                            </p>
-                            <ol type="I">
-                                <li>
-                                    <footnote-needed ref="1" numeric>date de d&eacute;but</footnote-needed>
-                                </li>
-                                <li>nombre d'agents inscrits</li>
-                                <li>
-                                    <footnote-needed ref="2" numeric>nombre d'agents valid&eacute;s</footnote-needed>, en <span class="label label-success">vert</span>
-                                </li>
-                                <li>
-                                    <footnote-needed ref="2" numeric>nombre d'agents non valid&eacute;s</footnote-needed>, en <span class="label label-danger">rouge</span>
-                                </li>
-                            </ol>
-                            <footnote-refs>
-                                <footnote-ref ref="1" numeric>La date de d&eacute;but est laiss&eacute;e <em>vide</em> pour les formations sur une seule journ&eacute;e.</footnote-ref>
-                                <footnote-ref ref="2" numeric>
-                                    Pour les formations qui sont seulement <em>pr&eacute;vues</em>, le nombre d'agents valid&eacute;s et recal&eacute;s est toujours nul.
-                                </footnote-ref>
-                            </footnote-refs>
-                        </div>
-                    </iron-collapse>
-                    <title-toggle h2 state="{{trainings--single-page}}">Fiche formation</title-toggle>
-                    <iron-collapse opened="[[trainings--single-page]]">
-                        <div class="collapse-content">
-                            <p>
-                                La fiche formation se compose, outre la barre d'action, de deux &eacute;l&eacute;ments que sont son <em>tableau de bord</em> et la liste des <a href="/orca-employees">agents</a> qui y sont inscrits.
-                            </p>
-                            <h3 class="layout horizontal center">
+                        </footnote-refs>
+                    </title-collapse>
+
+                    <title-collapse h2>
+                        <span class="title">Fiche formation</span>
+                        <p>
+                            La fiche formation se compose, outre la barre d'action, de deux &eacute;l&eacute;ments que sont son <em>tableau de bord</em> et la liste des <a href="/orca-employees">agents</a> qui y sont inscrits.
+                        </p>
+                        <h3 class="layout horizontal center">
                                 Barre d'actions<hr class="flex" />
                             </h3>
-                            <p>La <a href="actions">barre d'action</a> sur cette page propose aux utilisateurs&nbsp;:</p>
-                            <ol type="I">
-                                <li>
-                                    <footnote-needed ref="1" numeric>l'&eacute;dition
-                                        <footnote-needed ref="2" numeric alternate>(ou la modification)</footnote-needed> du
-                                        <abbr class="initialism" title="Proc&egrave;s Verbal">PV</abbr> de fin de session</footnote-needed>
-                                </li>
-                                <li>
-                                    <footnote-needed ref="1" numeric>la modification des d&eacute;tails de la formation</footnote-needed>
-                                </li>
-                                <li>le t&eacute;l&eacute;chargement de la fiche d'&eacute;margement
-                                    <footnote-needed ref="2" numeric alternate>(ou du
-                                        <abbr class="initialism" title="Proc&egrave;s Verbal">PV</abbr>)</footnote-needed> pour cette session</li>
-                                <li>
-                                    <footnote-needed ref="1" numeric>la suppression de la formation</footnote-needed>
-                                </li>
-                            </ol>
-                            <footnote-ref ref="1" numeric>
-                                Ces actions ne sont propos&eacute;es qu'aux utilisateurs ayant le privil&egrave;ge de <em>gestion des formations</em> pour le type de formation correspondant &agrave; la session.
-                            </footnote-ref>
-                            <footnote-ref alternate ref="2" numeric>Seulement disponible lorsque la formation a &eacute;t&eacute; <em>r&eacute;alis&eacute;e</em> (i.e.&nbsp;: que son
-                                <abbr class="initialism" title="Proc&egrave;s Verbal">PV</abbr> a &eacute;t&eacute; dress&eacute;).
-                            </footnote-ref>
-                            <scroll-to target="/orca-admin-users#roles">Gestion des utilisateurs &mdash; R&ocirc;les utilisateurs</scroll-to>
-                            <h3 class="layout horizontal center">
+                        <p>
+                            La <a href="actions">barre d'action</a> sur cette page propose aux utilisateurs&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li>
+                                <footnote-needed ref="1" numeric>l'&eacute;dition
+                                    <footnote-needed ref="2" numeric alternate>(ou la modification)</footnote-needed> du
+                                    <abbr class="initialism" title="Proc&egrave;s Verbal">PV</abbr> de fin de session</footnote-needed>
+                            </li>
+                            <li>
+                                <footnote-needed ref="1" numeric>la modification des d&eacute;tails de la formation</footnote-needed>
+                            </li>
+                            <li>le t&eacute;l&eacute;chargement de la fiche d'&eacute;margement
+                                <footnote-needed ref="2" numeric alternate>(ou du
+                                    <abbr class="initialism" title="Proc&egrave;s Verbal">PV</abbr>)</footnote-needed> pour cette session</li>
+                            <li>
+                                <footnote-needed ref="1" numeric>la suppression de la formation</footnote-needed>
+                            </li>
+                        </ol>
+                        <footnote-ref ref="1" numeric>
+                            Ces actions ne sont propos&eacute;es qu'aux utilisateurs ayant le privil&egrave;ge de <em>gestion des formations</em> pour le type de formation correspondant &agrave; la session.
+                        </footnote-ref>
+                        <footnote-ref alternate ref="2" numeric>Seulement disponible lorsque la formation a &eacute;t&eacute; <em>r&eacute;alis&eacute;e</em> (i.e.&nbsp;: que son
+                            <abbr class="initialism" title="Proc&egrave;s Verbal">PV</abbr> a &eacute;t&eacute; dress&eacute;).
+                        </footnote-ref>
+                        <scroll-to target="/orca-admin-users#roles">Gestion des utilisateurs &mdash; R&ocirc;les utilisateurs</scroll-to>
+                        <h3 class="layout horizontal center">
                                 Tableau de bord<hr class="flex" />
                             </h3>
-                            <p>Le tableau de bord pr&eacute;sente une vue d'ensemble de la session de formation. Il peut &ecirc;tre d&eacute;coup&eacute; en 3 blocs logiques&nbsp;:</p>
-                            <p>Dans un premier lieu, on retrouve l'ensemble des informations correspondant directement &agrave; sa configuration&nbsp;:</p>
-                            <ol type="I">
-                                <li>son type</li>
-                                <li>sa date de fin (et de d&eacute;but, pour les formations sur plusieurs jours)</li>
-                                <li>les &eacute;ventuelles notes prises</li>
-                                <li>le(s) formateur(s) &eacute;ventuellement associ&eacute;(s) &agrave; cette formation</li>
-                            </ol>
-                            <p>En-dessous se trouve le bloc correspondant aux d&eacute;tails inh&eacute;rents au <a href="/orca-admin-certificates">type de cette formation</a>. Ainsi, pour chaque aptitude octroy&eacute;e, on retrouve&nbsp;:</p>
-                            <ol type="I">
-                                <li>son <em>badge aptitude</em></li>
-                                <li>sa d&eacute;nomination compl&egrave;te</li>
-                                <li>sa date de fin de validit&eacute;, donn&eacute;e de deux fa&ccedil;ons&nbsp;:
-                                    <ul>
-                                        <li>absolue (e.g.&nbsp;: <em>mercredi 15 mars 2017</em>)</li>
-                                        <li>relative (e.g.&nbsp;: <em>il y a deux mois</em>)</li>
-                                    </ul>
-                                </li>
-                                <li>sa
-                                    <footnote-needed>dur&eacute;e de validit&eacute;</footnote-needed>, donn&eacute;e de deux fa&ccedil;ons&nbsp;:
-                                    <ul>
-                                        <li>en mois</li>
-                                        <li>en ann&eacute;es</li>
-                                    </ul>
-                                </li>
-                            </ol>
-                            <footnote-ref>
-                                La dur&eacute;e de validit&eacute; d'une aptitude d&eacute;pend du <em>type de formation</em> qui l'octroie.
-                                <br />Par exemple, on peut consid&eacute;rer une formation initiale &agrave; renouveler sous un an, puis des formations de recyclage cons&eacute;quentes tous les deux ans.
-                            </footnote-ref>
-                            <scroll-to target="/orca-admin-certificates">Gestion des aptitudes</scroll-to>
-                            <p>
-                                Enfin, l'espace inf&eacute;rieur du tableau de bord concentre les informations d'agents inscrits ainsi que, si la formation est <em>r&eacute;alis&eacute;e</em>, son nombre d'agents valid&eacute;s (en <span class="label label-success">vert</span>) et recal&eacute;s/absents (en <span class="label label-danger">rouge</span>).
-                            </p>
-                            <h3 class="layout horizontal center">
+                        <p>
+                            Le tableau de bord pr&eacute;sente une vue d'ensemble de la session de formation. Il peut &ecirc;tre d&eacute;coup&eacute; en 3 blocs logiques&nbsp;:
+                        </p>
+                        <p>
+                            Dans un premier lieu, on retrouve l'ensemble des informations correspondant directement &agrave; sa configuration&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li>son type</li>
+                            <li>sa date de fin (et de d&eacute;but, pour les formations sur plusieurs jours)</li>
+                            <li>les &eacute;ventuelles notes prises</li>
+                            <li>le(s) formateur(s) &eacute;ventuellement associ&eacute;(s) &agrave; cette formation</li>
+                        </ol>
+                        <p>
+                            En-dessous se trouve le bloc correspondant aux d&eacute;tails inh&eacute;rents au <a href="/orca-admin-certificates">type de cette formation</a>. Ainsi, pour chaque aptitude octroy&eacute;e, on retrouve&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li>son <em>badge aptitude</em></li>
+                            <li>sa d&eacute;nomination compl&egrave;te</li>
+                            <li>sa date de fin de validit&eacute;, donn&eacute;e de deux fa&ccedil;ons&nbsp;:
+                                <ul>
+                                    <li>absolue (e.g.&nbsp;: <em>mercredi 15 mars 2017</em>)</li>
+                                    <li>relative (e.g.&nbsp;: <em>il y a deux mois</em>)</li>
+                                </ul>
+                            </li>
+                            <li>sa
+                                <footnote-needed>dur&eacute;e de validit&eacute;</footnote-needed>, donn&eacute;e de deux fa&ccedil;ons&nbsp;:
+                                <ul>
+                                    <li>en mois</li>
+                                    <li>en ann&eacute;es</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <footnote-ref>
+                            La dur&eacute;e de validit&eacute; d'une aptitude d&eacute;pend du <em>type de formation</em> qui l'octroie.
+                            <br />Par exemple, on peut consid&eacute;rer une formation initiale &agrave; renouveler sous un an, puis des formations de recyclage cons&eacute;quentes tous les deux ans.
+                        </footnote-ref>
+                        <scroll-to target="/orca-admin-certificates">Gestion des aptitudes</scroll-to>
+                        <p>
+                            Enfin, l'espace inf&eacute;rieur du tableau de bord concentre les informations d'agents inscrits ainsi que, si la formation est <em>r&eacute;alis&eacute;e</em>, son nombre d'agents valid&eacute;s (en <span class="label label-success">vert</span>) et recal&eacute;s/absents (en <span class="label label-danger">rouge</span>).
+                        </p>
+                        <h3 class="layout horizontal center">
                                 Liste des agents inscrits<hr class="flex" />
                             </h3>
-                            <p>
-                                La liste des <a href="/orca-employees">agents</a> inscrits &agrave; la session de formation pr&eacute;sente, pour chacun d'entre eux, ses&nbsp;:
-                            </p>
-                            <ol type="I">
-                                <li>identifiant</li>
-                                <li>civilit&eacute;</li>
-                                <li>nom</li>
-                                <li>pr&eacute;nom</li>
-                                <li>statut (<span class="label label-success">CDI</span> ou <span class="label label-warning">CDD</span>)</li>
-                                <li>
-                                    <footnote-needed>observation &eacute;ventuelle du formateur</footnote-needed>
-                                </li>
-                                <li>
-                                    <footnote-needed>statut de validation</footnote-needed>
-                                </li>
-                            </ol>
-                            <footnote-ref>
-                                Ces informations ne sont renseign&eacute;es qu'au moment de l'&eacute;dition du
-                                <abbr class="initialism" title="Proc&egrave;s Verbal">PV</abbr> de fin de session et ne sont ainsi disponibles que pour les formations d&eacute;j&agrave; <em>r&eacute;alis&eacute;es</em>.
-                                <br />Dans le cas ou celle-ci n'est que <em>pr&eacute;vue</em>, le champ <em>observation</em> est laiss&eacute; vide et le <em>statut de validation</em> est&nbsp;: <em>En attente</em>.
-                            </footnote-ref>
-                            <p>Chaque agent list&eacute; emploie un <em>code couleur</em> pour l'<em>observation</em> et le <em>statut de validation</em>, comme suit&nbsp;:</p>
-                            <ol type="I">
-                                <li><span class="label label-success">vert</span>&nbsp;: agent valid&eacute;, aptitude(s) acquise(s)/renouvel&eacute;e(s)</li>
-                                <li><span class="label label-danger">rouge</span>&nbsp;: agent recal&eacute;/absent, aptitude(s) non acquise(s)/non renouvel&eacute;e(s)</li>
-                                <li><span class="label label-blank">gris</span>&nbsp;: proc&egrave;s verbal de formation non dress&eacute;</li>
-                            </ol>
-                            <p>La <a href="/advanced-search">recherche avanc&eacute;e</a> n'est pas disponible pour cette liste. Cliquer sur l'un de ses agents ouvre la fiche de celui-ci.</p>
-                        </div>
-                    </iron-collapse>
-                    <title-toggle h2 state="{{trainings--edit}}">Cr&eacute;ation et modification</title-toggle>
-                    <iron-collapse opened="[[trainings--edit]]">
-                        <div class="collapse-content">
-                            <p>
-                                Afin de proposer une exp&eacute;rience la plus naturelle possible, deux aspects concernant la cr&eacute;ation ainsi que la modification de formations sont &agrave; noter&nbsp;:
-                            </p>
-                            <ol type="I">
-                                <li>ces fonctionnalit&eacute;s utilisent toutes deux <em>la m&ecirc;me fiche</em></li>
-                                <li>cette unique fiche est arrang&eacute;e <em>de fa&ccedil;on identique</em> &agrave; celle de consultation</li>
-                            </ol>
-                            <p>
-                                Cette page fait appara&icirc;tre un avertissment lorsque l'utilisateur la quitte sans explicitement annuler ou enregistrer ses modifications, lui proposant de rester et conserver son travail.
-                            </p>
-                            <scroll-to target="/orca-trainings#training--creation">Vid&eacute;o d'introduction &mdash; Cr&eacute;er une session de formation</scroll-to>
-                            <h3 class="layout horizontal center">
+                        <p>
+                            La liste des <a href="/orca-employees">agents</a> inscrits &agrave; la session de formation pr&eacute;sente, pour chacun d'entre eux, ses&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li>identifiant</li>
+                            <li>civilit&eacute;</li>
+                            <li>nom</li>
+                            <li>pr&eacute;nom</li>
+                            <li>statut (<span class="label label-success">CDI</span> ou <span class="label label-warning">CDD</span>)</li>
+                            <li>
+                                <footnote-needed>observation &eacute;ventuelle du formateur</footnote-needed>
+                            </li>
+                            <li>
+                                <footnote-needed>statut de validation</footnote-needed>
+                            </li>
+                        </ol>
+                        <footnote-ref>
+                            Ces informations ne sont renseign&eacute;es qu'au moment de l'&eacute;dition du
+                            <abbr class="initialism" title="Proc&egrave;s Verbal">PV</abbr> de fin de session et ne sont ainsi disponibles que pour les formations d&eacute;j&agrave; <em>r&eacute;alis&eacute;es</em>.
+                            <br />Dans le cas ou celle-ci n'est que <em>pr&eacute;vue</em>, le champ <em>observation</em> est laiss&eacute; vide et le <em>statut de validation</em> est&nbsp;: <em>En attente</em>.
+                        </footnote-ref>
+                        <p>
+                            Chaque agent list&eacute; emploie un <em>code couleur</em> pour l'<em>observation</em> et le <em>statut de validation</em>, comme suit&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li><span class="label label-success">vert</span>&nbsp;: agent valid&eacute;, aptitude(s) acquise(s)/renouvel&eacute;e(s)</li>
+                            <li><span class="label label-danger">rouge</span>&nbsp;: agent recal&eacute;/absent, aptitude(s) non acquise(s)/non renouvel&eacute;e(s)</li>
+                            <li><span class="label label-blank">gris</span>&nbsp;: proc&egrave;s verbal de formation non dress&eacute;</li>
+                        </ol>
+                        <p>
+                            La <a href="/advanced-search">recherche avanc&eacute;e</a> n'est pas disponible pour cette liste. Cliquer sur l'un de ses agents ouvre la fiche de celui-ci.
+                        </p>
+                    </title-collapse>
+
+                    <title-collapse h2>
+                        <span class="title">Cr&eacute;ation et modification</span>
+                        <p>
+                            Afin de proposer une exp&eacute;rience la plus naturelle possible, deux aspects concernant la cr&eacute;ation ainsi que la modification de formations sont &agrave; noter&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li>ces fonctionnalit&eacute;s utilisent toutes deux <em>la m&ecirc;me fiche</em></li>
+                            <li>cette unique fiche est arrang&eacute;e <em>de fa&ccedil;on identique</em> &agrave; celle de consultation</li>
+                        </ol>
+                        <p>
+                            Cette page fait appara&icirc;tre un avertissment lorsque l'utilisateur la quitte sans explicitement annuler ou enregistrer ses modifications, lui proposant de rester et conserver son travail.
+                        </p>
+                        <scroll-to target="/orca-trainings#training--creation">Vid&eacute;o d'introduction &mdash; Cr&eacute;er une session de formation</scroll-to>
+                        <h3 class="layout horizontal center">
                                 Barre d'actions<hr class="flex" />
                             </h3>
-                            <p>La <a href="actions">barre d'action</a> sur cette page propose aux utilisateurs&nbsp;:</p>
-                            <ol type="I">
-                                <li>la validation de la cr&eacute;ation de
-                                    <footnote-needed>(ou la sauvegarde des modifications apport&eacute;es &agrave;)</footnote-needed> la session</li>
-                                <li>l'inscription de nouveaux agents</li>
-                                <li>l'annulation de la cr&eacute;ation
-                                    <footnote-needed>(ou des modifications)</footnote-needed>
-                                </li>
-                            </ol>
-                            <p>
-                                La validation de la cr&eacute;ation d'une session de formation (aussi bien que l'enregistrement des modifications apport&eacute;es) n'est disponible que lorsque les champs obligatoires sont correctement renseign&eacute;s.
-                            </p>
-                            <footnote-ref>
-                                Ces actions sont propos&eacute;es en ad&eacute;quation avec l'activit&eacute; en cours, selon que l'utilisateur est en train de <em>cr&eacute;er</em> ou de <em>modifier</em> une formation.
-                            </footnote-ref>
-                            <h3 class="layout horizontal center">
+                        <p>La <a href="actions">barre d'action</a> sur cette page propose aux utilisateurs&nbsp;:</p>
+                        <ol type="I">
+                            <li>la validation de la cr&eacute;ation de
+                                <footnote-needed>(ou la sauvegarde des modifications apport&eacute;es &agrave;)</footnote-needed> la session</li>
+                            <li>l'inscription de nouveaux agents</li>
+                            <li>l'annulation de la cr&eacute;ation
+                                <footnote-needed>(ou des modifications)</footnote-needed>
+                            </li>
+                        </ol>
+                        <p>
+                            La validation de la cr&eacute;ation d'une session de formation (aussi bien que l'enregistrement des modifications apport&eacute;es) n'est disponible que lorsque les champs obligatoires sont correctement renseign&eacute;s.
+                        </p>
+                        <footnote-ref>
+                            Ces actions sont propos&eacute;es en ad&eacute;quation avec l'activit&eacute; en cours, selon que l'utilisateur est en train de <em>cr&eacute;er</em> ou de <em>modifier</em> une formation.
+                        </footnote-ref>
+                        <h3 class="layout horizontal center">
                                 Champs de saisie<hr class="flex" />
                             </h3>
-                            <p>
-                                La cr&eacute;ation et/ou modification d'une formation permet de configurer quatre donn&eacute;es concernant celle-ci&nbsp;:
-                            </p>
-                            <ol type="I">
-                                <li>
-                                    <footnote-needed>son <a href="/orca-admin-certificates">type</a></footnote-needed>
-                                </li>
-                                <li>
-                                    <footnote-needed>sa/ses date(s)</footnote-needed>
-                                </li>
-                                <li>d'&eacute;ventuelles notes</li>
-                                <li>sa/ses formateur(s) &mdash; si formation en interne</li>
-                            </ol>
-                            <footnote-ref>Ces donn&eacute;es sont &agrave; renseigner obligatoirement.</footnote-ref>
-                            <h4>Type de formation</h4>
-                            <p>
-                                Le <em>type d'une formation</em> est l'information principale d&eacute;crivant les aptitudes qui sont octoy&eacute;es par celle-ci. Elle est renseign&eacute;e &agrave; l'aide d'un <em>menu d&eacute;roulant</em>. Les types disponibles sont restreints &agrave; ceux pour lesquels l'utilisateur courant a le <em>privil&egrave;ge de gestion</em>.
-                            </p>
-                            <scroll-to target="/orca-admin-certificates">Gestion des aptitudes et types de formations</scroll-to>
-                            <scroll-to target="/orca-admin-users#roles">Gestion des utilisateurs &mdash; R&ocirc;les utilisateurs</scroll-to>
-                            <h4>Date(s) de formation</h4>
-                            <p>
-                                On d&eacute;compose l'information des dates sur lesquelles la formation est pr&eacute;vue en deux ou trois donn&eacute;es&nbsp;:
-                            </p>
-                            <ol type="I">
-                                <li>s'il s'agit d'une formation sur plusieurs jours</li>
-                                <li>
-                                    <footnote-needed>le premier jour de formation</footnote-needed>
-                                </li>
-                                <li>
-                                    le seul
-                                    <footnote-needed>(ou dernier)</footnote-needed> jour de formation
-                                </li>
-                            </ol>
-                            <p>
-                                Les dates peuvent &ecirc;tre saisies au format <em>JJ/MM/AAAA</em> ou directement s&eacute;lectionn&eacute;es &agrave; l'aide d'un calendrier. La date de d&eacute;but, si renseign&eacute;e, doit imp&eacute;rativement pr&eacute;c&eacute;der la date de fin.
-                                <br />On consid&egrave;re que les aptitudes sont octroy&eacute;es &agrave; partir de la date de <em>dernier jour de formation</em>.
-                            </p>
-                            <footnote-ref>
-                                Ces informations concernent uniquement les formations sur plusieurs jours.
-                            </footnote-ref>
-                            <h4>Formateur(s)</h4>
-                            <p>
-                                Le/les formateur(s) associ&eacute;(s) &agrave; la formation forme(nt) une collection d'<a href="/orca-employees">agents</a> responsables de l'animation de la session et n'est utilis&eacute;e que pour l'&eacute;tablissement de statistiques.
-                                <br />Cette donn&eacute;e ne peut &ecirc;tre renseign&eacute;e que pour les formations r&eacute;alis&eacute;es en interne&nbsp;: si un organisme ext&eacute;rieur intervient et que cette information doit &ecirc;tre consign&eacute;e quelque part, le champ <em>notes</em> est tout indiqu&eacute; pour cette fonction.
-                            </p>
-                            <h3 class="layout horizontal center">
+                        <p>
+                            La cr&eacute;ation et/ou modification d'une formation permet de configurer quatre donn&eacute;es concernant celle-ci&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li>
+                                <footnote-needed>son <a href="/orca-admin-certificates">type</a></footnote-needed>
+                            </li>
+                            <li>
+                                <footnote-needed>sa/ses date(s)</footnote-needed>
+                            </li>
+                            <li>d'&eacute;ventuelles notes</li>
+                            <li>sa/ses formateur(s) &mdash; si formation en interne</li>
+                        </ol>
+                        <footnote-ref>Ces donn&eacute;es sont &agrave; renseigner obligatoirement.</footnote-ref>
+                        <h4>Type de formation</h4>
+                        <p>
+                            Le <em>type d'une formation</em> est l'information principale d&eacute;crivant les aptitudes qui sont octoy&eacute;es par celle-ci. Elle est renseign&eacute;e &agrave; l'aide d'un <em>menu d&eacute;roulant</em>. Les types disponibles sont restreints &agrave; ceux pour lesquels l'utilisateur courant a le <em>privil&egrave;ge de gestion</em>.
+                        </p>
+                        <scroll-to target="/orca-admin-certificates">Gestion des aptitudes et types de formations</scroll-to>
+                        <scroll-to target="/orca-admin-users#roles">Gestion des utilisateurs &mdash; R&ocirc;les utilisateurs</scroll-to>
+                        <h4>Date(s) de formation</h4>
+                        <p>
+                            On d&eacute;compose l'information des dates sur lesquelles la formation est pr&eacute;vue en deux ou trois donn&eacute;es&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li>s'il s'agit d'une formation sur plusieurs jours</li>
+                            <li>
+                                <footnote-needed>le premier jour de formation</footnote-needed>
+                            </li>
+                            <li>
+                                le seul
+                                <footnote-needed>(ou dernier)</footnote-needed> jour de formation
+                            </li>
+                        </ol>
+                        <p>
+                            Les dates peuvent &ecirc;tre saisies au format <em>JJ/MM/AAAA</em> ou directement s&eacute;lectionn&eacute;es &agrave; l'aide d'un calendrier. La date de d&eacute;but, si renseign&eacute;e, doit imp&eacute;rativement pr&eacute;c&eacute;der la date de fin.
+                            <br />On consid&egrave;re que les aptitudes sont octroy&eacute;es &agrave; partir de la date de <em>dernier jour de formation</em>.
+                        </p>
+                        <footnote-ref>
+                            Ces informations concernent uniquement les formations sur plusieurs jours.
+                        </footnote-ref>
+                        <h4>Formateur(s)</h4>
+                        <p>
+                            Le/les formateur(s) associ&eacute;(s) &agrave; la formation forme(nt) une collection d'<a href="/orca-employees">agents</a> responsables de l'animation de la session et n'est utilis&eacute;e que pour l'&eacute;tablissement de statistiques.
+                            <br />Cette donn&eacute;e ne peut &ecirc;tre renseign&eacute;e que pour les formations r&eacute;alis&eacute;es en interne&nbsp;: si un organisme ext&eacute;rieur intervient et que cette information doit &ecirc;tre consign&eacute;e quelque part, le champ <em>notes</em> est tout indiqu&eacute; pour cette fonction.
+                        </p>
+                        <h3 class="layout horizontal center">
                                 Inscription d'agents<hr class="flex" />
                             </h3>
-                            <p>
-                                Le menu d'inscription d'agents &agrave; une formation est accessible depuis la <a href="/actions">barre d'actions</a> ainsi que, dans le cadre d'une <em>cr&eacute;ation</em> de session uniquement, depuis un bouton en bas du tableau de bord.
-                                <br /> Les agents ainsi enregistr&eacute;s appara&icirc;ssent dans une liste similaire &agrave; celle de la <em>fiche formation</em> qui propose une option de d&eacute;sinscription pour chacun d'entre eux.
-                            </p>
-                            <scroll-to target="/orca-trainings#training--creation">Vid&eacute;o d'introduction &mdash; Cr&eacute;er une session de formation</scroll-to>
-                            <p>
-                                L'inscription peut &ecirc;tre soit individuelle, soit collective, et utilise la <a href="/orca-global-search">recherche globale</a> pour la s&eacute;lection de la ressource &agrave; ajouter. En s&eacute;lectionnant un <a href="/orca-sites">site</a> ou un <a href="/orca-departments">d&eacute;partement</a>, l'ensemble des agents actuellement affect&eacute;s au(x) site(s) correspondant(s) sont ajout&eacute;s &agrave; la session&nbsp;; la s&eacute;lection d'une formation entra&icirc;ne l'inscription de tous les agents y ayant particip&eacute;.
-                            </p>
-                            <p>&Agrave; chaque inscription, un message confirme l'ajout de(s) agent(s) concern&eacute;(s) et propose son annulation. Cette alerte est temporaire et dispara&icirc;t au bout de quelques secondes.</p>
-                        </div>
-                    </iron-collapse>
-                    <title-toggle h2 state="{{trainings--report}}">&Eacute;dition du
-                        <abbr class="initialism" title="Proc&egrave;s Verbal">PV</abbr> de fin de session</title-toggle>
-                    <iron-collapse opened="[[trainings--report]]">
-                        <div class="collapse-content">
-                            <p>
-                                La cl&ocirc;ture d'une session de formation est marqu&eacute;e par l'&eacute;dition de son
-                                <abbr class="initialism" title="Proc&egrave;s Verbal">PV</abbr>. Il s'agit de l'&eacute;tablissement de son compte-rendu, qui permet aux agents valid&eacute;s d'acqu&eacute;rir ou de renouveler les aptitudes octroy&eacute;es par la formation.
-                                <br />Cette page reprend essentiellement la liste des agents &agrave; valider.
-                            </p>
-                            <h3 class="layout horizontal center">
+                        <p>
+                            Le menu d'inscription d'agents &agrave; une formation est accessible depuis la <a href="/actions">barre d'actions</a> ainsi que, dans le cadre d'une <em>cr&eacute;ation</em> de session uniquement, depuis un bouton en bas du tableau de bord.
+                            <br /> Les agents ainsi enregistr&eacute;s appara&icirc;ssent dans une liste similaire &agrave; celle de la <em>fiche formation</em> qui propose une option de d&eacute;sinscription pour chacun d'entre eux.
+                        </p>
+                        <scroll-to target="/orca-trainings#training--creation">Vid&eacute;o d'introduction &mdash; Cr&eacute;er une session de formation</scroll-to>
+                        <p>
+                            L'inscription peut &ecirc;tre soit individuelle, soit collective, et utilise la <a href="/orca-global-search">recherche globale</a> pour la s&eacute;lection de la ressource &agrave; ajouter. En s&eacute;lectionnant un <a href="/orca-sites">site</a> ou un <a href="/orca-departments">d&eacute;partement</a>, l'ensemble des agents actuellement affect&eacute;s au(x) site(s) correspondant(s) sont ajout&eacute;s &agrave; la session&nbsp;; la s&eacute;lection d'une formation entra&icirc;ne l'inscription de tous les agents y ayant particip&eacute;.
+                        </p>
+                        <p>
+                            &Agrave; chaque inscription, un message confirme l'ajout de(s) agent(s) concern&eacute;(s) et propose son annulation. Cette alerte est temporaire et dispara&icirc;t au bout de quelques secondes.
+                        </p>
+                    </title-collapse>
+
+                    <title-collapse h2>
+                        <span class="title">&Eacute;dition du <abbr class="initialism" title="Proc&egrave;s Verbal">PV</abbr> de fin de session</span>
+                        <p>
+                            La cl&ocirc;ture d'une session de formation est marqu&eacute;e par l'&eacute;dition de son
+                            <abbr class="initialism" title="Proc&egrave;s Verbal">PV</abbr>. Il s'agit de l'&eacute;tablissement de son compte-rendu, qui permet aux agents valid&eacute;s d'acqu&eacute;rir ou de renouveler les aptitudes octroy&eacute;es par la formation.
+                            <br />Cette page reprend essentiellement la liste des agents &agrave; valider.
+                        </p>
+                        <h3 class="layout horizontal center">
                                 Barre d'actions<hr class="flex" />
                             </h3>
-                            <p>La <a href="actions">barre d'action</a> sur cette page propose aux utilisateurs&nbsp;:</p>
-                            <ol type="I">
-                                <li>la confirmation de l'&eacute;dition du
-                                    <abbr class="initialism" title="Proc&egrave;s Verbal">PV</abbr>
-                                    <footnote-needed>(ou l'enregistrement des modifications apport&eacute;es)</footnote-needed>
-                                </li>
-                                <li>la validation de l'ensemble des agents inscrits</li>
-                                <li>l'annulation de l'&eacute;dition du
-                                    <abbr class="initialism" title="Proc&egrave;s Verbal">PV</abbr>
-                                    <footnote-needed>(ou des modifications apport&eacute;es)</footnote-needed>
-                                </li>
-                            </ol>
-                            <footnote-ref>
-                                Ces actions sont propos&eacute;es en ad&eacute;quation avec l'&eacute;tat actuel de la formation correspondante, selon qu'elle n'est que <em>pr&eacute;vue</em> ou d&eacute;j&agrave; <em>r&eacute;alis&eacute;e</em>.
-                            </footnote-ref>
-                            <h3 class="layout horizontal center">
+                        <p>
+                            La <a href="actions">barre d'action</a> sur cette page propose aux utilisateurs&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li>la confirmation de l'&eacute;dition du
+                                <abbr class="initialism" title="Proc&egrave;s Verbal">PV</abbr>
+                                <footnote-needed>(ou l'enregistrement des modifications apport&eacute;es)</footnote-needed>
+                            </li>
+                            <li>la validation de l'ensemble des agents inscrits</li>
+                            <li>l'annulation de l'&eacute;dition du
+                                <abbr class="initialism" title="Proc&egrave;s Verbal">PV</abbr>
+                                <footnote-needed>(ou des modifications apport&eacute;es)</footnote-needed>
+                            </li>
+                        </ol>
+                        <footnote-ref>
+                            Ces actions sont propos&eacute;es en ad&eacute;quation avec l'&eacute;tat actuel de la formation correspondante, selon qu'elle n'est que <em>pr&eacute;vue</em> ou d&eacute;j&agrave; <em>r&eacute;alis&eacute;e</em>.
+                        </footnote-ref>
+                        <h3 class="layout horizontal center">
                                 Liste des agents &agrave; valider<hr class="flex" />
                             </h3>
-                            <p>
-                                La liste des <a href="/orca-employees">agents</a> &agrave; valider reprend l'int&eacute;gralit&eacute; des inscrits &agrave; la session de formation correspondante et est construite de fa&ccedil;on tr&egrave;s similaire. Elle pr&eacute;sente, pour chacun d'entre eux&nbsp;:
-                            </p>
-                            <ol type="I">
-                                <li>un bouton proposant sa d&eacute;sinscription</li>
-                                <li>son identifiant</li>
-                                <li>sa civilit&eacute;</li>
-                                <li>son nom</li>
-                                <li>son pr&eacute;nom</li>
-                                <li>son statut (<span class="label label-success">CDI</span> ou <span class="label label-warning">CDD</span>)</li>
-                                <li>
-                                    <footnote-needed>une <em>observation</em> &eacute;ventuelle le concernant</footnote-needed>
-                                </li>
-                                <li>
-                                    <footnote-needed>son statut de validation</footnote-needed>
-                                </li>
-                            </ol>
-                            <footnote-ref>
-                                Ces informations sont modifiables et doivent &ecirc;tre renseign&eacute;es pour &eacute;tablir le
-                                <abbr class="initialism" title="Proc&egrave;s Verbal">PV</abbr> de fin de session et ainsi marquer la formation correspondante comme &eacute;tant <em>r&eacute;alis&eacute;e</em>.
-                            </footnote-ref>
-                            <p>Le champ <em>observation</em> est optionnel mais il est judicieux d'indiquer, pour les agents non valid&eacute;s, la raison de cette sanction.</p>
-                        </div>
-                    </iron-collapse>
+                        <p>
+                            La liste des <a href="/orca-employees">agents</a> &agrave; valider reprend l'int&eacute;gralit&eacute; des inscrits &agrave; la session de formation correspondante et est construite de fa&ccedil;on tr&egrave;s similaire. Elle pr&eacute;sente, pour chacun d'entre eux&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li>un bouton proposant sa d&eacute;sinscription</li>
+                            <li>son identifiant</li>
+                            <li>sa civilit&eacute;</li>
+                            <li>son nom</li>
+                            <li>son pr&eacute;nom</li>
+                            <li>son statut (<span class="label label-success">CDI</span> ou <span class="label label-warning">CDD</span>)</li>
+                            <li>
+                                <footnote-needed>une <em>observation</em> &eacute;ventuelle le concernant</footnote-needed>
+                            </li>
+                            <li>
+                                <footnote-needed>son statut de validation</footnote-needed>
+                            </li>
+                        </ol>
+                        <footnote-ref>
+                            Ces informations sont modifiables et doivent &ecirc;tre renseign&eacute;es pour &eacute;tablir le
+                            <abbr class="initialism" title="Proc&egrave;s Verbal">PV</abbr> de fin de session et ainsi marquer la formation correspondante comme &eacute;tant <em>r&eacute;alis&eacute;e</em>.
+                        </footnote-ref>
+                        <p>
+                            Le champ <em>observation</em> est optionnel mais il est judicieux d'indiquer, pour les agents non valid&eacute;s, la raison de cette sanction.
+                        </p>
+                    </title-collapse>
                 </div>
             </paper-card-ripple>
 

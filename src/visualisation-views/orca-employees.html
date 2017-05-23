@@ -1,10 +1,10 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
 <link rel="import" href="../utils/paper-card-ripple.html">
 <link rel="import" href="../utils/scroll-to.html">
-<link rel="import" href="../utils/title-toggle.html">
+<link rel="import" href="../utils/title-collapse.html">
 
 <link rel="import" href="../shared-styles.html">
 
@@ -20,122 +20,126 @@
                 color: white;
             }
         }
-        
-        .collapse-content {
-            padding-top: 1px;
-            padding-bottom: 1px;
-        }
         </style>
 
         <div class="layout vertical">
-            <paper-card-ripple elevation="1" heading="Documentation">
-                <div name="doc" class="card-content">
+            <paper-card-ripple elevation="1" heading="Vue d'ensemble">
+                <div class="card-content">
                     <h1 class="underlined">Introduction</h1>
                     <p>
                         Les <em>agents</em> correspondent aux ressources humaines employ&eacute;es par votre organisation. Ils sont affect&eacute;s &agrave; des <a href="/sites">sites</a> et participent &agrave; des <a href="/trainings">formations</a>.
                     </p>
-                    <p>Les <em>agents</em> sont les entit&eacute;s de base pour lesquelles des statistiques sont &eacute;tablies. Les statistiques des <a href="/sites">sites</a> et
+                    <p>
+                        Les <em>agents</em> sont les entit&eacute;s de base pour lesquelles des statistiques sont &eacute;tablies. Les statistiques des <a href="/sites">sites</a> et
                         <a href="/departments">d&eacute;partements</a> sont obtenues &agrave; partir de celles des agents, chacun d'entre eux comptant essentiellement soit parmi l'effectif ayant actuellement une certaine aptitude, soit parmi celui ne l'ayant pas.
                         <br />Afin d'exploiter plus pr&eacute;cis&eacute;ment les donn&eacute;es, on pourra distinguer cependant les agents n'ayant jamais &eacute;t&eacute; form&eacute;s de ceux dont la formation est &agrave; renouveler&nbsp;; de m&ecirc;me que les aptitudes <em>valides</em> se d&eacute;clinent en deux groupes, selon qu'elles expirent bient&ocirc;t ou non.
                     </p>
-                    <p>Un compte <a href="/admin-users">utilisateur</a> peut &ecirc;tre li&eacute; et attribu&eacute; &agrave; un <em>agent</em>.
+                    <p>
+                        Un compte <a href="/admin-users">utilisateur</a> peut &ecirc;tre li&eacute; et attribu&eacute; &agrave; un <em>agent</em>.
                     </p>
                     <h1 class="underlined">Pr&eacute;sentation</h1>
                     <p>
-                        Comme chaque <em>module de visualisation</em>, la pr&eacute;sentation des agents se compose de deux pages&nbsp;: celle de <em>listage</em>, et la
-                        <em>fiche agent</em>.
+                        Comme chaque <em>module de visualisation</em>, la pr&eacute;sentation des agents se compose de deux pages&nbsp;: celle de <em>listage</em>, et la <em>fiche agent</em>.
                     </p>
-                    <title-toggle h2 state="{{employees--listing-page}}">Page de listage</title-toggle>
-                    <iron-collapse opened="[[employees--listing-page]]">
-                        <div class="collapse-content">
-                            <p>
-                                Cette page se compose principalement d'un tableau de l'ensemble des agents <a href="/access">accessibles</a> &agrave; l'utilisateur. Elle int&egrave;gre les fonctionnalit&eacute;s de <a href="/advanced-search">recherche avanc&eacute;e</a>, de <a href="/links">partage</a> et d'<a href="/exports">export</a>. On y retrouve, pour chaque agent, ses&nbsp;:
-                            </p>
-                            <ol type="I">
-                                <li>identifiant</li>
-                                <li>civilit&eacute;</li>
-                                <li>nom</li>
-                                <li>pr&eacute;nom</li>
-                                <li>site d'affectation</li>
-                                <li>statut (<span class="label label-success">CDI</span> ou <span class="label label-warning">CDD</span>)</li>
-                            </ol>
-                            <p>
-                                Ansi que, pour chaque <a href="/certificates">aptitude observ&eacute;e</a>&nbsp;: la date limite de validit&eacute;. Celle-ci utilise &eacute;galement un <em>code couleur</em> permettant d'un simple coup d'&oelig;il de savoir qu'elle est soit&nbsp;:
-                            </p>
-                            <ol type="I">
-                                <li><span class="label label-success">vert</span>&nbsp;: actuellement valide</li>
-                                <li><span class="label label-warning">orange</span>&nbsp;: valide, expirant sous 6 mois</li>
-                                <li><span class="label label-danger">rouge</span>&nbsp;: expir&eacute;e (ou autrement invalid&eacute;e)</li>
-                            </ol>
-                            <p>L'absence de badge d&eacute;note une aptitude <em>jamais acquise</em>.</p>
-                            <scroll-to target="#employees--certificates">Aptitudes d'un agent</scroll-to>
-                        </div>
-                    </iron-collapse>
-                    <title-toggle h2 state="{{employees--single-page}}">Fiche agent</title-toggle>
-                    <iron-collapse opened="[[employees--single-page]]">
-                        <div class="collapse-content">
-                            <p>
-                                La fiche d'un agent se compose des deux &eacute;l&eacute;ments que sont son <em>tableau de bord</em> et la liste de ses <a href="/trainings">formations</a>.
-                            </p>
-                            <h3 class="layout horizontal center">
-                                Barre d'actions<hr class="flex" />
-                            </h3>
-                            <p>La <a href="actions">barre d'action</a> sur cette page propose aux utilisateurs ayant les privil&egrave;ges n&eacute;cessaires&nbsp;:</p>
-                            <ol type="I">
-                                <li>la prise de notes &agrave; faire appara&icirc;tre dans le tableau de bord de l'agent</li>
-                                <li>
-                                    la gestion de <em>sortie des dispositifs</em>, pour le cas o&ucirc; une aptitude particuli&egrave;re est amen&eacute;e &agrave; &ecirc;tre invalid&eacute;e imm&eacute;diatement et ind&eacute;finiment.
-                                </li>
-                            </ol>
-                            <scroll-to target="/admin-users#roles">Gestion des utilisateurs &mdash; R&ocirc;les utilisateur</scroll-to>
-                            <h3 class="layout horizontal center">
-                                Tableau de bord<hr class="flex" />
-                            </h3>
-                            <p>Le tableau de bord concentre l'int&eacute;gralit&eacute; des informations de l'agent&nbsp;:</p>
-                            <ol type="I">
-                                <li>son type de contrat</li>
-                                <li>son site d'affectation</li>
-                                <li>sa date de naissance</li>
-                                <li>son adresse courriel si renseign&eacute;e</li>
-                                <li>les &eacute;ventuelles notes prises le concernant</li>
-                                <li>les &eacute;ventuelles invalidations de ses aptitudes, d&eacute;taill&eacute;es avec les date effective et raison d'invalidation</li>
-                            </ol>
-                            <p>Puis, pour chaque <a href="/certificates">aptitude observ&eacute;e</a>&nbsp;:</p>
-                            <ol type="I">
-                                <li>sa date limite de validit&eacute;</li>
-                                <li>la dur&eacute;e restante pour en pr&eacute;voir le renouvellement</li>
-                            </ol>
-                            <p>Ces informations utilisent un <em>code couleur</em> selon que l'aptitude correspondante est&nbsp;:</p>
-                            <ol type="I">
-                                <li><span class="label label-success">vert</span>&nbsp;: actuellement valide</li>
-                                <li><span class="label label-warning">orange</span>&nbsp;: valide, expirant sous 6 mois</li>
-                                <li><span class="label label-danger">rouge</span>&nbsp;: expir&eacute;e (ou autrement invalid&eacute;e)</li>
-                            </ol>
-                            <p>L'absence d'information d&eacute;note une aptitude <em>jamais acquise</em>.</p>
-                            <scroll-to target="#employees--certificates">Aptitudes d'un agent</scroll-to>
-                            <h3 class="layout horizontal center">
-                                Liste des formations<hr class="flex" />
-                            </h3>
-                            <p>
-                                La liste des <a href="/trainings">formations</a> auxquelles un agent a particip&eacute; pr&eacute;sente certaines informations pour chacune d'entre elles&nbsp;:
-                            </p>
-                            <ol type="I">
-                                <li>le type de formation &mdash; avec les badges des diff&eacute;rentes <em>aptitudes</em> associ&eacute;s</li>
-                                <li>la/les date(s) de formation</li>
-                                <li>une observation &eacute;ventuelle du formateur concernant l'agent</li>
-                                <li>le statut de validation de la formation pour l'agent</li>
-                            </ol>
-                            <p>Chaque formation list&eacute;e utilise un <em>code couleur</em> pour les badges d'<em>aptitudes octroy&eacute;es</em> et de <em>statut de validation</em> comme suit&nbsp;:</p>
-                            <ol type="I">
-                                <li><span class="label label-success">vert</span>&nbsp;: agent valid&eacute;, aptitude(s) acquise(s)/renouvel&eacute;e(s)</li>
-                                <li><span class="label label-danger">rouge</span>&nbsp;: agent recal&eacute;/absent, aptitude(s) non acquise(s)/non renouvel&eacute;e(s)</li>
-                                <li><span class="label label-blank">gris</span>&nbsp;:
-                                    <abbr class="initialism" title="Proc&egrave;s Verbal">PV</abbr> de formation non dress&eacute;
-                                </li>
-                            </ol>
-                            <p>La <a href="/advanced-search">recherche avanc&eacute;e</a> n'est pas disponible pour cette liste. Cliquer sur l'une de ces formations ouvre la fiche de celle-ci.</p>
-                        </div>
-                    </iron-collapse>
+
+                    <title-collapse h2>
+                        <span class="title">Page de listage</span>
+                        <p>
+                            Cette page se compose principalement d'un tableau de l'ensemble des agents <a href="/access">accessibles</a> &agrave; l'utilisateur. Elle int&egrave;gre les fonctionnalit&eacute;s de <a href="/advanced-search">recherche avanc&eacute;e</a>, de <a href="/links">partage</a> et d'<a href="/exports">export</a>. On y retrouve, pour chaque agent, ses&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li>identifiant</li>
+                            <li>civilit&eacute;</li>
+                            <li>nom</li>
+                            <li>pr&eacute;nom</li>
+                            <li>site d'affectation</li>
+                            <li>statut (<span class="label label-success">CDI</span> ou <span class="label label-warning">CDD</span>)</li>
+                        </ol>
+                        <p>
+                            Ansi que, pour chaque <a href="/certificates">aptitude observ&eacute;e</a>&nbsp;: la date limite de validit&eacute;. Celle-ci utilise &eacute;galement un <em>code couleur</em> permettant d'un simple coup d'&oelig;il de savoir qu'elle est soit&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li><span class="label label-success">vert</span>&nbsp;: actuellement valide</li>
+                            <li><span class="label label-warning">orange</span>&nbsp;: valide, expirant sous 6 mois</li>
+                            <li><span class="label label-danger">rouge</span>&nbsp;: expir&eacute;e (ou autrement invalid&eacute;e)</li>
+                        </ol>
+                        <p>
+                            L'absence de badge d&eacute;note une aptitude <em>jamais acquise</em>.
+                        </p>
+                        <scroll-to target="#employees--certificates">Aptitudes d'un agent</scroll-to>
+                    </title-collapse>
+
+                    <title-collapse h2>
+                        <span class="title">Fiche agent</span>
+                        <p>
+                            La fiche d'un agent se compose des deux &eacute;l&eacute;ments que sont son <em>tableau de bord</em> et la liste de ses <a href="/trainings">formations</a>.
+                        </p>
+                        <h3 class="layout horizontal center">Barre d'actions<hr class="flex" /></h3>
+                        <p>
+                            La <a href="actions">barre d'action</a> sur cette page propose aux utilisateurs ayant les privil&egrave;ges n&eacute;cessaires&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li>la prise de notes &agrave; faire appara&icirc;tre dans le tableau de bord de l'agent</li>
+                            <li>
+                                la gestion de <em>sortie des dispositifs</em>, pour le cas o&ucirc; une aptitude particuli&egrave;re est amen&eacute;e &agrave; &ecirc;tre invalid&eacute;e imm&eacute;diatement et ind&eacute;finiment.
+                            </li>
+                        </ol>
+                        <scroll-to target="/admin-users#roles">Gestion des utilisateurs &mdash; R&ocirc;les utilisateur</scroll-to>
+                        <h3 class="layout horizontal center">Tableau de bord<hr class="flex" /></h3>
+                        <p>
+                            Le tableau de bord concentre l'int&eacute;gralit&eacute; des informations de l'agent&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li>son type de contrat</li>
+                            <li>son site d'affectation</li>
+                            <li>sa date de naissance</li>
+                            <li>son adresse courriel si renseign&eacute;e</li>
+                            <li>les &eacute;ventuelles notes prises le concernant</li>
+                            <li>les &eacute;ventuelles invalidations de ses aptitudes, d&eacute;taill&eacute;es avec les date effective et raison d'invalidation</li>
+                        </ol>
+                        <p>
+                            Puis, pour chaque <a href="/certificates">aptitude observ&eacute;e</a>&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li>sa date limite de validit&eacute;</li>
+                            <li>la dur&eacute;e restante pour en pr&eacute;voir le renouvellement</li>
+                        </ol>
+                        <p>
+                            Ces informations utilisent un <em>code couleur</em> selon que l'aptitude correspondante est&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li><span class="label label-success">vert</span>&nbsp;: actuellement valide</li>
+                            <li><span class="label label-warning">orange</span>&nbsp;: valide, expirant sous 6 mois</li>
+                            <li><span class="label label-danger">rouge</span>&nbsp;: expir&eacute;e (ou autrement invalid&eacute;e)</li>
+                        </ol>
+                        <p>
+                            L'absence d'information d&eacute;note une aptitude <em>jamais acquise</em>.
+                        </p>
+                        <scroll-to target="#employees--certificates">Aptitudes d'un agent</scroll-to>
+                        <h3 class="layout horizontal center">Liste des formations<hr class="flex" /></h3>
+                        <p>
+                            La liste des <a href="/trainings">formations</a> auxquelles un agent a particip&eacute; pr&eacute;sente certaines informations pour chacune d'entre elles&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li>le type de formation &mdash; avec les badges des diff&eacute;rentes <em>aptitudes</em> associ&eacute;s</li>
+                            <li>la/les date(s) de formation</li>
+                            <li>une observation &eacute;ventuelle du formateur concernant l'agent</li>
+                            <li>le statut de validation de la formation pour l'agent</li>
+                        </ol>
+                        <p>
+                            Chaque formation list&eacute;e utilise un <em>code couleur</em> pour les badges d'<em>aptitudes octroy&eacute;es</em> et de <em>statut de validation</em> comme suit&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li><span class="label label-success">vert</span>&nbsp;: agent valid&eacute;, aptitude(s) acquise(s)/renouvel&eacute;e(s)</li>
+                            <li><span class="label label-danger">rouge</span>&nbsp;: agent recal&eacute;/absent, aptitude(s) non acquise(s)/non renouvel&eacute;e(s)</li>
+                            <li><span class="label label-blank">gris</span>&nbsp;:
+                                <abbr class="initialism" title="Proc&egrave;s Verbal">PV</abbr> de formation non dress&eacute;
+                            </li>
+                        </ol>
+                        <p>
+                            La <a href="/advanced-search">recherche avanc&eacute;e</a> n'est pas disponible pour cette liste. Cliquer sur l'une de ces formations ouvre la fiche de celle-ci.
+                        </p>
+                    </title-collapse>
                 </div>
             </paper-card-ripple>
 

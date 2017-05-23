@@ -1,5 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
 <link rel="import" href="../../bower_components/paper-ripple/paper-ripple.html">
 
 <link rel="import" href="../shared-styles.html">
@@ -15,54 +17,27 @@
             position: relative;
         }
         
-        .placeholder-tooltip {
-            color: grey;
-            font-weight: 300;
-        }
-        
-        .placeholder-tooltip::before {
-            content: 'cliquer pour';
-            color: lightgrey;
-        }
-        
         paper-ripple {
             color: grey;
         }
         
-        iron-icon {
-            color: var(--primary-color);
+        h1,
+        h2 {
+            margin-bottom: 0;
         }
         </style>
         <template is="dom-if" if="[[h2]]">
             <h2 name="title" class="layout horizontal center" on-tap="toggle">
                 <paper-ripple></paper-ripple>
-                <span class="flex"><content></content></span>
-                <div class="placeholder-tooltip">
-                    <template is="dom-if" if="[[!state]]">
-                        d&eacute;rouler
-                        <iron-icon icon="icons:expand-more"></iron-icon>
-                    </template>
-                    <template is="dom-if" if="[[state]]">
-                        r&eacute;enrouler
-                        <iron-icon icon="icons:expand-less"></iron-icon>
-                    </template>
-                </div>
+                <span class="flex"><content select=":not(.suffix)"></content></span>
+                <content select=".suffix"></content>
             </h2>
         </template>
         <template is="dom-if" if="[[!h2]]">
             <h1 name="title" class="layout horizontal center" on-tap="toggle">
                 <paper-ripple></paper-ripple>
-                <span class="flex"><content></content></span>
-                <div class="placeholder-tooltip">
-                    <template is="dom-if" if="[[!state]]">
-                        d&eacute;rouler
-                        <iron-icon icon="icons:expand-more"></iron-icon>
-                    </template>
-                    <template is="dom-if" if="[[state]]">
-                        r&eacute;enrouler
-                        <iron-icon icon="icons:expand-less"></iron-icon>
-                    </template>
-                </div>
+                <span class="flex"><content select=":not(.suffix)"></content></span>
+                <content select=".suffix"></content>
             </h1>
         </template>
     </template>
