@@ -3,7 +3,16 @@
   "shell": "src/main/orca-docs.html",
   "fragments": [
     "src/error-views/orca-404.html",
-    "src/error-views/orca-under-construction.html"
+    "src/error-views/orca-under-construction.html",
+    "src/main-views/orca-get.html",
+    "src/main-views/orca-home.html",
+    "src/search-views/orca-advanced-search.html",
+    "src/search-views/orca-filtering.html",
+    "src/search-views/orca-quick-search.html",
+    "src/visualisation-views/orca-departments.html",
+    "src/visualisation-views/orca-employees.html",
+    "src/visualisation-views/orca-sites.html",
+    "src/visualisation-views/orca-trainings.html"
   ],
   "sourceGlobs": [
     "src/**/*",
@@ -11,7 +20,8 @@
     "bower.json"
   ],
   "includeDependencies": [
-    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js",
+    "node_modules/bowser/bowser.min.js"
   ],
   "lint": {
     "rules": ["polymer-1"]

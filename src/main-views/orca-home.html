@@ -4,12 +4,11 @@
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../../bower_components/paper-ripple/paper-ripple.html">
 
-<link rel="import" href="../utils/title-toggle.html">
 <link rel="import" href="../utils/orca-animated-logo.html">
+<link rel="import" href="../utils/paper-card-ripple.html">
+<link rel="import" href="../utils/title-toggle.html">
 
 <link rel="import" href="../shared-styles.html">
 
@@ -22,15 +21,6 @@
         
         #home-content {
             padding-top: var(--default-margin);
-        }
-        
-        h1.toggle {
-            cursor: pointer;
-            position: relative;
-        }
-        
-        h1.toggle paper-ripple {
-            color: grey;
         }
         
         img.label {
@@ -72,7 +62,7 @@
             <span class="flex"></span>
         </div>
         <div id="home-content">
-            <paper-card id="first-card" class="image-dark" heading="Gestion des Formations S&eacute;curit&eacute;" elevation="1" image="/assets/home/risk-safety.png">
+            <paper-card-ripple class="image-dark" heading="Gestion des Formations S&eacute;curit&eacute;" elevation="1" image="/assets/home/risk-safety.png">
                 <div class="card-content">
                     <p>
                         Parfois, avoir les bons réflexes peut sauver une vie, ou &eacute;viter un d&eacute;sastre.
@@ -90,8 +80,8 @@
                         <iron-icon icon="icons:visibility"></iron-icon>D&eacute;monstration
                     </paper-button>
                 </div>
-            </paper-card>
-            <paper-card heading="Derni&egrave;res nouveaut&eacute;s" elevation="1" image="/assets/home/news.png">
+            </paper-card-ripple>
+            <paper-card-ripple heading="Derni&egrave;res nouveaut&eacute;s" elevation="1" image="/assets/home/news.png">
                 <div class="card-content">
                     <p>
                         Orca est en constant changement. Chaque version arrive avec son lot de nouveaut&eacute;s et bien souvent, d'infimes d&eacute;tails sont &eacute;galement ajust&eacute;s. Suivez l'&eacute;volution des bugs que vous nous soumettez&nbsp;!
@@ -186,8 +176,8 @@
                         </paper-button>
                     </a>
                 </div>
-            </paper-card>
-            <paper-card class="image-dark" heading="&Eacute;volutions imminentes" elevation="1" image="/assets/home/upcoming.png">
+            </paper-card-ripple>
+            <paper-card-ripple class="image-dark" heading="&Eacute;volutions imminentes" elevation="1" image="/assets/home/upcoming.png">
                 <div class="card-content">
                     <p>
                         Le projet est encore jeune et notre &eacute;quipe travaille activement au d&eacute;veloppement de nouvelles fonctionnalit&eacute;s.
@@ -288,7 +278,7 @@
                         </div>
                     </iron-collapse>
                 </div>
-            </paper-card>
+            </paper-card-ripple>
         </div>
     </template>
 
@@ -297,7 +287,7 @@
         is: 'orca-home',
 
         ready: function() {
-            if (navigator.isChrome()) {
+            if (window.bowser.a) {
                 this._initIntro();
                 this._animateIntro();
             }

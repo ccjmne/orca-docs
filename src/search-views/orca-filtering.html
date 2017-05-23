@@ -4,9 +4,10 @@
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../../bower_components/paper-video/paper-video.html">
+
+<link rel="import" href="../utils/paper-card-ripple.html">
 
 <link rel="import" href="../shared-styles.html">
 
@@ -25,7 +26,7 @@
         </style>
 
         <div class="layout vertical">
-            <paper-card elevation="1" heading="Fonctionnement et d&eacute;monstration">
+            <paper-card-ripple elevation="1" heading="Fonctionnement et d&eacute;monstration">
                 <paper-tabs id="tabs" selected="{{tab}}" attr-for-selected="name" fallback-selection="doc" align-bottom>
                     <paper-tab name="doc">DOCUMENTATION</paper-tab>
                     <paper-tab name="gif">D&Eacute;MONSTRATION</paper-tab>
@@ -102,7 +103,7 @@
                         </div>
                     </div>
                 </iron-pages>
-            </paper-card>
+            </paper-card-ripple>
         </div>
     </template>
     <script>

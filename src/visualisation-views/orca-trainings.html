@@ -1,14 +1,15 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
-<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../../bower_components/paper-video/paper-video.html">
 
-<link rel="import" href="../utils/title-toggle.html">
+<link rel="import" href="../utils/footnotes.html">
+<link rel="import" href="../utils/paper-card-ripple.html">
 <link rel="import" href="../utils/scroll-to.html">
+<link rel="import" href="../utils/title-toggle.html">
+
+<link rel="import" href="../shared-styles.html">
 
 <dom-module id="orca-trainings">
     <template>
@@ -30,7 +31,7 @@
         </style>
 
         <div class="layout vertical">
-            <paper-card elevation="1" heading="Documentation">
+            <paper-card-ripple elevation="1" heading="Documentation">
                 <div name="doc" class="card-content">
                     <h1 class="underlined">Introduction</h1>
                     <p>
@@ -344,9 +345,9 @@
                         </div>
                     </iron-collapse>
                 </div>
-            </paper-card>
+            </paper-card-ripple>
 
-            <paper-card id="training--creation" heading="Vid&eacute;o d'introduction" elevation="1">
+            <paper-card-ripple id="training--creation" heading="Vid&eacute;o d'introduction" elevation="1">
                 <div class="card-content">
                     <p>
                         Dans la vid&eacute;o suivante, l'utilisateur cr&eacute;e une nouvelle session de formation, y inscrit tout un site ainsi qu'un agent suppl&eacute;mentaire et lui assigne un formateur responsable.
@@ -356,7 +357,7 @@
                 <div class="img border-top">
                     <paper-video id="gif-creation" controls preload="auto" src="../../assets/videos/training--creation.webm" autohide-controls="500" height="720"></paper-video>
                 </div>
-            </paper-card>
+            </paper-card-ripple>
         </div>
     </template>
 

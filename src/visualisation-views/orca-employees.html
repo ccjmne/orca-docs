@@ -1,13 +1,12 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
-<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../bower_components/paper-card/paper-card.html">
-
-<link rel="import" href="../utils/title-toggle.html">
+<link rel="import" href="../utils/paper-card-ripple.html">
 <link rel="import" href="../utils/scroll-to.html">
+<link rel="import" href="../utils/title-toggle.html">
+
+<link rel="import" href="../shared-styles.html">
 
 <dom-module id="orca-employees">
     <template>
@@ -29,7 +28,7 @@
         </style>
 
         <div class="layout vertical">
-            <paper-card elevation="1" heading="Documentation">
+            <paper-card-ripple elevation="1" heading="Documentation">
                 <div name="doc" class="card-content">
                     <h1 class="underlined">Introduction</h1>
                     <p>
@@ -138,9 +137,9 @@
                         </div>
                     </iron-collapse>
                 </div>
-            </paper-card>
+            </paper-card-ripple>
 
-            <paper-card id="employees--certificates" heading="Aptitudes d'un agent" elevation="1">
+            <paper-card-ripple id="employees--certificates" heading="Aptitudes d'un agent" elevation="1">
                 <div class="card-content">
                     <p>
                         Les <a href="/admin-certificates">aptitudes</a> d'un agent sont les propri&eacute;t&eacute;s auxquelles s'int&eacute;ressent les statistiques. Elles sont obtenues en participant &agrave; une formation et &eacute;tant valid&eacute; &agrave; l'issue de celle-ci et peuvent &ecirc;tre perdues de diff&eacute;rentes mani&egrave;res.
@@ -171,7 +170,7 @@
                         Il est n&eacute;anmoins &eacute;galement possible d'invalider explicitement les aptitudes de certains agents directement depuis leur fiche personnelle, en r&eacute;ponse &agrave; une demande de ces derniers par exemple. Les agents ainsi <em>exclus d'un dispositif</em> ne peuvent plus acqu&eacute;rir l'aptitude correspondante &agrave; moins d'&ecirc;tre r&eacute;int&eacute;gr&eacute; de la m&ecirc;me mani&egrave;re.
                     </p>
                 </div>
-            </paper-card>
+            </paper-card-ripple>
         </div>
     </template>
 

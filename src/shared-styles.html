@@ -87,7 +87,6 @@
         
         abbr[title] {
             cursor: help;
-            border-bottom: 1px dotted #777;
         }
         
         .initialism {
@@ -149,15 +148,20 @@
             margin-top: var(--default-margin);
         }
         
-        div.layout + paper-card {
+        div.layout + paper-card,
+        div.layout + paper-card-ripple {
             margin-top: var(--default-margin);
         }
         
-        paper-card + paper-card {
+        paper-card + paper-card,
+        paper-card + paper-card-ripple,
+        paper-card-ripple + paper-card,
+        paper-card-ripple + paper-card-ripple {
             margin-top: var(--default-margin);
         }
         
-        paper-card + div.layout {
+        paper-card + div.layout,
+        paper-card-ripple + div.layout {
             margin-top: var(--default-margin);
         }
         

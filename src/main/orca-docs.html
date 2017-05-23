@@ -19,7 +19,6 @@
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 
 
-<link rel="import" href="../utils/footnotes.html">
 <link rel="import" href="../utils/html-echo.html">
 
 <link rel="import" href="../shared-styles.html">
@@ -246,7 +245,10 @@
         _showView: function(pageName) {
             return function() {
                 this.set('pageName', pageName);
-                this.__scrollToSection();
+                this.$['main-view'].scrollIntoView({
+                    behavior: 'smooth'
+                });
+                this.fire('scroll-to');
             }.bind(this);
         },
 
@@ -267,17 +269,37 @@
                 return;
             }
 
-            target.scrollIntoView({
-                behavior: 'smooth'
-            });
+            // true  - if the top of the block should be aligned with the top of the viewport
+            // false - if the bottom of the block should be aligned with the bottom of the viewport
+            const blockStart = (this.$['main-view'].offsetHeight - target.offsetTop > this.$$('[main]').$['mainContainer'].offsetHeight);
+            target.scrollIntoView(window.bowser.firefox && {
+                behavior: 'smooth',
+                block: blockStart ? 'start' : 'end'
+            } || blockStart);
+
+            this.debounce('highlight-' + target.id, this.__highlight.bind(this, target), 200);
+        },
+
+        __highlight: function(target) {
+            if (typeof target.highlight === 'function') {
+                target.highlight();
+                return;
+            }
+
+            if (target.querySelector('paper-ripple[__highlight]')) {
+                // Exit if there already is a ripple "playing"
+                return;
+            }
 
             const ripple = document.createElement('paper-ripple');
+            ripple.setAttribute('__highlight', true);
             ripple.setAttribute('noink', true);
             target.append(ripple);
-            ripple.simulatedRipple();
             ripple.addEventListener('transitionend', function() {
                 target.removeChild(ripple);
             });
+
+            ripple.simulatedRipple();
         },
 
         __watchHash: function(prev) {

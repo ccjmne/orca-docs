@@ -1,0 +1,38 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-ripple/paper-ripple.html">
+
+<dom-module id="paper-card-ripple">
+    <template>
+        <style>
+        :host {
+            display: block;
+        }
+        </style>
+
+        <paper-card heading="[[heading]]" image="[[image]]" elevation="1">
+            <content></content>
+            <paper-ripple id="highlight" noink></paper-ripple>
+        </paper-card>
+    </template>
+    <script>
+    Polymer({
+        is: 'paper-card-ripple',
+
+        properties: {
+            heading: {
+                type: String
+            },
+
+            image: {
+                type: String
+            }
+        },
+
+        highlight: function() {
+            this.$.highlight.simulatedRipple();
+        }
+    });
+    </script>
+</dom-module>

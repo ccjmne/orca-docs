@@ -75,10 +75,10 @@
         is: 'orca-animated-logo',
 
         ready: function() {
-            if (!navigator.isChrome()) {
+            if (!window.bowser.a) {
                 this.$.outline.setAttribute('visibility', 'hidden');
                 this.$.plain.setAttribute('width', '350px');
-            };
+            }
 
             this.addEventListener('tap', this.shine);
         },

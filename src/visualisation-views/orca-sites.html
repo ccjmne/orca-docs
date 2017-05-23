@@ -1,14 +1,14 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
-<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../../bower_components/paper-video/paper-video.html">
 
-<link rel="import" href="../utils/title-toggle.html">
+<link rel="import" href="../utils/paper-card-ripple.html">
 <link rel="import" href="../utils/scroll-to.html">
+<link rel="import" href="../utils/title-toggle.html">
+
+<link rel="import" href="../shared-styles.html">
 
 <dom-module id="orca-sites">
     <template>
@@ -30,7 +30,7 @@
         </style>
 
         <div class="layout vertical">
-            <paper-card elevation="1" heading="Documentation">
+            <paper-card-ripple elevation="1" heading="Documentation">
                 <div name="doc" class="card-content">
                     <h1 class="underlined">Introduction</h1>
                     <p>
@@ -123,9 +123,9 @@
                         </div>
                     </iron-collapse>
                 </div>
-            </paper-card>
+            </paper-card-ripple>
 
-            <paper-card id="sites--history" heading="Historique d'un site" elevation="1">
+            <paper-card-ripple id="sites--history" heading="Historique d'un site" elevation="1">
                 <div class="card-content">
                     <p>
                         L'historique est un outil permettant de visualiser, &agrave; l'aide d'un graphique simple, l'&eacute;volution de la satisfaction de la cible d'une aptitude au cours du temps.
@@ -139,7 +139,7 @@
                 <div class="img border-top">
                     <paper-video id="gif-condition" controls preload="auto" src="../../assets/videos/sites--history.webm" autohide-controls="500" height="600"></paper-video>
                 </div>
-            </paper-card>
+            </paper-card-ripple>
         </div>
     </template>
 
