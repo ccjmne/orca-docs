@@ -6,7 +6,7 @@
 
 <dom-module id="title-toggle">
     <template>
-        <style include="iron-flex iron-positioning shared-styles">
+        <style is="custom-style" include="iron-flex iron-positioning shared-styles">
         :host {
             cursor: pointer;
         }
@@ -15,12 +15,12 @@
             position: relative;
         }
         
-        placeholder-tooltip {
+        .placeholder-tooltip {
             color: grey;
             font-weight: 300;
         }
         
-        placeholder-tooltip::before {
+        .placeholder-tooltip::before {
             content: 'cliquer pour';
             color: lightgrey;
         }
@@ -37,7 +37,7 @@
             <h2 name="title" class="layout horizontal center" on-tap="toggle">
                 <paper-ripple></paper-ripple>
                 <span class="flex"><content></content></span>
-                <placeholder-tooltip>
+                <div class="placeholder-tooltip">
                     <template is="dom-if" if="[[!state]]">
                         d&eacute;rouler
                         <iron-icon icon="icons:expand-more"></iron-icon>
@@ -46,14 +46,14 @@
                         r&eacute;enrouler
                         <iron-icon icon="icons:expand-less"></iron-icon>
                     </template>
-                </placeholder-tooltip>
+                </div>
             </h2>
         </template>
         <template is="dom-if" if="[[!h2]]">
             <h1 name="title" class="layout horizontal center" on-tap="toggle">
                 <paper-ripple></paper-ripple>
                 <span class="flex"><content></content></span>
-                <placeholder-tooltip>
+                <div class="placeholder-tooltip">
                     <template is="dom-if" if="[[!state]]">
                         d&eacute;rouler
                         <iron-icon icon="icons:expand-more"></iron-icon>
@@ -62,7 +62,7 @@
                         r&eacute;enrouler
                         <iron-icon icon="icons:expand-less"></iron-icon>
                     </template>
-                </placeholder-tooltip>
+                </div>
             </h1>
         </template>
     </template>

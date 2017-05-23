@@ -127,17 +127,29 @@
          *     paper-card      *
          ***********************/
         
-        paper-card .card-content {
+        paper-card .card-content,
+        paper-card
+        /*space*/
+        
+        ::content .card-content {
             padding-top: 0 !important;
             font-weight: 300;
             text-align: justify;
         }
         
-        paper-card .card-content + hr {
+        paper-card .card-content + hr,
+        paper-card
+        /*space*/
+        
+        ::content .card-content + hr {
             margin-top: 0;
         }
         
-        paper-card .card-content p:last-child {
+        paper-card .card-content p:last-child,
+        paper-card
+        /*space*/
+        
+        ::content .card-content p:last-child {
             margin-bottom: 0;
         }
         /***********************
