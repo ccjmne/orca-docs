@@ -1,0 +1,326 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../../bower_components/gold-email-input/gold-email-input.html">
+
+<link rel="import" href="../../../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="../../../bower_components/neon-animation/animations/fade-in-animation.html">
+<link rel="import" href="../../../bower_components/neon-animation/animations/fade-out-animation.html">
+<link rel="import" href="../../../bower_components/neon-animation/animations/scale-down-animation.html">
+<link rel="import" href="../../../bower_components/neon-animation/animations/scale-up-animation.html">
+
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+<link rel="import" href="../../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../../bower_components/paper-toggle-button/paper-toggle-button.html">
+<link rel="import" href="../../../bower_components/paper-tooltip/paper-tooltip.html">
+
+<link rel="import" href="../../shared-styles.html">
+
+<dom-module id="dialog-subscribe">
+    <template>
+        <style include="shared-styles iron-flex iron-flex-alignment">
+        :host {
+            display: block;
+            --paper-tooltip: {
+                font-size: .8em;
+            }
+        }
+        
+        paper-dialog paper-button {
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+        
+        p.no-bottom-margin {
+            margin-bottom: 0;
+        }
+        
+        .layout.horizontal paper-input + paper-input {
+            margin-left: 20px;
+        }
+        
+        paper-dialog#subscribe-delegate paper-dialog-scrollable {
+            margin: 0 -24px;
+        }
+        
+        .tooltip {
+            border-bottom: 1px dashed lightgrey;
+            cursor: help;
+        }
+        
+        .invoice {
+            margin: 20px 0;
+            width: 80%;
+        }
+        
+        .invoice table {
+            border-collapse: collapse;
+        }
+        
+        .invoice table th,
+        .invoice table td {
+            padding: 3px 16px;
+        }
+        
+        .invoice table thead {
+            background-color: #eee;
+            border-bottom: 1px solid lightgrey;
+        }
+        
+        .invoice table tbody tr.total {
+            border-top: 1px solid lightgrey;
+            background-color: #eee;
+        }
+        
+        .invoice table tbody tr.total:not(:last-of-type) {
+            border-bottom: 1px solid lightgrey;
+        }
+        
+        .invoice table tbody tr.total td:first-of-type {
+            text-align: right;
+        }
+        
+        .invoice table tbody tr td:last-of-type {
+            text-align: right;
+        }
+        
+        .invoice table tbody tr td:last-of-type::after {
+            content: '\20AC';
+        }
+        
+        .invoice table tbody tr td:not(.minus):last-of-type::before {
+            content: '+';
+            float: left;
+        }
+        
+        .invoice table tbody tr td.minus:last-of-type::before {
+            content: '\2212';
+            float: left;
+        }
+        </style>
+        <paper-dialog id="subscribe-delegate" with-backdrop>
+            <form is="iron-form" id="subscribe-form" method="post" content-type="application/json" action="https://6ft0v06fp5.execute-api.eu-west-1.amazonaws.com/prod/mailme" autocomplete="off">
+                <h1>Solution Orca &mdash; mod&egrave;le <em>[[plan.display]]</em></h1>
+                <paper-dialog-scrollable>
+                    <template is="dom-if" if="[[_isMicro(plan)]]">
+                        <p>
+                            Le mod&egrave;le <em>Micro</em> est le plan le moins on&eacute;reux pour la solution Orca.
+                            <br /> Il permet aux petites entit&eacute;s d'acc&eacute;der &agrave; la solution &agrave; un moindre prix. Sa particularit&eacute; essentielle concerne la limite du nombre d'agents g&eacute;r&eacute;s&nbsp;: pas plus de 500. Comme les deux autres plans, il offre un acc&egrave;s &agrave; un nombre illimit&eacute; d'utilisateurs &agrave; tout moment. Sa configuration mat&eacute;rielle est amplement suffisante pour convenir m&ecirc;me &agrave; un usage intensif et ce mod&egrave;le inclut &eacute;galement l'acc&egrave;s &agrave; toutes les mises &agrave; jour de la solution, majeures comme mineures.
+                        </p>
+                    </template>
+                    <template is="dom-if" if="[[_isBusiness(plan)]]">
+                        <p>
+                            Le plan <em>Business</em> est le mod&egrave;le standard pour la solution Orca.
+                            <br />Il offre une configuration mat&eacute;rielle amplement suffisante pour convenir m&ecirc;me &agrave; un usage intensif. Les donn&eacute;es sont r&eacute;pliqu&eacute;es et sauvegard&eacute;es quotidiennement &mdash; avec une semaine de disponibilit&eacute;. Ce mod&egrave;le inclut &eacute;galement l'acc&egrave;s &agrave; toutes les mises &agrave; jour de la solution, majeures comme mineures.
+                        </p>
+                        <h2>Nombre d'agents actifs</h2>
+                        <p>Jusqu'&agrave; 500 agents sont inclus dans le prix de base&nbsp;; chaque tranche suppl&eacute;mentaire de 500 agents est factur&eacute;e 35&euro; mensuellement.
+                            <paper-input label="Nombre d'agents actifs" type="number" min="0" value="{{plan.employees}}" auto-validate required="[[_isBusiness(plan)]]"></paper-input>
+                            <iron-collapse opened="[[plan.employees]]">
+                                Vous envisagez avoir jusqu'&agrave; [[plan.upper]] agents actifs, soit [[plan.times]] tranche(s) de 500 agents.
+                                <br />Co&ucirc;t additionnel induit mensuellement&nbsp;:
+                                <span class="tooltip">
+                                    1 &times; 0&euro;
+                                    <paper-tooltip offset="0">1<sup>&egrave;re</sup> tranche gratuite</paper-tooltip>
+                                </span>
+                                <span>+</span>
+                                <span class="tooltip">
+                                    [[plan.effectiveTimes]] &times; 35&euro;
+                                    <paper-tooltip offset="0">[[plan.effectiveTimes]] extra tranche(s)</paper-tooltip>
+                                </span>
+                                <span>= [[plan.extra]]&euro;</span>
+                            </iron-collapse>
+                        </p>
+                    </template>
+                    <template is="dom-if" if="[[_isPartner(plan)]]">
+                        <p>
+                            Le plan <em>Partner</em> est le mod&egrave;le haut-de-gamme pour la solution Orca.
+                            <br />Il offre, en plus des fonctionnalit&eacute;s du plan <em>Business</em>&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li>une configuration mat&eacute;rielle d&eacute;di&eacute;e et de haute performance</li>
+                            <li>un monitoring des tentatives d'intrusion</li>
+                            <li>un nombre d'agents actifs et comptes utilisateurs illimit&eacute;s</li>
+                            <li>un acc&egrave;s participatif au tableau de bord de d&eacute;veloppement de la solution</li>
+                        </ol>
+                        <p>
+                            Avec ce plan, soyez impliqu&eacute;s dans l'&eacute;volution d'Orca en b&eacute;n&eacute;ficiant d'un contact direct avec l'&eacute;quipe de d&eacute;veloppement. Discutez des am&eacute;liorations que vous voudriez voir appara&icirc;tre et suivez en d&eacute;tail l'avancement de la r&eacute;solution de bugs ou de l'int&eacute;gration de nouvelles fonctionnalit&eacute;s.
+                        </p>
+                    </template>
+                    <h2>Mode de facturation</h2>
+                    <p class="layout horizontal">
+                        <paper-toggle-button checked="{{plan.yearly}}">Facturation annuelle &mdash; 1 mois offert</paper-toggle-button>
+                    </p>
+                    <h2>Votre devis</h2>
+                    <div class="layout horizontal">
+                        <span class="flex"></span>
+                        <paper-material class="invoice" elevation="1">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Description</th>
+                                        <th width="1%">Montant&nbsp;[[_billing(plan.yearly)]]</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Mod&egrave;le <em>[[plan.display]]</em></td>
+                                        <td>[[_computeCost(plan.yearly, plan.base)]]</td>
+                                    </tr>
+                                    <template is="dom-if" if="[[_isBusiness(plan)]]">
+                                        <tr>
+                                            <td>Jusqu'&agrave; <em>[[plan.upper]]</em> agents actifs</td>
+                                            <td>[[_computeCost(plan.yearly, plan.extra)]]</td>
+                                        </tr>
+                                    </template>
+                                    <template is="dom-if" if="[[plan.yearly]]">
+                                        <template is="dom-if" if="[[_isBusiness(plan)]]">
+                                            <tr class="total">
+                                                <td>Sous-total</td>
+                                                <td>[[_computeCost(plan.yearly, plan.base, plan.extra)]]</td>
+                                            </tr>
+                                        </template>
+                                        <tr>
+                                            <td>Facturation <em>annuelle</em></td>
+                                            <td class="minus">[[_computeCost(false, plan.base, plan.extra)]]</td>
+                                        </tr>
+                                    </template>
+                                    <tr class="total">
+                                        <td>Total [[_billing(plan.yearly)]]</td>
+                                        <td>[[_computeDiscounted(plan.yearly, plan.yearly, plan.base, plan.extra)]]</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </paper-material>
+                        <span class="flex"></span>
+                    </div>
+                    <small class="disclaimer">Prix exprim&eacute;s hors taxes</small>
+                </paper-dialog-scrollable>
+                <div class="layout vertical align-center">
+                    <p class="no-bottom-margin">Laissez-nous vos coordonn&eacute;es pour que nous puissions prendre contact avec vous.</p>
+                    <div class="layout horizontal">
+                        <paper-input class="flex" value="{{name}}" label="Votre nom" auto-validate required></paper-input>
+                        <paper-input class="flex" value="{{organization}}" label="Votre organisation" auto-validate required></paper-input>
+                    </div>
+                    <gold-email-input class="flex" value="{{address}}" label="Votre adresse courriel" auto-validate required></gold-email-input>
+                    <button type="submit" class="no-style">
+                        <paper-button raised disabled="[[inflight]]" class="primary">
+                            <iron-icon id="icon" icon="icons:send"></iron-icon>Contactez-moi
+                        </paper-button>
+                    </button>
+                </div>
+            </form>
+        </paper-dialog>
+    </template>
+    <script>
+    Polymer({
+
+        is: 'dialog-subscribe',
+
+        observers: ['_computeExtra(plan.employees)'],
+
+        ready: function() {
+            this.false = false; // data-binding doesn't support actual values
+
+            this.$$('#subscribe-delegate paper-dialog-scrollable').dialogElement = this.$['subscribe-delegate'];
+            this.$['subscribe-form'].addEventListener('iron-form-presubmit', this._preSubmit.bind(this));
+            this.$['subscribe-form'].addEventListener('iron-form-submit', this._submit.bind(this));
+            this.$['subscribe-form'].addEventListener('iron-form-error', this._400.bind(this));
+            this.$['subscribe-form'].addEventListener('iron-form-response', this._200.bind(this));
+
+            (function _setAnimations(node, entry, exit) {
+                function _mapAnimation(name) {
+                    return {
+                        name: name,
+                        node: node
+                    };
+                }
+
+                node.animationConfig = {
+                    entry: (entry instanceof Array ? entry : [entry]).map(_mapAnimation),
+                    exit: (exit instanceof Array ? exit : [exit]).map(_mapAnimation)
+                };
+            })(this.$['subscribe-delegate'], ['fade-in-animation', 'scale-up-animation'], ['fade-out-animation', 'scale-down-animation']);
+        },
+
+        open: function(plan) {
+            this.plan = plan;
+            this.$['subscribe-delegate'].open();
+            this.set('plan.yearly', this.plan.yearly || false); // trigger observers to fill up the invoice table.
+        },
+
+        _preSubmit: function(e) {
+            this.$['subscribe-form'].request.set('body', {
+                recipient: {
+                    organization: this.organization,
+                    name: this.name,
+                    address: this.address
+                },
+                plan: this.plan
+            });
+        },
+
+        _submit: function(e) {
+            this.inflight = true;
+        },
+
+        _200: function() {
+            this.inflight = false;
+            this.$['subscribe-delegate'].close();
+            this.fire('toast', 'Un e-mail de confirmation vous a été envoyé. Nous vous contacterons dès que possible.')
+        },
+
+        _400: function() {
+            this.inflight = false;
+            this.$['subscribe-delegate'].close();
+            this.fire('toast', 'Une erreur est survenue. Vérifiez que vous avec bien saisi une adresse e-mail valide.');
+        },
+
+        _isMicro: function(plan) {
+            return plan.name === 'micro'
+        },
+
+        _isBusiness: function(plan) {
+            return plan.name === 'business'
+        },
+
+        _isPartner: function(plan) {
+            return plan.name === 'partner'
+        },
+
+        _billing: function(yearly) {
+            return yearly ? 'annuel' : 'mensuel';
+        },
+
+        _computeExtra: function(employees) {
+            this.set('plan.times', Math.ceil((employees || 0) / 500));
+            this.set('plan.upper', 500 * this.plan.times);
+            this.set('plan.effectiveTimes', Math.max(0, this.plan.times - 1));
+            this.set('plan.extra', this.plan.effectiveTimes * 35);
+        },
+
+        _computeCost: function(yearly, /*...*/ values) {
+            const value = Object.values(arguments).slice(1).reduce(function(sum, i) {
+                return sum + i;
+            }, 0);
+
+            return yearly ? value * 12 : value;
+        },
+
+        _computeDiscounted: function(yearly, discount, /*...*/ values) {
+            const value = Object.values(arguments).slice(2).reduce(function(sum, i) {
+                return sum + i;
+            }, 0);
+
+            return yearly ? value * (discount ? 11 : 12) : value;
+        }
+
+    });
+    </script>
+</dom-module>

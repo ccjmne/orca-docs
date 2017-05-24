@@ -259,6 +259,12 @@
             }
         },
 
+        _demo: function() {
+            this.fire('open-dialog', {
+                id: 'dialog-demo'
+            });
+        },
+
         _initIntro: function() {
             //document.querySelector('#mainContainer').style['overflow-y'] = 'hidden';
             this.$.intro.style['height'] = window.innerHeight + 'px';
@@ -398,10 +404,6 @@
                     };
                 };
             };
-        },
-
-        _demo: function() {
-            document.querySelector('#dialog--demo').open();
         }
     });
     </script>

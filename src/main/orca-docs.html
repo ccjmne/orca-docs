@@ -19,15 +19,14 @@
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 
 
+<link rel="import" href="drawer-menu.html">
+<link rel="import" href="orca-dialogs.html">
+<link rel="import" href="orca-footer.html">
 <link rel="import" href="../utils/html-echo.html">
 
 <link rel="import" href="../shared-styles.html">
 
-<link rel="import" href="drawer-menu.html">
-<link rel="import" href="orca-footer.html">
-
 <dom-module id="orca-docs">
-
     <template>
         <style is="custom-style" include="shared-styles iron-positioning iron-flex iron-flex-alignment">
         :host {
@@ -126,6 +125,8 @@
         }
         </style>
 
+        <orca-dialogs id="dialogs"></orca-dialogs>
+
         <app-location route="{{route}}"></app-location>
 
         <app-route route="{{route}}" pattern="/:view" data="{{routeData}}"></app-route>
@@ -208,6 +209,10 @@
 
         ready: function() {
             this.addEventListener('scroll-to', this.__scrollToSection);
+            this.addEventListener('open-dialog', function(event) {
+                this.$.dialogs.open(event.detail);
+            });
+
             this.__watchHash();
             window.Intercom('boot', {
                 app_id: 'f8wixr1i'

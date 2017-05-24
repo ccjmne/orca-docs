@@ -294,15 +294,24 @@
         is: 'orca-get',
 
         _micro: function() {
-            document.querySelector('#dialog--subscribe').open(this._plans.micro);
+            this.fire('open-dialog', {
+                id: 'dialog-subscribe',
+                data: this._plans.micro
+            });
         },
 
         _business: function() {
-            document.querySelector('#dialog--subscribe').open(this._plans.business);
+            this.fire('open-dialog', {
+                id: 'dialog-subscribe',
+                data: this._plans.business
+            });
         },
 
         _partner: function() {
-            document.querySelector('#dialog--subscribe').open(this._plans.partner);
+            this.fire('open-dialog', {
+                id: 'dialog-subscribe',
+                data: this._plans.partner
+            });
         },
 
         _separator: function(newSection) {

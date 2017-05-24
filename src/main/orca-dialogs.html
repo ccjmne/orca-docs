@@ -1,0 +1,102 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<link rel="import" href="../../bower_components/neon-animation/animations/fade-in-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/fade-out-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/scale-down-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/scale-up-animation.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
+
+<link rel="import" href="dialogs/dialog-subscribe.html">
+
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="orca-dialogs">
+    <template>
+        <style include="shared-styles iron-flex iron-flex-alignment">
+        :host {
+            display: block;
+            --primary-color: #337AB7;
+        }
+        </style>
+
+        <paper-toast id="permatoast" duration="0">
+            <paper-button on-tap="closeToast">Ok</paper-button>
+        </paper-toast>
+
+        <paper-dialog id="dialog-demo" with-backdrop class="layout vertical center">
+            <h1>D&eacute;monstration en ligne</h1>
+            <p>
+                Vous &ecirc;tes sur le point d'acc&eacute;der &agrave; la version de d&eacute;monstration de la solution Orca.
+                <br />Veuillez vous y connecter en utilisant les identifiants suivants&nbsp;:
+            </p>
+            <p>
+                <table class="attributes">
+                    <tbody>
+                        <tr>
+                            <td>identifiant</td>
+                            <td><code>root</code></td>
+                        </tr>
+                        <tr>
+                            <td>mot de passe</td>
+                            <td><code>pwd</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </p>
+            <p>
+                <a href="//demo.formationssecurite.fr" class="paper-button">
+                    <paper-button raised class="primary">
+                        <iron-icon icon="icons:flight-takeoff"></iron-icon>D&eacute;marrer
+                    </paper-button>
+                </a>
+            </p>
+        </paper-dialog>
+
+        <dialog-subscribe id="dialog-subscribe"></dialog-subscribe>
+    </template>
+    <script>
+    Polymer({
+        is: 'orca-dialogs',
+
+        ready: function() {
+            this._setAnimations(this.$['dialog-demo'], ['fade-in-animation', 'scale-up-animation'], ['fade-out-animation', 'scale-down-animation']);
+            this.addEventListener('toast', function(event) {
+                this.toast(event.detail);
+            });
+        },
+
+        open: function(detail) {
+            this.$[detail.id].open(detail.data);
+        },
+
+        toast: function(text) {
+            this.$.permatoast.hide();
+            this.$.permatoast.show(text);
+        },
+
+        closeToast: function() {
+            this.$.permatoast.hide();
+        },
+
+        _setAnimations: function(node, entry, exit) {
+            function _mapAnimation(name) {
+                return {
+                    name: name,
+                    node: node
+                };
+            }
+
+            node.animationConfig = {
+                entry: (entry instanceof Array ? entry : [entry]).map(_mapAnimation),
+                exit: (exit instanceof Array ? exit : [exit]).map(_mapAnimation)
+            };
+        }
+    });
+    </script>
+</dom-module>
