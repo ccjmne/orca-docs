@@ -1,0 +1,96 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/paper-video/paper-video.html">
+
+<link rel="import" href="../utils/paper-card-ripple.html">
+
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="orca-observed-certificates">
+    <template>
+        <style is="custom-style" include="shared-styles iron-flex iron-flex-alignment">
+        :host {
+            display: block;
+            --paper-tabs-selection-bar-color: white;
+            --paper-tab-ink: white;
+            --paper-tabs: {
+                background-color: var(--primary-color);
+                color: white;
+            }
+        }
+        </style>
+
+        <div class="layout vertical">
+            <paper-card-ripple elevation="1" heading="Fonctionnement et d&eacute;monstration">
+                <paper-tabs id="tabs" selected="{{tab}}" attr-for-selected="name" fallback-selection="doc" align-bottom>
+                    <paper-tab name="doc">DOCUMENTATION</paper-tab>
+                    <paper-tab name="gif">D&Eacute;MONSTRATION</paper-tab>
+                </paper-tabs>
+
+                <iron-pages selected="[[tab]]" attr-for-selected="name">
+                    <div name="doc" class="card-content">
+                        <h1 class="underlined">Introduction</h1>
+                        <p>
+                            Impactant la plupart des modules de visualisation, les <em>aptitudes observ&eacute;es</em> repr&eacute;sentent une fonctionnalit&eacute; d'&eacute;puration de donn&eacute;es, permettant de pr&eacute;senter des informations toujours pertinentes &mdash; et d'&eacute;viter celles superflues.
+                            <br /> Le principe de cette fonctionnalit&eacute; est de proposer une solution <em>non intrusive</em> permettant de simplifier l'interface et de faciliter le focus sur l'information pertinente, sans jamais pour autant cacher d'&eacute;ventuelles ressources &agrave; l'utilisateur.
+                        </p>
+                        <h2>R&eacute;utilisation et int&eacute;gration</h2>
+                        <p>
+                            Les aptitudes s&eacute;lectionn&eacute;es sont li&eacute;es &agrave; l'utilisateur et leur configuration est imm&eacute;diatement propag&eacute;e et sauvegard&eacute;e &agrave; chaque changement. L'utilisateur n'a virtuellement plus de visibilit&eacute; sur les informations concernant les aptitudes qui ne l'int&eacute;ressent pas &agrave; travers toute l'application, avec quelques exceptions&nbsp;:
+                        </p>
+                        <ol type="I">
+                            <li>les modules de <a href="/admin-certificates">gestion des aptitudes</a> et types de formation ne sont pas sujets &agrave; ce filtre</li>
+                            <li>le listage des <a href="/trainings">formations</a> (y compris dans les pages <a href="/employees">agents</a>) n'est pas restreint</li>
+                        </ol>
+                        <h1 class="underlined layout horizontal end">
+                            <span class="flex">Utilisation</span>
+                            <paper-button class="primary" on-tap="_gif"><iron-icon icon="icons:visibility"></iron-icon>voir d&eacute;monstration</paper-button>
+                        </h1>
+                        <p>
+                            Partout o&ugrave; les <em>aptitudes observ&eacute;es</em> ont une influence, une barre de configuration est int&eacute;gr&eacute;e &agrave; l'interface. Cette barre pr&eacute;sente essentiellement une collection de boutons correspondant chacun &agrave; une aptitude. Enfoncer l'un de ceux-ci (d'un simple clic) d&eacute;finit son aptitude li&eacute;e comme &eacute;tant <em>observ&eacute;e</em>. Cliquer de nouveau sur un bouton enfonc&eacute; rel&acirc;che celui-ci et cesse d'<em>observer</em> l'aptitude correspondante.
+                        </p>
+                        <h2>D&eacute;tails d'impl&eacute;mentation</h2>
+                        <ol type="I">
+                            <li>
+                                Les aptitudes sont pr&eacute;sent&eacute;es dans leur bandeau de configuration &mdash; comme &agrave; travers toute l'application, dans l'ordre configur&eacute; via le module de
+                                <a href="/admin-certificates">gestion des aptitudes</a>.
+                            </li>
+                            <li>
+                                Pour &eacute;viter de prendre trop de place quand de nombreuses aptitudes sont d&eacute;finies, la barre de configuration est compos&eacute;e d'un maximum de 5 boutons.
+                                <br />Dans le cas o&ugrave; au moins 6 aptitudes sont disponibles, le dernier bouton s'&eacute;tend d'un clic et propose un menu d&eacute;roulant permettant de configurer celles restantes.
+                            </li>
+                        </ol>
+                    </div>
+                    <div name="gif">
+                        <div class="img">
+                            <paper-video controls preload="auto" src="../../assets/videos/certificates--certificates.webm" autohide-controls="500" height="600"></paper-video>
+                        </div>
+                        <div class="card-actions">
+                            <paper-button class="primary" on-tap="_doc">
+                                <iron-icon icon="icons:arrow-back"></iron-icon>retour &agrave; la documentation
+                            </paper-button>
+                        </div>
+                    </div>
+                </iron-pages>
+            </paper-card-ripple>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'orca-observed-certificates',
+
+        _doc: function() {
+            this.tab = 'doc';
+        },
+
+        _gif: function() {
+            this.tab = 'gif';
+        }
+    });
+    </script>
+</dom-module>
