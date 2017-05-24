@@ -33,23 +33,31 @@
         }
         
         .vr {
-            margin: 24px 0 8px 0;
             padding: 8px;
-            border-radius: 10px;
+            margin-bottom: 8px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
         }
         
         .vr:not(.right) {
-            border-left: 1px solid var(--primary-color);
+            border-left: 1px solid lightgrey;
+        }
+        
+        .vr:not(.right)[h2] {
+            border-left: 1px dashed lightgrey;
         }
         
         .vr.right {
-            border-right: 1px solid var(--primary-color);
+            border-right: 1px solid lightgrey;
+        }
+        
+        .vr.right[h2] {
+            border-right: 1px dashed lightgrey;
         }
         </style>
 
         <title-toggle state="{{state}}" h2="[[h2]]">
             <content select=".title"></content>
-
             <div class="suffix">
                 <template is="dom-if" if="[[!state]]">
                     d&eacute;rouler
@@ -62,11 +70,11 @@
             </div>
         </title-toggle>
         <iron-collapse opened="[[state]]" class="layout horizontal">
-            <div class="vr"></div>
+            <div class="vr" h2$="[[h2]]"></div>
             <div class="collapse-content flex">
                 <content select=":not(.title)"></content>
             </div>
-            <div class="vr right"></div>
+            <div class="vr right" h2$="[[h2]]"></div>
         </iron-collapse>
     </template>
     <script>
