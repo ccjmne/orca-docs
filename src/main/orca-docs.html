@@ -208,12 +208,16 @@
         ],
 
         ready: function() {
+            this.$.dialogs.$.permatoast.fitInto = this.$$('[main]');
             this.addEventListener('scroll-to', this.__scrollToSection);
             this.addEventListener('open-dialog', function(event) {
                 this.$.dialogs.open(event.detail);
             });
-
+            this.addEventListener('toast', function(event) {
+                this.$.dialogs.toast(event.detail);
+            });
             this.__watchHash();
+
             window.Intercom('boot', {
                 app_id: 'f8wixr1i'
             });
