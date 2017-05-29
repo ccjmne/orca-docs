@@ -139,7 +139,7 @@
                             <paper-ripple></paper-ripple>
                             <span class="flex"></span>
                             <img class="logo" alt="Orca logo" src="../../assets/logo_bw.png" />
-                            <h1 class="name">Accueil</h1>
+                            <h1 class="plain name">Accueil</h1>
                             <span class="flex"></span>
                         </a>
                     </div>
@@ -162,7 +162,7 @@
                 <template is="dom-if" if="[[_hasHeader(pageName)]]">
                     <paper-toolbar>
                         <paper-icon-button icon="icons:menu" paper-drawer-toggle></paper-icon-button>
-                        <h1><html-echo html="[[_getTitle(pageName)]]"></html-echo></h1>
+                        <h1 class="plain"><html-echo html="[[_getTitle(pageName)]]"></html-echo></h1>
                     </paper-toolbar>
                 </template>
                 <template is="dom-if" if="[[!_hasHeader(pageName)]]">
