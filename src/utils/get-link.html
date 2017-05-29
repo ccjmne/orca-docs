@@ -1,0 +1,81 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<dom-module id="get-link">
+    <template>
+        <style>
+        #get-link {
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            right: 100%;
+            padding: var(--vertical-padding, 5px) var(--horizontal-padding, 16px);
+            color: var(--primary-color);
+        }
+        
+        :host {
+            opacity: 0;
+        }
+        
+        :host(.shown) {
+            opacity: 1;
+        }
+        </style>
+
+        <a href$="[[_href]]" id="get-link" on-tap="_copy">
+            <iron-icon icon="icons:link"></iron-icon>
+        </a>
+    </template>
+    <script>
+    Polymer({
+        is: 'get-link',
+
+        properties: {
+            id: {
+                type: String,
+                observer: '_setHref'
+            },
+
+            /** @type {?Node} */
+            mouseoverTarget: {
+                type: Object
+            }
+        },
+
+        ready: function() {
+            if (!this.id) {
+                console.error('No \'id\' property set for:');
+                console.error(this);
+            }
+
+            (function(mouseoverTarget) {
+                mouseoverTarget.addEventListener('mouseover', function() {
+                    this.toggleClass('shown', true);
+                }.bind(this));
+
+                mouseoverTarget.addEventListener('mouseout', function() {
+                    this.toggleClass('shown', false);
+                }.bind(this));
+            }).call(this, this.mouseoverTarget || this.parentNode);
+        },
+
+        _setHref: function(id) {
+            this._href = '#' + id;
+        },
+
+        _copy: function() {
+            // In case the target is the current url (hash included), force trigger scrolling + highlighting
+            if (window.location.href === this.$['get-link'].href) {
+                this.fire('scroll-to');
+            }
+
+            window.clipboard.copy(this.$['get-link'].href);
+            this.fire('toast', {
+                text: 'Lien copié dans votre presse-papier !',
+                duration: 2500
+            });
+        }
+    });
+    </script>
+</dom-module>

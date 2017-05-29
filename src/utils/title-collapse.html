@@ -4,6 +4,7 @@
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 
+<link rel="import" href="get-link.html">
 <link rel="import" href="title-toggle.html">
 
 <link rel="import" href="../shared-styles.html">
@@ -13,6 +14,11 @@
         <style is="custom-style" include="shared-styles iron-flex iron-flex-alignment">
         :host {
             display: block;
+            position: relative;
+        }
+        
+        get-link {
+            --horizontal-padding: 32px;
         }
         
         .collapse-content {
@@ -58,6 +64,9 @@
         }
         </style>
 
+        <template is="dom-if" if="[[id]]">
+            <get-link id="[[id]]" mouseover-target="[[mouseoverTarget]]"></get-link>
+        </template>
         <title-toggle state="{{state}}" h2="[[h2]]">
             <content select=".title"></content>
             <div class="suffix">
@@ -78,6 +87,7 @@
             </div>
             <div class="vr right" h2$="[[h2]]"></div>
         </iron-collapse>
+        <paper-ripple id="highlight" noink recenters></paper-ripple>
     </template>
     <script>
     Polymer({
@@ -97,9 +107,12 @@
         },
 
         ready: function() {
-            this.async(function() {
-                this.classFollows('underlined', this.$.title, this);
-            });
+            this.mouseoverTarget = this;
+        },
+
+        highlight: function() {
+            this.state = true;
+            this.$.highlight.simulatedRipple();
         }
     });
     </script>
