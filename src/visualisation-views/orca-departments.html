@@ -27,7 +27,7 @@
         <div class="layout vertical">
             <paper-card-ripple elevation="1" heading="Vue d'ensemble">
                 <div name="doc" class="card-content">
-                    <h1 class="underlined">Introduction</h1>
+                    <h1>Introduction</h1>
                     <p>
                         Les <em>d&eacute;partements</em> sont l'une des ressources principales de la solution Orca. Ils permettent d'organiser les <a href="/orca-sites">sites</a> en groupes logiques.
                     </p>
@@ -35,13 +35,13 @@
                         Bien que correspondant souvent &agrave; un groupement par proximit&eacute; g&eacute;ographique, les d&eacute;partements peuvent &eacute;galement &ecirc;tre utilis&eacute;s afin de distinguer leurs sites selon tout autre crit&egrave;re. On peut par exemple envisager de grouper ensemble tous les &eacute;tablissements recevant du public.
                         <br />Un compte <a href="/admin-users">utilisateur</a> peut &ecirc;tre li&eacute; et attribu&eacute; &agrave; un <em>d&eacute;partement</em>.
                     </p>
-                    <h1 class="underlined">Pr&eacute;sentation</h1>
+                    <h1>Pr&eacute;sentation</h1>
                     <p>
                         Comme chaque <em>module de visualisation</em>, la pr&eacute;sentation des d&eacute;partements se compose de deux pages&nbsp;: celle de <em>listage</em>, et la
                         <em>fiche d&eacute;partement</em>.
                     </p>
 
-                    <title-collapse h2>
+                    <title-collapse h2 id="listing-page">
                         <span class="title">Page de listage</span>
                         <p>
                             Cette page se compose principalement d'un tableau de l'ensemble des d&eacute;partements <a href="/access">accessibles</a> &agrave; l'utilisateur. Elle int&egrave;gre les fonctionnalit&eacute;s de <a href="/orca-advanced-search">recherche avanc&eacute;e</a>, de <a href="/links">partage</a> et d'<a href="/exports">export</a>. On y retrouve, pour chaque d&eacute;partement, ses&nbsp;:
@@ -63,7 +63,7 @@
                         <scroll-to target="#departments--score">Score aptitude d'un d&eacute;partement</scroll-to>
                     </title-collapse>
 
-                    <title-collapse h2>
+                    <title-collapse h2 id="department-page">
                         <span class="title">Fiche d&eacute;partement</span>
                         <p>
                             La fiche d'un d&eacute;partement se compose des deux &eacute;l&eacute;ments que sont son <em>tableau de bord</em> et la liste de ses sites. Elle int&egrave;gre &eacute;galement la fonctionnalit&eacute; d'<a href="/exports">export</a>.
@@ -112,7 +112,7 @@
                     <p>
                         L'historique est un outil permettant de visualiser, &agrave; l'aide d'un graphique simple, l'&eacute;volution de la satisfaction de la cible d'une aptitude au cours du temps.
                     </p>
-                    <h1 class="underlined">Utilisation</h1>
+                    <h1>Utilisation</h1>
                     <p>
                         Deux donn&eacute;es configurent la vue de l'historique&nbsp;: la date de d&eacute;but et l'aptitude concern&eacute;e. L'historique pr&eacute;sentera les donn&eacute;es pour l'aptitude s&eacute;lectionn&eacute;e sur toute la p&eacute;riode depuis la date choisie jusqu'aujourd'hui &mdash; avec un relev&eacute; chaque mois.
                         <br />Le graphique utilis&eacute; est interactif et passer la souris au-dessus de celui-ci permet de focaliser la vue sur un relev&eacute; particulier et de visualiser le d&eacute;tail des cibles &agrave; la date correspondante.</p>
