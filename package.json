@@ -23,6 +23,7 @@
     "polymer-build": "^0.4.0"
   },
   "dependencies": {
-    "bowser": "^1.7.0"
+    "bowser": "^1.7.0",
+    "clipboard-js": "^0.3.3"
   }
 }
