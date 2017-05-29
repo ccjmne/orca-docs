@@ -21,12 +21,19 @@
         <style include="shared-styles iron-flex iron-flex-alignment">
         :host {
             display: block;
-            --primary-color: #337AB7;
+        }
+        
+        paper-toast {
+            padding-right: 0;
+        }
+        
+        paper-toast paper-button {
+            color: #99cfff;
         }
         </style>
 
         <paper-toast id="permatoast" duration="0">
-            <paper-button on-tap="closeToast">Ok</paper-button>
+            <paper-button on-tap="_closeToast">Ok</paper-button>
         </paper-toast>
 
         <paper-dialog id="dialog-demo" with-backdrop class="layout vertical center">
@@ -76,11 +83,16 @@
         },
 
         toast: function(text) {
+            this.async(function() {
+                this.$.permatoast.show(typeof text === 'object' ? text : {
+                    text: text,
+                    duration: 0
+                });
+            }, this.$.permatoast.opened ? 200 : 0);
             this.$.permatoast.hide();
-            this.$.permatoast.show(text);
         },
 
-        closeToast: function() {
+        _closeToast: function() {
             this.$.permatoast.hide();
         },
 
