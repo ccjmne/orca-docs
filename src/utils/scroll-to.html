@@ -35,8 +35,8 @@
 
         _trigger: function() {
             // In case the target is the current url (hash included), force trigger
-            if (window.location.hash === this.target || window.location.pathname + window.location.hash === this.target) {
-                this.fire('scroll-to')
+            if (window.location.href === this.$$('a').href) {
+                this.fire('scroll-to');
             }
         }
     });
