@@ -2,6 +2,7 @@
 
 <link rel="import" href="../../../bower_components/gold-email-input/gold-email-input.html">
 
+<link rel="import" href="../../../bower_components/iron-a11y-keys/iron-a11y-keys.html">
 <link rel="import" href="../../../bower_components/iron-collapse/iron-collapse.html">
 <link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../../bower_components/iron-form/iron-form.html">
@@ -45,7 +46,7 @@
             margin-left: 20px;
         }
         
-        paper-dialog#subscribe-delegate paper-dialog-scrollable {
+        paper-dialog#dialog-delegate paper-dialog-scrollable {
             margin: 0 -24px;
         }
         
@@ -104,7 +105,8 @@
             float: left;
         }
         </style>
-        <paper-dialog id="subscribe-delegate" with-backdrop>
+        <paper-dialog id="dialog-delegate" with-backdrop>
+            <iron-a11y-keys id="a11y" keys="enter" on-keys-pressed="_submitForm"></iron-a11y-keys>
             <form is="iron-form" id="subscribe-form" method="post" content-type="application/json" action="https://6ft0v06fp5.execute-api.eu-west-1.amazonaws.com/prod/mailme" autocomplete="off">
                 <h1>Solution Orca &mdash; mod&egrave;le <em>[[plan.display]]</em></h1>
                 <paper-dialog-scrollable>
@@ -227,8 +229,8 @@
 
         ready: function() {
             this.false = false; // data-binding doesn't support actual values
-
-            this.$$('#subscribe-delegate paper-dialog-scrollable').dialogElement = this.$['subscribe-delegate'];
+            this.$.a11y.target = this.$['subscribe-form'];
+            this.$$('#dialog-delegate paper-dialog-scrollable').dialogElement = this.$['dialog-delegate'];
             this.$['subscribe-form'].addEventListener('iron-form-presubmit', this._preSubmit.bind(this));
             this.$['subscribe-form'].addEventListener('iron-form-submit', this._submit.bind(this));
             this.$['subscribe-form'].addEventListener('iron-form-error', this._400.bind(this));
@@ -246,13 +248,17 @@
                     entry: (entry instanceof Array ? entry : [entry]).map(_mapAnimation),
                     exit: (exit instanceof Array ? exit : [exit]).map(_mapAnimation)
                 };
-            })(this.$['subscribe-delegate'], ['fade-in-animation', 'scale-up-animation'], ['fade-out-animation', 'scale-down-animation']);
+            })(this.$['dialog-delegate'], ['fade-in-animation', 'scale-up-animation'], ['fade-out-animation', 'scale-down-animation']);
         },
 
         open: function(plan) {
             this.plan = plan;
-            this.$['subscribe-delegate'].open();
+            this.$['dialog-delegate'].open();
             this.set('plan.yearly', this.plan.yearly || false); // trigger observers to fill up the invoice table.
+        },
+
+        _submitForm: function() {
+            this.$['subscribe-form'].submit();
         },
 
         _preSubmit: function(e) {
@@ -272,13 +278,13 @@
 
         _200: function() {
             this.inflight = false;
-            this.$['subscribe-delegate'].close();
+            this.$['dialog-delegate'].close();
             this.fire('toast', 'Un e-mail de confirmation vous a été envoyé. Nous vous contacterons dès que possible.')
         },
 
         _400: function() {
             this.inflight = false;
-            this.$['subscribe-delegate'].close();
+            this.$['dialog-delegate'].close();
             this.fire('toast', 'Une erreur est survenue. Vérifiez que vous avec bien saisi une adresse e-mail valide.');
         },
 
