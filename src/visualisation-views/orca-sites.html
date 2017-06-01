@@ -92,10 +92,29 @@
                             Puis, pour chaque <a href="/orca-observed-certificates">aptitude observ&eacute;e</a>&nbsp;:
                         </p>
                         <ol type="I">
-                            <li>le d&eacute;tail de sa cible</li>
-                            <li>son nombre (et taux) d'agents form&eacute;s</li>
-                            <li>le nombre d'agents restant &agrave; former ou renouveler pour atteindre la cible</li>
+                            <li>
+                                <footnote-needed ref="1" numeric>le d&eacute;tail de sa
+                                    <footnote-needed ref="2" numeric alternate>cible</footnote-needed>
+                                </footnote-needed>
+                            </li>
+                            <li>
+                                <footnote-needed ref="1" numeric>son nombre (et taux) d'agents form&eacute;s</footnote-needed>
+                            </li>
+                            <li>
+                                <footnote-needed ref="1" numeric>le nombre d'agents restant &agrave; former ou renouveler pour atteindre la cible</footnote-needed>
+                            </li>
                         </ol>
+                        <footnote-ref ref="1" numeric no-lf>
+                            Ces informations utilisent un <em>code couleur</em> selon que la cible pour l'aptitude correspondante est&nbsp;:
+                            <ol type="I">
+                                <li><span class="label label-success">vert</span>&nbsp;: atteinte</li>
+                                <li><span class="label label-warning">orange</span>&nbsp;: presque atteinte (aux deux tiers ou plus)</li>
+                                <li><span class="label label-danger">rouge</span>&nbsp;: non atteinte (&agrave; moins de deux tiers)</li>
+                            </ol>
+                        </footnote-ref>
+                        <footnote-ref ref="2" numeric alternate>
+                            La <a href="/admin-certificates">gestion des aptitudes</a> permet d'&eacute;tablir un taux <em>cible</em> de l'effectif de chaque site &agrave; maintenir en comp&eacute;tence. Chaque site ainsi atteint <em>plus ou moins</em> la cible fix&eacute;e.
+                        </footnote-ref>
                         <p>
                             Enfin, le tableau de bord peut s'&eacute;tendre pour proposer un historique suivant l'&eacute;volution de la satisfaction des cibles du site.
                         </p>
@@ -107,9 +126,20 @@
                         <ol type="I">
                             <li>leur matricule</li>
                             <li>leurs genre, nom et pr&eacute;nom</li>
-                            <li>leur statut (permanent ou temporaire)</li>
-                            <li>leur date d'expiration de chaque <a href="/orca-observed-certificates">aptitude observ&eacute;e</a></li>
+                            <li>leur statut (<span class="label label-success">CDI</span> ou <span class="label label-warning">CDD</span>)</li>
+                            <li>leur date
+                                <footnote-needed>d'expiration pour chaque <a href="/orca-observed-certificates">aptitude observ&eacute;e</a></footnote-needed>
+                            </li>
                         </ol>
+                        <footnote-ref no-lf>
+                            Cette information utilise &eacute;galement le m&ecirc;me <em>code couleur</em> que dans les fiches agents&nbsp;:
+                            <ol type="I">
+                                <li><span class="label label-success">vert</span>&nbsp;: actuellement valide</li>
+                                <li><span class="label label-warning">orange</span>&nbsp;: valide, expirant sous 6 mois</li>
+                                <li><span class="label label-danger">rouge</span>&nbsp;: expir&eacute;e (ou autrement invalid&eacute;e)</li>
+                            </ol>
+                        </footnote-ref>
+                        <scroll-to target="/orca-employees#certificates">Fiche agent &mdash; Aptitudes d'un agent</scroll-to>
                         <p>
                             La <a href="/orca-advanced-search">recherche avanc&eacute;e</a> n'est pas disponible pour cette liste. Cliquer sur l'un de ces agents ouvre la fiche de celui-ci.
                         </p>
@@ -125,7 +155,9 @@
                     <h1>Utilisation</h1>
                     <p>
                         Deux donn&eacute;es configurent la vue de l'historique&nbsp;: la date de d&eacute;but et l'aptitude concern&eacute;e. L'historique pr&eacute;sentera les donn&eacute;es pour l'aptitude s&eacute;lectionn&eacute;e sur toute la p&eacute;riode depuis la date choisie jusqu'aujourd'hui &mdash; avec un relev&eacute; chaque mois.
-                        <br />Le graphique utilis&eacute; est interactif et passer la souris au-dessus de celui-ci permet de focaliser la vue sur un relev&eacute; particulier et de mettre en valeur la cible de ce site ainsi que son nombre effectif d'agents valides &agrave; la date correspondante.
+                    </p>
+                    <p>
+                        Le graphique utilis&eacute; est interactif et passer la souris au-dessus de celui-ci permet de focaliser la vue sur un relev&eacute; particulier et de mettre en valeur la cible de ce site ainsi que son nombre effectif d'agents valides &agrave; la date correspondante.
                     </p>
                 </div>
                 <div class="img border-top">

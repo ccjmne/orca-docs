@@ -4,6 +4,7 @@
 
 <link rel="import" href="../../bower_components/paper-video/paper-video.html">
 
+<link rel="import" href="../utils/footnotes.html">
 <link rel="import" href="../utils/paper-card-ripple.html">
 <link rel="import" href="../utils/scroll-to.html">
 <link rel="import" href="../utils/title-collapse.html">
@@ -108,8 +109,10 @@
                     </p>
                     <h1>Utilisation</h1>
                     <p>
-                        Deux donn&eacute;es configurent la vue de l'historique&nbsp;: la date de d&eacute;but et l'aptitude concern&eacute;e. L'historique pr&eacute;sentera les donn&eacute;es pour l'aptitude s&eacute;lectionn&eacute;e sur toute la p&eacute;riode depuis la date choisie jusqu'aujourd'hui &mdash; avec un relev&eacute; chaque mois.
-                        <br />Le graphique utilis&eacute; est interactif et passer la souris au-dessus de celui-ci permet de focaliser la vue sur un relev&eacute; particulier et de visualiser le d&eacute;tail des cibles &agrave; la date correspondante.</p>
+                        Deux donn&eacute;es configurent la vue de l'historique&nbsp;: la date de d&eacute;but et l'aptitude concern&eacute;e. L'historique pr&eacute;sente les donn&eacute;es pour l'aptitude s&eacute;lectionn&eacute;e sur toute la p&eacute;riode depuis la date choisie jusqu'aujourd'hui &mdash; avec un relev&eacute; chaque mois.
+                    </p>
+                    <p>
+                        Le graphique utilis&eacute; est interactif et passer la souris au-dessus de celui-ci permet de focaliser la vue sur un relev&eacute; particulier et de visualiser le d&eacute;tail des cibles &agrave; la date correspondante.</p>
                     <hr />
                     <p>
                         Chaque relev&eacute; pr&eacute;sente le <em>d&eacute;tail</em> de la cible d'une aptitude &agrave; une certaine date, lequel se d&eacute;compose en trois &eacute;l&eacute;ments&nbsp;:
@@ -119,6 +122,9 @@
                         <li>le nombre de sites pour lesquels la cible est <span class="quote">presque atteinte</span> (aux deux tiers)</li>
                         <li>le nombre de sites pour lesquels la cible n'est pas atteinte &mdash; &agrave; moins de deux tiers</li>
                     </ol>
+                    <p>
+                        Dans la vid&eacute;o de d&eacute;monstration ci-dessous, l'utilisateur consulte l'historique des statistiques d'un d&eacute;partement.
+                    </p>
                 </div>
                 <div class="img border-top">
                     <paper-video controls preload="auto" src="../../assets/orca-departments/history.webm" autohide-controls="500" height="600"></paper-video>
@@ -128,17 +134,35 @@
             <paper-card-ripple id="score" heading="Score aptitude d'un d&eacute;partement">
                 <div class="card-content">
                     <p>
-                        Pour un d&eacute;partement, son <em>score</em> est un taux, en pourcents, qui concerne une aptitude.
-                        <br />Cachun de ses sites a le potentiel de combler une fraction de ce score, plus ou moins grande selon le nombre de ses sites. Ils contribuent &agrave; leur fraction selon leur indice de r&eacute;alisation de la cible assign&eacute;e &agrave; l'aptitude concern&eacute;e&nbsp;:
+                        Pour un d&eacute;partement, son <em>score</em> est un taux, en pourcents, qui concerne une aptitude. Il est directement calcul&eacute; selon la validation de l'aptitude en question par
+                        <footnote-needed ref="1" numeric>l'ensemble de ses sites</footnote-needed>.
+                    </p>
+                    <p>
+                        Chacun de ses sites a le potentiel de combler une fraction de ce score, plus ou moins grande selon le nombre de ses sites. Ils contribuent &agrave; leur fraction selon leur
+                        <footnote-needed ref="2" numeric>indice de r&eacute;alisation de la cible</footnote-needed> assign&eacute;e &agrave; l'aptitude concern&eacute;e&nbsp;:
                     </p>
                     <ol type="I">
-                        <li>cible atteinte&nbsp;: fraction remplie &agrave; 100%</li>
-                        <li>cible presque atteinte&nbsp;: fraction remplie aux deux tiers</li>
-                        <li>moins de &frac23; de la cible&nbsp;: fraction enti&egrave;rement vide</li>
+                        <li>cible site <span class="label label-success">atteinte</span>&nbsp;: fraction remplie &agrave; 100%</li>
+                        <li>cible site <span class="label label-warning">presque atteinte</span>&nbsp;: fraction remplie aux deux tiers</li>
+                        <li>cible site <span class="label label-danger">non atteinte</span> (moins de &frac23;)&nbsp;: fraction enti&egrave;rement vide</li>
                     </ol>
+                    <footnote-refs>
+                        <footnote-ref ref="1" numeric>
+                            Il n'y a pas de distinction ni m&ecirc;me de pond&eacute;ration intervenant dans la contribution de chaque site selon tout crit&egrave;re comme leur nombre d'agents.
+                        </footnote-ref>
+                        <footnote-ref ref="2" numeric>
+                            La <a href="/admin-certificates">gestion des aptitudes</a> permet d'&eacute;tablir un taux <em>cible</em> de l'effectif de chaque site &agrave; maintenir en comp&eacute;tence. Chaque site ainsi atteint <em>plus ou moins</em> la cible fix&eacute;e.
+                        </footnote-ref>
+                    </footnote-refs>
+                    <scroll-to target="/orca-sites#site-page">Fiche site &mdash; Tableau de bord</scroll-to>
                     <p>
-                        &Agrave; noter&nbsp;: le nombre d'agents de chaque site n'intervient pas dans le calcul du score des d&eacute;partements.
+                        Les contributions de l'ensemble des sites de chaque d&eacute;partment sont ainsi compil&eacute;es et un score est obtenu. Il est accompagn&eacute; d'un badge dont le code couleur se d&eacute;cline comme suit&nbsp;:
                     </p>
+                    <ol type="I">
+                        <li><span class="label label-success">vert</span>&nbsp;: 100% &mdash; tous les sites de ce d&eacute;partement atteignent la cible fix&eacute;e</li>
+                        <li><span class="label label-warning">orange</span>&nbsp;: &agrave; partir de 67%</li>
+                        <li><span class="label label-danger">rouge</span>&nbsp;: jusqu'&agrave; 66%</li>
+                    </ol>
                 </div>
             </paper-card-ripple>
         </div>
