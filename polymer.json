@@ -22,7 +22,8 @@
   ],
   "includeDependencies": [
     "bower_components/webcomponentsjs/webcomponents-lite.min.js",
-    "node_modules/bowser/bowser.min.js"
+    "node_modules/bowser/bowser.min.js",
+    "node_modules/clipboard-js/clipboard.min.js"
   ],
   "lint": {
     "rules": ["polymer-1"]
