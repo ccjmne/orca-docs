@@ -1,13 +1,11 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../../bower_components/paper-video/paper-video.html">
 
 <link rel="import" href="../utils/paper-card-ripple.html">
+<link rel="import" href="../utils/title-collapse.html">
 
 <link rel="import" href="../shared-styles.html">
 
@@ -16,42 +14,43 @@
         <style is="custom-style" include="shared-styles iron-flex iron-flex-alignment">
         :host {
             display: block;
-            --paper-tabs-selection-bar-color: white;
-            --paper-tab-ink: white;
-            --paper-tabs: {
-                background-color: var(--primary-color);
-                color: white;
-            }
         }
         </style>
 
         <div class="layout vertical">
-            <paper-card-ripple elevation="1" heading="Fonctionnement et d&eacute;monstration">
-                <paper-tabs id="tabs" selected="{{tab}}" attr-for-selected="name" fallback-selection="doc" align-bottom>
-                    <paper-tab name="doc">DOCUMENTATION</paper-tab>
-                    <paper-tab name="gif">D&Eacute;MONSTRATION</paper-tab>
-                </paper-tabs>
+            <paper-card-ripple id="overview" heading="Vue d'ensemble">
+                <div class="card-content">
+                    <h1>Introduction</h1>
+                    <p>
+                        La <em>recherche globale</em> (ou <em>recherche rapide</em>) est un module d'acc&egrave;s rapide aux ressources.
+                        <br />Il s'agit simplement d'un champ de saisie int&eacute;gr&eacute; au bandeau-menu principal. Commencer &agrave; y saisir une recherche d&eacute;roule un menu pr&eacute;sentant les ressources correspondantes, mises en valeur selon leur pertinence.
+                    </p>
+                    <h2>D&eacute;tails d'impl&eacute;mentation</h2>
+                    <ol type="I">
+                        <li>Seuls les <em>modules de visualisation</em> sont interfac&eacute;s &agrave; travers cette fonctionnalit&eacute; d'acc&egrave;s rapide.</li>
+                        <li>Cliquer sur une entr&eacute;e de ce menu permet d'acc&eacute;der &agrave; la page de la ressource associ&eacute;e.</li>
+                        <li>
+                            Le menu est &eacute;galement navigable sans lever les mains du clavier, &agrave; l'aide des touches directionnelles. La touche
+                            <kbd>Entr&eacute;e&nbsp;&crarr;</kbd> s&eacute;lectionne l'item focalis&eacute; et ouvre la fiche correspondante.
+                        </li>
+                    </ol>
+                    <p>
+                        Dans la vid&eacute;o de d&eacute;monstration ci-dessous, l'utilisateur acc&egrave;de &agrave; plusieurs fiches <a href="/orca-sites">sites</a>, <a href="/orca-employees">agents</a> et <a href="/orca-trainings">formations</a> &agrave; l'aide de la recherche globale.
+                    </p>
+                </div>
+                <div class="img border-top">
+                    <paper-video controls preload="auto" src="../../assets/orca-quick-search/overview.webm" autohide-controls="500" height="600"></paper-video>
+                </div>
+            </paper-card-ripple>
 
-                <iron-pages selected="[[tab]]" attr-for-selected="name">
-                    <div name="doc" class="card-content">
-                        <h1>Introduction</h1>
-                        <p>
-                            La <em>recherche globale</em> (ou <em>recherche rapide</em>) est un module d'acc&egrave;s rapide aux ressources.
-                            <br />Il s'agit simplement d'un champ de saisie int&eacute;gr&eacute; au bandeau-menu principal. Commencer &agrave; y saisir une recherche d&eacute;roule un menu pr&eacute;sentant les ressources correspondantes, mises en valeur selon leur pertinence.
-                        </p>
-                        <h2>D&eacute;tails d'impl&eacute;mentation</h2>
-                        <ol type="I">
-                            <li>Seuls les <em>modules de visualisation</em> sont interfac&eacute;s &agrave; travers cette fonctionnalit&eacute; d'acc&egrave;s rapide.</li>
-                            <li>Cliquer sur une entr&eacute;e de ce menu permet d'acc&eacute;der &agrave; la page de la ressource associ&eacute;e.</li>
-                            <li>
-                                Le menu est &eacute;galement navigable sans lever les mains du clavier, &agrave; l'aide des touches directionnelles. La touche
-                                <kbd>Entr&eacute;e &crarr;</kbd> s&eacute;lectionne l'item focalis&eacute; et ouvre la fiche correspondante.
-                            </li>
-                        </ol>
-                        <h1 class="layout horizontal end">
-                            <span class="flex">S&eacute;lection des ressources</span>
-                            <paper-button class="primary" on-tap="_gif"><iron-icon icon="icons:visibility"></iron-icon>voir d&eacute;monstration</paper-button>
-                        </h1>
+            <paper-card-ripple id="filtering-sorting" heading="Filtrage et tri">
+                <div class="card-content">
+                    <p>
+                        La <em>recherche globale</em> se d&eacute;compose en une fonction de filtrage et l'application d'un algorithme de tri.
+                        <br />Cette section d&eacute;crit le d&eacute;tail technique du fonctionnement de la recherche globale&nbsp;: les informations suivantes sont complexes et largement inint&eacute;ressantes.
+                    </p>
+                    <title-collapse id="filtering" h2>
+                        <span class="title">S&eacute;lection des ressources</span>
                         <p>
                             Les quatre types de ressources constituant l'ensemble des <em>modules de visualisation</em> sont accessibles via cette fonctionnalit&eacute;. Celles-ci sont identifi&eacute;es et s&eacute;lectionn&eacute;es selon leur type. Ainsi&nbsp;:
                             <ol type="I">
@@ -60,10 +59,9 @@
                                 <li>la s&eacute;lection des <a href="/orca-trainings">formations</a> utilise leurs types et leurs dates</li>
                             </ol>
                         </p>
-                        <h1 class="layout horizontal end">
-                            <span class="flex">Ordonnancement des r&eacute;sultats</span>
-                            <paper-button class="primary" on-tap="_gif"><iron-icon icon="icons:visibility"></iron-icon>voir d&eacute;monstration</paper-button>
-                        </h1>
+                    </title-collapse>
+                    <title-collapse id="sorting" h2>
+                        <span class="title">Ordonnancement des r&eacute;sultats</span>
                         <p>
                             Les r&eacute;sultats, potentiellement nombreux, sont soumis &agrave; un algorithme de prioritisation qui permet de sugg&eacute;rer &agrave; l'utilisateur les plus pertinents d'abord. Cet algorithme se d&eacute;compose en trois niveaux&nbsp;:
                         </p>
@@ -96,32 +94,14 @@
                                 </ol>
                             </li>
                         </ul>
-                    </div>
-                    <div name="gif">
-                        <div class="img">
-                            <paper-video controls preload="auto" src="../../assets/videos/quick-search--quick-search.webm" autohide-controls="500" height="600"></paper-video>
-                        </div>
-                        <div class="card-actions">
-                            <paper-button class="primary" on-tap="_doc">
-                                <iron-icon icon="icons:arrow-back"></iron-icon>retour &agrave; la documentation
-                            </paper-button>
-                        </div>
-                    </div>
-                </iron-pages>
+                    </title-collapse>
+                </div>
             </paper-card-ripple>
         </div>
     </template>
     <script>
     Polymer({
-        is: 'orca-quick-search',
-
-        _doc: function() {
-            this.tab = 'doc';
-        },
-
-        _gif: function() {
-            this.tab = 'gif';
-        }
+        is: 'orca-quick-search'
     });
     </script>
 </dom-module>

@@ -13,17 +13,11 @@
         <style is="custom-style" include="shared-styles iron-flex iron-flex-alignment">
         :host {
             display: block;
-            --paper-tabs-selection-bar-color: white;
-            --paper-tab-ink: white;
-            --paper-tabs: {
-                background-color: var(--primary-color);
-                color: white;
-            }
         }
         </style>
 
         <div class="layout vertical">
-            <paper-card-ripple elevation="1" heading="Vue d'ensemble">
+            <paper-card-ripple id="overview" heading="Vue d'ensemble">
                 <div class="card-content">
                     <h1>Introduction</h1>
                     <p>
@@ -42,7 +36,7 @@
                         Comme chaque <em>module de visualisation</em>, la pr&eacute;sentation des agents se compose de deux pages&nbsp;: celle de <em>listage</em>, et la <em>fiche agent</em>.
                     </p>
 
-                    <title-collapse h2>
+                    <title-collapse id="listing-page" h2>
                         <span class="title">Page de listage</span>
                         <p>
                             Cette page se compose principalement d'un tableau de l'ensemble des agents <a href="/access">accessibles</a> &agrave; l'utilisateur. Elle int&egrave;gre les fonctionnalit&eacute;s de <a href="/orca-advanced-search">recherche avanc&eacute;e</a>, de <a href="/links">partage</a> et d'<a href="/exports">export</a>. On y retrouve, pour chaque agent, ses&nbsp;:
@@ -66,10 +60,10 @@
                         <p>
                             L'absence de badge d&eacute;note une aptitude <em>jamais acquise</em>.
                         </p>
-                        <scroll-to target="#employees--certificates">Aptitudes d'un agent</scroll-to>
+                        <scroll-to target="#certificates">Aptitudes d'un agent</scroll-to>
                     </title-collapse>
 
-                    <title-collapse h2>
+                    <title-collapse id="employee-page" h2>
                         <span class="title">Fiche agent</span>
                         <p>
                             La fiche d'un agent se compose des deux &eacute;l&eacute;ments que sont son <em>tableau de bord</em> et la liste de ses <a href="/orca-trainings">formations</a>.
@@ -115,7 +109,7 @@
                         <p>
                             L'absence d'information d&eacute;note une aptitude <em>jamais acquise</em>.
                         </p>
-                        <scroll-to target="#employees--certificates">Aptitudes d'un agent</scroll-to>
+                        <scroll-to target="#certificates">Aptitudes d'un agent</scroll-to>
                         <h3 class="layout horizontal center">Liste des formations<hr class="flex" /></h3>
                         <p>
                             La liste des <a href="/orca-trainings">formations</a> auxquelles un agent a particip&eacute; pr&eacute;sente certaines informations pour chacune d'entre elles&nbsp;:
@@ -143,7 +137,7 @@
                 </div>
             </paper-card-ripple>
 
-            <paper-card-ripple id="employees--certificates" heading="Aptitudes d'un agent" elevation="1">
+            <paper-card-ripple id="certificates" heading="Aptitudes d'un agent">
                 <div class="card-content">
                     <p>
                         Les <a href="/admin-certificates">aptitudes</a> d'un agent sont les propri&eacute;t&eacute;s auxquelles s'int&eacute;ressent les statistiques. Elles sont obtenues en participant &agrave; une formation et &eacute;tant valid&eacute; &agrave; l'issue de celle-ci et peuvent &ecirc;tre perdues de diff&eacute;rentes mani&egrave;res.

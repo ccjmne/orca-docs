@@ -15,18 +15,12 @@
         <style is="custom-style" include="shared-styles iron-flex iron-flex-alignment">
         :host {
             display: block;
-            --paper-tabs-selection-bar-color: white;
-            --paper-tab-ink: white;
-            --paper-tabs: {
-                background-color: var(--primary-color);
-                color: white;
-            }
         }
         </style>
 
         <div class="layout vertical">
-            <paper-card-ripple elevation="1" heading="Vue d'ensemble">
-                <div name="doc" class="card-content">
+            <paper-card-ripple id="overview" heading="Vue d'ensemble">
+                <div class="card-content">
                     <h1>Introduction</h1>
                     <p>
                         Les <em>d&eacute;partements</em> sont l'une des ressources principales de la solution Orca. Ils permettent d'organiser les <a href="/orca-sites">sites</a> en groupes logiques.
@@ -60,7 +54,7 @@
                             <li>le taux d'agents form&eacute;s</li>
                             <li>le nombre d'agents form&eacute;s</li>
                         </ol>
-                        <scroll-to target="#departments--score">Score aptitude d'un d&eacute;partement</scroll-to>
+                        <scroll-to target="#score">Score aptitude d'un d&eacute;partement</scroll-to>
                     </title-collapse>
 
                     <title-collapse h2 id="department-page">
@@ -89,8 +83,8 @@
                         <p>
                             Enfin, le tableau de bord peut s'&eacute;tendre pour proposer un historique suivant l'&eacute;volution des scores du d&eacute;partement.
                         </p>
-                        <scroll-to target="#departments--score">Score aptitude d'un d&eacute;partement</scroll-to>
-                        <scroll-to target="#departments--history">Historique d'un d&eacute;partement</scroll-to>
+                        <scroll-to target="#score">Score aptitude d'un d&eacute;partement</scroll-to>
+                        <scroll-to target="#history">Historique d'un d&eacute;partement</scroll-to>
                         <h3 class="layout horizontal center">Liste des sites<hr class="flex" /></h3>
                         <p>
                             La liste des sites d'un d&eacute;partement contient certaines informations pour chacun d'entre eux&nbsp;:
@@ -107,7 +101,7 @@
                 </div>
             </paper-card-ripple>
 
-            <paper-card-ripple id="departments--history" heading="Historique d'un d&eacute;partement" elevation="1">
+            <paper-card-ripple id="history" heading="Historique d'un d&eacute;partement">
                 <div class="card-content">
                     <p>
                         L'historique est un outil permettant de visualiser, &agrave; l'aide d'un graphique simple, l'&eacute;volution de la satisfaction de la cible d'une aptitude au cours du temps.
@@ -127,11 +121,11 @@
                     </ol>
                 </div>
                 <div class="img border-top">
-                    <paper-video id="gif-condition" controls preload="auto" src="../../assets/videos/departments--history.webm" autohide-controls="500" height="600"></paper-video>
+                    <paper-video controls preload="auto" src="../../assets/orca-departments/history.webm" autohide-controls="500" height="600"></paper-video>
                 </div>
             </paper-card-ripple>
 
-            <paper-card-ripple id="departments--score" heading="Score aptitude d'un d&eacute;partement" elevation="1">
+            <paper-card-ripple id="score" heading="Score aptitude d'un d&eacute;partement">
                 <div class="card-content">
                     <p>
                         Pour un d&eacute;partement, son <em>score</em> est un taux, en pourcents, qui concerne une aptitude.

@@ -16,17 +16,11 @@
         <style is="custom-style" include="shared-styles iron-flex iron-flex-alignment">
         :host {
             display: block;
-            --paper-tabs-selection-bar-color: white;
-            --paper-tab-ink: white;
-            --paper-tabs: {
-                background-color: var(--primary-color);
-                color: white;
-            }
         }
         </style>
 
         <div class="layout vertical">
-            <paper-card-ripple elevation="1" heading="Vue d'ensemble">
+            <paper-card-ripple id="overview" heading="Vue d'ensemble">
                 <div name="doc" class="card-content">
                     <h1>Introduction</h1>
                     <p>
@@ -44,7 +38,7 @@
                         <br />D'autre part, ces ressources particuli&egrave;res font &eacute;galement l'objet d'un module de statistiques.
                     </p>
 
-                    <title-collapse h2>
+                    <title-collapse id="listing-page" h2>
                         <span class="title">Page de listage</span>
                         <p>
                             Cette page se compose principalement d'un tableau de l'ensemble des formations. Elle int&egrave;gre les fonctionnalit&eacute;s de <a href="/orca-advanced-search">recherche avanc&eacute;e</a>, de <a href="/orca-links">partage</a> et d'<a href="/orca-exports">export</a>. La barre d'action propose &eacute;galement (aux utilisateurs autoris&eacute;s) la cr&eacute;ation de nouvelles formations.
@@ -89,7 +83,7 @@
                         </footnote-refs>
                     </title-collapse>
 
-                    <title-collapse h2>
+                    <title-collapse id="training-page" h2>
                         <span class="title">Fiche formation</span>
                         <p>
                             La fiche formation se compose, outre la barre d'action, de deux &eacute;l&eacute;ments que sont son <em>tableau de bord</em> et la liste des <a href="/orca-employees">agents</a> qui y sont inscrits.
@@ -203,7 +197,7 @@
                         </p>
                     </title-collapse>
 
-                    <title-collapse h2>
+                    <title-collapse id="edit-page" h2>
                         <span class="title">Cr&eacute;ation et modification</span>
                         <p>
                             Afin de proposer une exp&eacute;rience la plus naturelle possible, deux aspects concernant la cr&eacute;ation ainsi que la modification de formations sont &agrave; noter&nbsp;:
@@ -215,7 +209,7 @@
                         <p>
                             Cette page fait appara&icirc;tre un avertissment lorsque l'utilisateur la quitte sans explicitement annuler ou enregistrer ses modifications, lui proposant de rester et conserver son travail.
                         </p>
-                        <scroll-to target="/orca-trainings#training--creation">Vid&eacute;o d'introduction &mdash; Cr&eacute;er une session de formation</scroll-to>
+                        <scroll-to target="#intro-video">Vid&eacute;o d'introduction &mdash; Cr&eacute;er une session de formation</scroll-to>
                         <h3 class="layout horizontal center">
                                 Barre d'actions<hr class="flex" />
                             </h3>
@@ -290,7 +284,7 @@
                             Le menu d'inscription d'agents &agrave; une formation est accessible depuis la <a href="/actions">barre d'actions</a> ainsi que, dans le cadre d'une <em>cr&eacute;ation</em> de session uniquement, depuis un bouton en bas du tableau de bord.
                             <br /> Les agents ainsi enregistr&eacute;s appara&icirc;ssent dans une liste similaire &agrave; celle de la <em>fiche formation</em> qui propose une option de d&eacute;sinscription pour chacun d'entre eux.
                         </p>
-                        <scroll-to target="/orca-trainings#training--creation">Vid&eacute;o d'introduction &mdash; Cr&eacute;er une session de formation</scroll-to>
+                        <scroll-to target="#intro-video">Vid&eacute;o d'introduction &mdash; Cr&eacute;er une session de formation</scroll-to>
                         <p>
                             L'inscription peut &ecirc;tre soit individuelle, soit collective, et utilise la <a href="/orca-global-search">recherche globale</a> pour la s&eacute;lection de la ressource &agrave; ajouter. En s&eacute;lectionnant un <a href="/orca-sites">site</a> ou un <a href="/orca-departments">d&eacute;partement</a>, l'ensemble des agents actuellement affect&eacute;s au(x) site(s) correspondant(s) sont ajout&eacute;s &agrave; la session&nbsp;; la s&eacute;lection d'une formation entra&icirc;ne l'inscription de tous les agents y ayant particip&eacute;.
                         </p>
@@ -299,7 +293,7 @@
                         </p>
                     </title-collapse>
 
-                    <title-collapse h2>
+                    <title-collapse id="completion-page" h2>
                         <span class="title">&Eacute;dition du <abbr class="initialism" title="Proc&egrave;s Verbal">PV</abbr> de fin de session</span>
                         <p>
                             La cl&ocirc;ture d'une session de formation est marqu&eacute;e par l'&eacute;dition de son
@@ -357,15 +351,18 @@
                 </div>
             </paper-card-ripple>
 
-            <paper-card-ripple id="training--creation" heading="Vid&eacute;o d'introduction" elevation="1">
+            <paper-card-ripple id="intro-video" heading="Vid&eacute;o d'introduction">
                 <div class="card-content">
                     <p>
                         Dans la vid&eacute;o suivante, l'utilisateur cr&eacute;e une nouvelle session de formation, y inscrit tout un site ainsi qu'un agent suppl&eacute;mentaire et lui assigne un formateur responsable.
-                        <br />La rubrique <em>Cr&eacute;ation et modification</em> dans la documentation ci-dessus pr&eacute;sente davantage d'informations concernant cette proc&eacute;dure.
                     </p>
+                    <p>
+                        La rubrique <em>Cr&eacute;ation et modification</em> dans la documentation ci-dessus pr&eacute;sente davantage d'informations concernant cette proc&eacute;dure.
+                    </p>
+                    <scroll-to target="#edit-page">Formations &mdash; Cr&eacute;ation et modification</scroll-to>
                 </div>
                 <div class="img border-top">
-                    <paper-video id="gif-creation" controls preload="auto" src="../../assets/videos/training--creation.webm" autohide-controls="500" height="720"></paper-video>
+                    <paper-video id="gif-creation" controls preload="auto" src="../../assets/orca-trainings/creation.webm" autohide-controls="500" height="720"></paper-video>
                 </div>
             </paper-card-ripple>
         </div>

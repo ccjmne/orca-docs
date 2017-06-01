@@ -282,7 +282,7 @@
 
             // true  - if the top of the block should be aligned with the top of the viewport
             // false - if the bottom of the block should be aligned with the bottom of the viewport
-            const blockStart = (this.$['main-view'].offsetHeight - target.offsetTop > this.$$('[main]').$['mainContainer'].offsetHeight);
+            const blockStart = (this.$['main-view'].offsetHeight + this.$$('orca-footer').offsetHeight - target.offsetTop > this.$$('[main]').$['mainContainer'].offsetHeight);
             target.scrollIntoView(window.bowser.firefox && {
                 behavior: 'smooth',
                 block: blockStart ? 'start' : 'end'

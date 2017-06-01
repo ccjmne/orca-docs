@@ -1,13 +1,13 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../../bower_components/paper-video/paper-video.html">
 
+<link rel="import" href="../utils/footnotes.html">
 <link rel="import" href="../utils/paper-card-ripple.html">
+<link rel="import" href="../utils/scroll-to.html">
+<link rel="import" href="../utils/title-collapse.html">
 
 <link rel="import" href="../shared-styles.html">
 
@@ -16,65 +16,60 @@
         <style is="custom-style" include="shared-styles iron-flex iron-flex-alignment">
         :host {
             display: block;
-            --paper-tabs-selection-bar-color: white;
-            --paper-tab-ink: white;
-            --paper-tabs: {
-                background-color: var(--primary-color);
-                color: white;
-            }
         }
         </style>
 
         <div class="layout vertical">
-            <paper-card-ripple elevation="1" heading="Fonctionnement et d&eacute;monstration">
-                <paper-tabs id="tabs" selected="{{tab}}" attr-for-selected="name" fallback-selection="doc" align-bottom>
-                    <paper-tab name="doc">DOCUMENTATION</paper-tab>
-                    <paper-tab name="gif">D&Eacute;MONSTRATION</paper-tab>
-                </paper-tabs>
+            <paper-card-ripple id="overview" heading="Vue d'ensemble">
+                <div class="card-content">
+                    <h1>Introduction</h1>
+                    <p>
+                        Int&eacute;gr&eacute;es &agrave; chacune des listes de ressources, les fonctionnalit&eacute;s de <em>filtrage et tri</em> sont l'outil de base pour affiner les r&eacute;sultats d'une recherche.
+                    </p>
+                    <p>
+                        Bien qu'&eacute;tant (de fa&ccedil;on g&eacute;n&eacute;rale) le principal moyen de rechercher une information, celles-ci, dans Orca, sont pr&eacute;vues pour <em>pr&eacute;senter</em> des donn&eacute;es. Pour acc&eacute;der rapidement &agrave; une ressource particuli&egrave;re, on privil&eacute;giera la
+                        <a href="/orca-quick-search">recherche globale</a>, bien souvent suffisante.
+                    </p>
+                    <h2>R&eacute;utilisation et int&eacute;gration</h2>
+                    <p>
+                        Les filtrage et tri fonctionnent de pair avec le <a href="/orca-links">module de partage</a>&nbsp;: chaque modification apport&eacute;e est instantan&eacute;ment refl&eacute;t&eacute;e dans l'URL du navigateur. Partager ou sauvegarder le lien vers une recherche permet de r&eacute;-acc&eacute;der &agrave; tout moment &agrave; la m&ecirc;me configuration &mdash; avec des r&eacute;sultats toujours &agrave; jour.
+                    </p>
+                    <scroll-to target="/orca-links#overview">Module de partage &mdash; Vue d'ensemble</scroll-to>
+                </div>
+            </paper-card-ripple>
 
-                <iron-pages selected="[[tab]]" attr-for-selected="name">
-                    <div name="doc" class="card-content">
-                        <h1>Introduction</h1>
-                        <p>
-                            Int&eacute;gr&eacute;es &agrave; chacune des listes de ressources, les fonctionnalit&eacute;s de <em>filtrage et tri</em> sont l'outil de base pour affiner les r&eacute;sultats d'une recherche.
-                            <br />Bien qu'&eacute;tant (de fa&ccedil;on g&eacute;n&eacute;rale) le principal moyen de rechercher une information, celles-ci, dans Orca, sont pr&eacute;vues pour <em>pr&eacute;senter</em> des donn&eacute;es. Pour acc&eacute;der rapidement &agrave; une ressource particuli&egrave;re, on privil&eacute;giera la
-                            <a href="/quick-search">recherche globale</a>, bien souvent suffisante.
-                        </p>
-                        <h2>R&eacute;utilisation et int&eacute;gration</h2>
-                        <p>
-                            Les filtrage et tri fonctionnent de pair avec le <a href="/links">module de partage</a>&nbsp;: chaque modification apport&eacute;e est instantan&eacute;ment refl&eacute;t&eacute;e dans l'URL du navigateur. Partager ou sauvegarder le lien vers une recherche permet de r&eacute;-acc&eacute;der &agrave; tout moment &agrave; la m&ecirc;me configuration &mdash; avec des r&eacute;sultats toujours &agrave; jour.
-                        </p>
-                        <h1 class="layout horizontal end">
-                            <span class="flex">Utilisation</span>
-                            <paper-button class="primary" on-tap="_gif"><iron-icon icon="icons:visibility"></iron-icon>voir d&eacute;monstration</paper-button>
-                        </h1>
-                        <p>
-                            Chaque liste de ressource se pr&eacute;sente sous forme d'un tableau dont chaque colonne contient un type d'information et chaque ligne est une ressource. Les fonctionnalit&eacute;s de filtrage et tri sont directement accessibles dans l'ent&ecirc;te de ces tableaux &mdash; puisqu'agissant syst&eacute;matiquement sur un type d'information.
-                        </p>
-                        <h2>Utilisation du filtrage</h2>
+            <paper-card-ripple id="usage" heading="Utilisation">
+                <div class="card-content">
+                    <p>
+                        Chaque liste de ressource se pr&eacute;sente sous forme d'un tableau dont chaque colonne contient un type d'information et chaque ligne est une ressource. Les fonctionnalit&eacute;s de filtrage et tri sont directement accessibles dans l'en-t&ecirc;te de ces tableaux &mdash; puisqu'agissant syst&eacute;matiquement sur un type d'information.
+                    </p>
+                    <title-collapse id="filtering" h2>
+                        <span class="title">Utilisation du filtrage</span>
                         <p>Une grande quantit&eacute; des informations sont &eacute;ligibles pour filtrage. On distingue trois types de champ filtrables&nbsp;:</p>
                         <ol type="I">
                             <li>
-                                La quasi-totalit&eacute; des colonnes sont associ&eacute;es &agrave; des donn&eacute;es de type <em>texte</em>, virtuellement sans contexte. L'utilisateur est libre d'entrer une quelconque cha&icirc;ne de caract&egrave;s dans le champ associ&eacute;.
+                                La quasi-totalit&eacute; des colonnes sont associ&eacute;es &agrave; des donn&eacute;es de type <em>texte</em>, virtuellement sans contexte. L'utilisateur est libre d'entrer une quelconque cha&icirc;ne de caract&egrave;res dans le champ associ&eacute;.
                             </li>
                             <li>
-                                Certaines donn&eacute;es sont clairement contextualis&eacute;es et correspondent &agrave; une collection de ressources finie et relativement petite. Les champs de saisie correspondant &agrave; celles-ci sont renforc&eacute;s de l'auto-compl&eacute;tion &agrave; la saisie.
+                                Certaines donn&eacute;es sont clairement contextualis&eacute;es et correspondent &agrave; une collection de ressources finie et relativement petite. Les champs de saisie correspondant &agrave; celles-ci sont renforc&eacute;es de l'auto-compl&eacute;tion &agrave; la saisie.
                             </li>
                             <li>
-                                Enfin, certaines informations sont effectivement strictes et correspondant &agrave; une collection tr&egrave;s restreinte de ressources. Celles-ci sont filtr&eacute;es directement par s&eacute;lection dans un menu d&eacute;roulant.
+                                Enfin, certaines informations sont effectivement strictes et correspondant &agrave; une collection de ressources tr&egrave;s restreinte. Celles-ci sont filtr&eacute;es directement par s&eacute;lection dans un menu d&eacute;roulant.
                             </li>
                         </ol>
-                        <h2>Utilisation du tri</h2>
+                    </title-collapse>
+                    <title-collapse id="sorting" h2>
+                        <span class="title">Utilisation du tri</span>
                         <p>
-                            Il est possible d'activer le tri selon une donn&eacute;e pour l'ext&ecirc;me majori&eacute; des colonnes. Un clic sur l'ent&ecirc;te trie les ressources selon l'information correspondante par ordre alphanum&eacute;rique&nbsp;; un second clic, dans l'ordre inverse. Juste avant chaque ent&ecirc;te est une ic&ocirc;ne, repr&eacute;sentant soit&nbsp;:
+                            Il est possible d'activer le tri selon une donn&eacute;e pour l'ext&ecirc;me majori&eacute; des colonnes. Un clic sur l'en-t&ecirc;te trie les ressources selon l'information correspondante par ordre alphanum&eacute;rique&nbsp;; un second clic, dans l'ordre inverse. Juste avant chaque en-t&ecirc;te est une ic&ocirc;ne, repr&eacute;sentant soit&nbsp;:
                         </p>
                         <ol type="I">
                             <li>que les ressources sont triables par le type d'information correspondant</li>
-                            <li>que les ressources sont en ce moment tri&eacute;es selon ces donn&eacute;es, par ordre alphanum&eacute;rique</li>
-                            <li>que les ressources sont en ce moment tri&eacute;es selon ces donn&eacute;es, par ordre anti-alphanum&eacute;rique</li>
+                            <li>que les ressources sont en ce moment tri&eacute;es selon ces donn&eacute;es, dans l'ordre croissant</li>
+                            <li>que les ressources sont en ce moment tri&eacute;es selon ces donn&eacute;es, dans l'ordre d&eacute;croissant</li>
                         </ol>
                         <p>
-                            L'absence d'ic&ocirc;ne d&eacute;signe une colonne sur laquelle le tri n'est pas possible.
+                            L'absence d'ic&ocirc;ne d&eacute;note d'une colonne sur laquelle le tri n'est pas possible.
                         </p>
                         <h2>D&eacute;tails d'impl&eacute;mentation</h2>
                         <ol type="I">
@@ -82,41 +77,31 @@
                                 Chaque tableau de ressources est tri&eacute; par d&eacute;faut selon le crit&egrave;re le plus pertinent.
                             </li>
                             <li>
-                                Chaque filtre sp&eacute;cifi&eacute; ajoute une nouvelle condition de filtrage des r&eacute;sultats. Seules les ressources qui satisfont tous ces crit&egrave;res sont conserv&eacute;es.
+                                Chaque filtre sp&eacute;cifi&eacute; ajoute une nouvelle condition de filtrage des r&eacute;sultats. Seules les ressources qui
+                                <footnote-needed>satisfont tous ces crit&egrave;res</footnote-needed> sont conserv&eacute;es.
                             </li>
                             <li>
-                                Le cas &eacute;ch&eacute;ant, les filtres viennent s'ajouter aux crit&egrave;res de recherche avanc&eacute;e de la <a href="/advanced-search">recherche avanc&eacute;e</a> et seuls les r&eacute;sultats satisfaisant l'ensemble de ces conditions sont pr&eacute;serv&eacute;s.
-                            </li>
-                            <li>
-                                Les colonnes suppl&eacute;mentaires ajout&eacute;es d'apr&egrave;s la configuration des <a href="/certificates">aptitudes observ&eacute;es</a> ou encore des informations additionnelles de la <a href="/advanced-search">recherche avanc&eacute;e</a> sont g&eacute;n&eacute;ralement triables, mais jamais filtrables.
+                                Les colonnes suppl&eacute;mentaires ajout&eacute;es d'apr&egrave;s la configuration des <a href="/orca-observed-certificates">aptitudes observ&eacute;es</a> ou encore des informations additionnelles de la <a href="/orca-advanced-search">recherche avanc&eacute;e</a> sont g&eacute;n&eacute;ralement triables, mais jamais filtrables.
                             </li>
                         </ol>
-                    </div>
-                    <div name="gif">
-                        <div class="img">
-                            <paper-video controls preload="auto" src="../../assets/videos/filtering--filtering.webm" autohide-controls="500" height="600"></paper-video>
-                        </div>
-                        <div class="card-actions">
-                            <paper-button class="primary" on-tap="_doc">
-                                <iron-icon icon="icons:arrow-back"></iron-icon>retour &agrave; la documentation
-                            </paper-button>
-                        </div>
-                    </div>
-                </iron-pages>
+                        <footnote-ref>
+                            Le cas &eacute;ch&eacute;ant, les filtres viennent s'ajouter aux crit&egrave;res de filtrage de la <a href="/orca-advanced-search">recherche avanc&eacute;e</a> et seuls les r&eacute;sultats satisfaisant l'ensemble de ces conditions sont pr&eacute;serv&eacute;s.
+                        </footnote-ref>
+                        <scroll-to target="/orca-advanced-search#overview-details">Recherche avanc&eacute; &mash; Details d'impl&eacute;mentation</scroll-to>
+                    </title-collapse>
+                    <p>
+                        Dans la vid&eacute;o de d&eacute;monstration suivante, l'utilisateur consulte ses donn&eacuite;es en utilisant des filtres, ajoutant des colonnes d'informations et triant les r&eacute;sultats.
+                    </p>
+                </div>
+                <div class="img border-top">
+                    <paper-video controls preload="auto" src="../../assets/orca-filtering/usage.webm" autohide-controls="500" height="600"></paper-video>
+                </div>
             </paper-card-ripple>
         </div>
     </template>
     <script>
     Polymer({
-        is: 'orca-filtering',
-
-        _doc: function() {
-            this.tab = 'doc';
-        },
-
-        _gif: function() {
-            this.tab = 'gif';
-        }
+        is: 'orca-filtering'
     });
     </script>
 </dom-module>
