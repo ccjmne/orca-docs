@@ -83,10 +83,10 @@
         :host {
             @apply --footnote-highlight;
         }
-        :host[alternate] {
+        :host([alternate]) {
             background-color: var(--footnote-alternate-background, --footnote-alternate-background-default);
         };
-        :host[alternate]::before {
+        :host([alternate])::before {
             @apply --footnote-highlight-before;
         }
         </style>
@@ -165,10 +165,10 @@
             margin: 2px 0;
             @apply --footnote-highlight;
         }
-        :host[alternate] {
+        :host([alternate]) {
             background-color: var(--footnote-alternate-background, --footnote-alternate-background-default);
         };
-        :host[alternate]::before {
+        :host([alternate])::before {
             @apply --footnote-highlight-before;
         }
         </style>
