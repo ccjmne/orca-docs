@@ -122,7 +122,7 @@
     <template>
         <footnote-indicator numeric="[[numeric]]" ref="[[ref]]"></footnote-indicator>&nbsp;:
         <content></content>
-        <br />
+        <template is="dom-if" if="[[!noLf]]"><br /></template>
     </template>
     <script>
     Polymer({
@@ -140,6 +140,10 @@
             alternate: {
                 type: Boolean,
                 reflectToAttribute: true,
+                value: false
+            },
+            noLf: {
+                type: Boolean,
                 value: false
             }
         },
