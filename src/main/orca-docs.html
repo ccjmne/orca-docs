@@ -275,7 +275,7 @@
 
         __scrollToSection: function() {
             const view = this.$['main-view'].querySelector('.iron-selected');
-            const target = view && window.location.hash && view.firstChild.$$(window.location.hash);
+            const target = view && (window.location.hash && view.firstChild.$$(window.location.hash) || view.firstChild.$$('#overview')) || view;
             if (!target) {
                 return;
             }
@@ -288,13 +288,14 @@
                 block: blockStart ? 'start' : 'end'
             } || blockStart);
 
-            this.debounce('highlight-' + target.id, this.__highlight.bind(this, target), 200);
+            if (target !== view) {
+                this.debounce('highlight-' + target.id, this.__highlight.bind(this, target), 200);
+            }
         },
 
         __highlight: function(target) {
             if (typeof target.highlight === 'function') {
-                target.highlight();
-                return;
+                return target.highlight();
             }
 
             if (target.querySelector('paper-ripple[__highlight]')) {

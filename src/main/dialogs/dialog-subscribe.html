@@ -33,6 +33,10 @@
             }
         }
         
+        iron-a11y-keys {
+            display: none;
+        }
+        
         paper-dialog paper-button {
             font-size: 1.2em;
             font-weight: 300;
@@ -56,7 +60,7 @@
         }
         
         .invoice {
-            margin: 20px 0;
+            margin-bottom: 10px;
             width: 80%;
         }
         
@@ -108,7 +112,7 @@
         <paper-dialog id="dialog-delegate" with-backdrop>
             <iron-a11y-keys id="a11y" keys="enter" on-keys-pressed="_submitForm"></iron-a11y-keys>
             <form is="iron-form" id="subscribe-form" method="post" content-type="application/json" action="https://6ft0v06fp5.execute-api.eu-west-1.amazonaws.com/prod/mailme" autocomplete="off">
-                <h1>Solution Orca &mdash; mod&egrave;le <em>[[plan.display]]</em></h1>
+                <h1 class="plain">Solution Orca &mdash; mod&egrave;le <em>[[plan.display]]</em></h1>
                 <paper-dialog-scrollable>
                     <template is="dom-if" if="[[_isMicro(plan)]]">
                         <p>
