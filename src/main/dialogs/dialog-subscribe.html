@@ -112,18 +112,18 @@
         <paper-dialog id="dialog-delegate" with-backdrop>
             <iron-a11y-keys id="a11y" keys="enter" on-keys-pressed="_submitForm"></iron-a11y-keys>
             <form is="iron-form" id="subscribe-form" method="post" content-type="application/json" action="https://6ft0v06fp5.execute-api.eu-west-1.amazonaws.com/prod/mailme" autocomplete="off">
-                <h1 class="plain">Solution Orca &mdash; mod&egrave;le <em>[[plan.display]]</em></h1>
+                <h1 class="plain">Solution Orca &mdash; offre <em>[[plan.display]]</em></h1>
                 <paper-dialog-scrollable>
                     <template is="dom-if" if="[[_isMicro(plan)]]">
                         <p>
-                            Le mod&egrave;le <em>Micro</em> est le plan le moins on&eacute;reux pour la solution Orca.
-                            <br /> Il permet aux petites entit&eacute;s d'acc&eacute;der &agrave; la solution &agrave; un moindre prix. Sa particularit&eacute; essentielle concerne la limite du nombre d'agents g&eacute;r&eacute;s&nbsp;: pas plus de 500. Comme les deux autres plans, il offre un acc&egrave;s &agrave; un nombre illimit&eacute; d'utilisateurs &agrave; tout moment. Sa configuration mat&eacute;rielle est amplement suffisante pour convenir m&ecirc;me &agrave; un usage intensif et ce mod&egrave;le inclut &eacute;galement l'acc&egrave;s &agrave; toutes les mises &agrave; jour de la solution, majeures comme mineures.
+                            L'offre <em>Micro</em> est le plan le moins on&eacute;reux pour la solution Orca.
+                            <br /> Il permet aux petites entit&eacute;s d'acc&eacute;der &agrave; la solution &agrave; un moindre prix. Sa particularit&eacute; essentielle concerne la limite du nombre d'agents g&eacute;r&eacute;s&nbsp;: pas plus de 500. Comme les deux autres plans, il offre un acc&egrave;s &agrave; un nombre illimit&eacute; d'utilisateurs &agrave; tout moment. Sa configuration mat&eacute;rielle est amplement suffisante pour convenir m&ecirc;me &agrave; un usage intensif et cette offre inclut &eacute;galement l'acc&egrave;s &agrave; toutes les mises &agrave; jour de la solution, majeures comme mineures.
                         </p>
                     </template>
                     <template is="dom-if" if="[[_isBusiness(plan)]]">
                         <p>
-                            Le plan <em>Business</em> est le mod&egrave;le standard pour la solution Orca.
-                            <br />Il offre une configuration mat&eacute;rielle amplement suffisante pour convenir m&ecirc;me &agrave; un usage intensif. Les donn&eacute;es sont r&eacute;pliqu&eacute;es et sauvegard&eacute;es quotidiennement &mdash; avec une semaine de disponibilit&eacute;. Ce mod&egrave;le inclut &eacute;galement l'acc&egrave;s &agrave; toutes les mises &agrave; jour de la solution, majeures comme mineures.
+                            Le plan <em>Business</em> est l'offre standard pour la solution Orca.
+                            <br />Il offre une configuration mat&eacute;rielle amplement suffisante pour convenir m&ecirc;me &agrave; un usage intensif. Les donn&eacute;es sont r&eacute;pliqu&eacute;es et sauvegard&eacute;es quotidiennement &mdash; avec une semaine de disponibilit&eacute;. Cette offre inclut &eacute;galement l'acc&egrave;s &agrave; toutes les mises &agrave; jour de la solution, majeures comme mineures.
                         </p>
                         <h2>Nombre d'agents actifs</h2>
                         <p>Jusqu'&agrave; 500 agents sont inclus dans le prix de base&nbsp;; chaque tranche suppl&eacute;mentaire de 500 agents est factur&eacute;e 35&euro; mensuellement.
@@ -146,7 +146,7 @@
                     </template>
                     <template is="dom-if" if="[[_isPartner(plan)]]">
                         <p>
-                            Le plan <em>Partner</em> est le mod&egrave;le haut-de-gamme pour la solution Orca.
+                            Le plan <em>Partner</em> est l'offre haut-de-gamme pour la solution Orca.
                             <br />Il offre, en plus des fonctionnalit&eacute;s du plan <em>Business</em>&nbsp;:
                         </p>
                         <ol type="I">
@@ -176,7 +176,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Mod&egrave;le <em>[[plan.display]]</em></td>
+                                        <td>Offre <em>[[plan.display]]</em></td>
                                         <td>[[_computeCost(plan.yearly, plan.base)]]</td>
                                     </tr>
                                     <template is="dom-if" if="[[_isBusiness(plan)]]">
