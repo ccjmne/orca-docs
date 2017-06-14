@@ -1,8 +1,9 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-icons/communication-icons.html">
 
 <link rel="import" href="../../bower_components/paper-material/paper-material.html">
 <link rel="import" href="../../bower_components/paper-ripple/paper-ripple.html">
@@ -43,6 +44,8 @@
         
         paper-material {
             border-radius: 2px;
+            overflow: hidden;
+            background-color: white;
         }
         
         #micro,
@@ -146,6 +149,27 @@
             font-size: .9em;
             line-height: 1.2em;
             background-color: crimson;
+            color: white;
+        }
+        
+        div.enquiries > p {
+            padding: 16px 32px;
+            margin: 0;
+            text-align: center;
+        }
+        
+        paper-material#intercom-trigger {
+            cursor: pointer;
+        }
+        
+        paper-material#intercom-trigger .left {
+            padding-left: 32px;
+            padding-right: 16px;
+        }
+        
+        paper-material#intercom-trigger .right {
+            padding: 0 16px;
+            background-color: var(--primary-color);
             color: white;
         }
         </style>
@@ -287,11 +311,36 @@
                 </table>
             </paper-material>
         </div>
-        <small class="disclaimer">Prix exprim&eacute;s hors taxes</small>
+        <small class="disclaimer">
+            Prix exprim&eacute;s hors taxes
+            <br />Les montants pr&eacute;sent&eacute;s sont donn&eacute;s &agrave; titre indicatif et sont susceptibles de changer
+        </small>
+
+        <div class="layout vertical center stretch clear-both">
+            <div class="enquiries">
+                <p>
+                    Un besoin particulier&nbsp;? Plus de 20&nbsp;000 agents&nbsp;?
+                    <br />Vous souhaitez davantage d'informations&nbsp;?
+                </p>
+                <paper-material class="layout horizontal" id="intercom-trigger" on-tap="__intercom">
+                    <paper-ripple></paper-ripple>
+                    <p class="left flex">
+                        Notre &eacute;quipe est disponible pour r&eacute;pondre &agrave; vos interrogations en direct&nbsp;!
+                    </p>
+                    <div class="right layout horizontal center-center">
+                        <iron-icon icon="communication:chat"></iron-icon>
+                    </div>
+                </paper-material>
+            </div>
+        </div>
     </template>
     <script>
     Polymer({
         is: 'orca-get',
+
+        __intercom: function() {
+            document.querySelector('iframe.intercom-launcher-frame').contentWindow.document.body.querySelector('.intercom-launcher').click();
+        },
 
         _micro: function() {
             this.fire('open-dialog', {
