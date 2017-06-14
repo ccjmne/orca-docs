@@ -48,11 +48,11 @@
                 </div>
                 <hr class="vertical self-stretch" />
                 <div id="links" class="layout vertical center-justified">
-                    <a href="/get">Nos prix</a>
-                    <a href="/customers">Nos clients</a>
+                    <a href="/orca-get">Nos prix</a>
+                    <a href="/orca-customers">Nos clients</a>
                 </div>
                 <div class="layout vertical end center-justified">
-                    <span class="dialog-trigger" href="/privacy">Politique de confidentialit&eacute;</span>
+                    <span class="dialog-trigger" on-tap="_privacy">Politique de confidentialit&eacute;</span>
                     <span class="dialog-trigger" on-tap="_tos">Conditions d'utilisation</span>
                 </div>
                 <hr class="vertical self-stretch" />
@@ -70,6 +70,12 @@
 
         ready: function() {
             this.date = new Date().getFullYear();
+        },
+
+        _privacy: function() {
+            this.fire('open-dialog', {
+                id: 'dialog-privacy'
+            });
         },
 
         _tos: function() {

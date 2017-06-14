@@ -275,7 +275,7 @@
 
         __scrollToSection: function() {
             const view = this.$['main-view'].querySelector('.iron-selected');
-            const target = view && (window.location.hash && view.firstChild.$$(window.location.hash) || view.firstChild.$$('#overview')) || view;
+            const target = view && (window.location.hash && view.firstChild.$$(window.location.hash)) || view;
             if (!target) {
                 return;
             }
