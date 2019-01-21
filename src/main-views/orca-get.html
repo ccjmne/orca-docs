@@ -27,115 +27,115 @@
             --business: #ddd;
             --business-lighter: #eee;
         }
-        
+
         .checked {
             color: var(--color-check);
         }
-        
+
         .unchecked {
             color: var(--color-clear);
         }
-        
+
         td.subscribe {
             text-transform: uppercase;
             text-decoration: none;
             padding: 16px;
         }
-        
+
         paper-material {
             overflow: hidden;
         }
-        
+
         #micro,
         #business,
         #partner {
             cursor: pointer;
         }
-        
+
         h2 {
             border: none;
         }
-        
+
         .lighter {
             font-weight: lighter;
         }
-        
+
         table {
             border-collapse: collapse;
             width: 100%;
         }
-        
+
         td,
         th {
             height: 25px;
             padding: 5px 15px;
         }
-        
+
         table tbody tr:not(:first-of-type).separator {
             border-top-width: 3px !important;
         }
-        
+
         paper-material.front {
             padding: 6px 0;
             z-index: 1;
         }
-        
+
         paper-material:not(.front) {
             margin: 6px 0;
         }
-        
+
         #features {
             margin: 6px 0;
         }
-        
+
         #features table tbody {
             text-align: right;
         }
-        
+
         #features table tbody tr:not(:first-of-type) {
             border-top: 1px solid lightgrey;
         }
-        
+
         #micro td.core,
         #business td.core,
         #partner td.core {
             background-color: white;
         }
-        
+
         #micro table tbody,
         #business table tbody,
         #partner table tbody {
             text-align: center;
         }
-        
+
         #micro {
             background-color: var(--micro);
         }
-        
+
         #micro table tbody tr:not(:first-of-type) {
             border-top: 1px solid var(--micro-lighter);
         }
-        
+
         #business {
             background-color: var(--business);
         }
-        
+
         #business table tbody tr:not(:first-of-type) {
             border-top: 1px solid var(--business-lighter);
         }
-        
+
         #partner {
             background-color: var(--partner);
         }
-        
+
         #partner table tbody tr:not(:first-of-type) {
             border-top: 1px solid var(--partner-lighter);
         }
-        
+
         #business {
             overflow: hidden;
         }
-        
+
         #business .ribbon {
             position: absolute;
             top: 0;
@@ -149,27 +149,28 @@
             background-color: crimson;
             color: white;
         }
-        
-        div.enquiries > p {
+
+        div.enquiries>p {
             padding: 16px 32px;
             margin: 0;
             text-align: center;
         }
-        
+
         paper-material#intercom-trigger {
             cursor: pointer;
         }
-        
+
         paper-material#intercom-trigger .left {
             padding-left: 32px;
             padding-right: 16px;
         }
-        
+
         paper-material#intercom-trigger .right {
             padding: 0 16px;
             background-color: var(--primary-color);
             color: white;
         }
+
         </style>
 
         <div class="layout horizontal stretch center-justified">
@@ -384,17 +385,17 @@
                     micro: {
                         name: 'micro',
                         display: 'Micro',
-                        base: 220
+                        base: 280
                     },
                     business: {
                         name: 'business',
                         display: 'Business',
-                        base: 760
+                        base: 860
                     },
                     partner: {
                         name: 'partner',
                         display: 'Partner',
-                        base: 1520
+                        base: 2280
                     }
                 }
             },
@@ -537,7 +538,7 @@
                         value: '&le; 500'
                     },
                     'business': {
-                        value: '35&euro;/500 agents'
+                        value: '65&euro;/500 agents'
                     },
                     'partner': {
                         _class: 'checked',
@@ -575,5 +576,6 @@
             }
         }
     });
+
     </script>
 </dom-module>

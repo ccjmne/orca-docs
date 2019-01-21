@@ -32,78 +32,78 @@
                 font-size: .8em;
             }
         }
-        
+
         iron-a11y-keys {
             display: none;
         }
-        
+
         paper-dialog paper-button {
             font-size: 1.2em;
             font-weight: 300;
         }
-        
+
         p.no-bottom-margin {
             margin-bottom: 0;
         }
-        
+
         .layout.horizontal paper-input + paper-input {
             margin-left: 20px;
         }
-        
+
         paper-dialog#dialog-delegate paper-dialog-scrollable {
             margin: 0 -24px;
         }
-        
+
         .tooltip {
             border-bottom: 1px dashed lightgrey;
             cursor: help;
         }
-        
+
         .invoice {
             margin-bottom: 10px;
             width: 80%;
         }
-        
+
         .invoice table {
             border-collapse: collapse;
         }
-        
+
         .invoice table th,
         .invoice table td {
             padding: 3px 16px;
         }
-        
+
         .invoice table thead {
             background-color: #eee;
             border-bottom: 1px solid lightgrey;
         }
-        
+
         .invoice table tbody tr.total {
             border-top: 1px solid lightgrey;
             background-color: #eee;
         }
-        
+
         .invoice table tbody tr.total:not(:last-of-type) {
             border-bottom: 1px solid lightgrey;
         }
-        
+
         .invoice table tbody tr.total td:first-of-type {
             text-align: right;
         }
-        
+
         .invoice table tbody tr td:last-of-type {
             text-align: right;
         }
-        
+
         .invoice table tbody tr td:last-of-type::after {
             content: '\20AC';
         }
-        
+
         .invoice table tbody tr td:not(.minus):last-of-type::before {
             content: '+';
             float: left;
         }
-        
+
         .invoice table tbody tr td.minus:last-of-type::before {
             content: '\2212';
             float: left;
@@ -126,7 +126,7 @@
                             <br />Il offre une configuration mat&eacute;rielle amplement suffisante pour convenir m&ecirc;me &agrave; un usage intensif. Les donn&eacute;es sont r&eacute;pliqu&eacute;es et sauvegard&eacute;es quotidiennement &mdash; avec une semaine de disponibilit&eacute;. Cette offre inclut &eacute;galement l'acc&egrave;s &agrave; toutes les mises &agrave; jour de la solution, majeures comme mineures.
                         </p>
                         <h2>Nombre d'agents actifs</h2>
-                        <p>Jusqu'&agrave; 500 agents sont inclus dans le prix de base&nbsp;; chaque tranche suppl&eacute;mentaire de 500 agents est factur&eacute;e 35&euro; mensuellement.
+                        <p>Jusqu'&agrave; 500 agents sont inclus dans le prix de base&nbsp;; chaque tranche suppl&eacute;mentaire de 500 agents est factur&eacute;e 65&euro; mensuellement.
                             <paper-input label="Nombre d'agents actifs" type="number" min="0" value="{{plan.employees}}" auto-validate required="[[_isBusiness(plan)]]"></paper-input>
                             <iron-collapse opened="[[plan.employees]]">
                                 Vous envisagez avoir jusqu'&agrave; [[plan.upper]] agents actifs, soit [[plan.times]] tranche(s) de 500 agents.
@@ -137,7 +137,7 @@
                                 </span>
                                 <span>+</span>
                                 <span class="tooltip">
-                                    [[plan.effectiveTimes]] &times; 35&euro;
+                                    [[plan.effectiveTimes]] &times; 65&euro;
                                     <paper-tooltip offset="0">[[plan.effectiveTimes]] extra tranche(s)</paper-tooltip>
                                 </span>
                                 <span>= [[plan.extra]]&euro;</span>
@@ -312,7 +312,7 @@
             this.set('plan.times', Math.ceil((employees || 0) / 500));
             this.set('plan.upper', 500 * this.plan.times);
             this.set('plan.effectiveTimes', Math.max(0, this.plan.times - 1));
-            this.set('plan.extra', this.plan.effectiveTimes * 35);
+            this.set('plan.extra', this.plan.effectiveTimes * 65);
         },
 
         _computeCost: function(yearly, /*...*/ values) {

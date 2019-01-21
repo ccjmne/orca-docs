@@ -15,12 +15,12 @@
     "src/visualisation-views/orca-sites.html",
     "src/visualisation-views/orca-trainings.html"
   ],
-  "sourceGlobs": [
+  "sources": [
     "src/**/*",
     "assets/**/*",
     "bower.json"
   ],
-  "includeDependencies": [
+  "extraDependencies": [
     "bower_components/webcomponentsjs/webcomponents-lite.min.js",
     "node_modules/bowser/bowser.min.js",
     "node_modules/clipboard-js/clipboard.min.js"

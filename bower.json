@@ -13,8 +13,7 @@
     "iron-elements": "PolymerElements/iron-elements#^1.0.10",
     "layout-elements": "PolymerElements/layout-elements",
     "paper-elements": "PolymerElements/paper-elements#^1.0.7",
-    "polymer": "^1.9.1",
-    "paper-video": "^1.0.3"
+    "polymer": "^1.9.1"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
